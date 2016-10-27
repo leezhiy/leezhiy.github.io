@@ -2,7 +2,7 @@
 title: T豆技术博客
 description: '欢迎来到T豆技术博客'
 url: 'http://a605248452.github.io'
-baseurl: 'http://a605248452.github.io'
+baseurl: '/'
 # google_analytics: 'UA-XXXXXX-X'
 # disqus_shortname: 'your-disqus-name'
 
