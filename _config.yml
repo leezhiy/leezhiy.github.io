@@ -1,7 +1,7 @@
 # Basic
 title: Leezhiy
 subtitle: Personal homepage
-description: 
+description: welcome to leezhiy blog
 # 头像里面的标题
 avatarTitle: Leezhiy
 # 头像里面的描述
@@ -59,9 +59,9 @@ nav:
     - {title: 标签, description: tags, url: '/tags'}      
     
 
-# 友情链接
-flink:
-    - {title: TakingDataSDK博客, description: TakingDataSDK博客, url: 'http://talkingdata.me'}     
+# # 友情链接
+# flink:
+#     - {title: TakingDataSDK博客, description: TakingDataSDK博客, url: 'http://talkingdata.me'}     
     
 
 # Pagination
