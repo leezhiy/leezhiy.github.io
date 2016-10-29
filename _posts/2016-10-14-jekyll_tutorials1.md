@@ -123,7 +123,7 @@ categories: tag标签的分类，如：categories: 随笔
 
 虽然博客部署完成了，你会发现博客太简单不是你想要的，如果你喜欢我的模板的话，可以使用我的模板。
 
-首先你要获取的我博客，[Github项目地址](https://github.com/leopardpan/leopardpan.github.io.git)，你可以直接[点击下载博客](https://github.com/leopardpan/leopardpan.github.io/archive/master.zip)，进去leopardpan.github.io/ 目录下， 使用命令部署本地服务 
+首先你要获取的我博客，[Github项目地址](https://github.com/leezhiy/leezhiy.github.io.git)，你可以直接[点击下载博客](https://github.com/leezhiy/leezhiy.github.io/archive/master.zip)，进去leezhiy.github.io/ 目录下， 使用命令部署本地服务 
 
 ```
 $ jekyll server   
