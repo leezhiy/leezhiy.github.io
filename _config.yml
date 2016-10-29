@@ -1,0 +1,72 @@
+# Basic
+title: Leezhiy
+subtitle: Personal homepage
+description: 
+# 头像里面的标题
+avatarTitle: Leezhiy
+# 头像里面的描述
+avatarDesc: PHP
+url: "http://Leezhiy.github.io"
+
+# Comment
+comment:
+    # disqus: leopard
+    duoshuo: Leezhiy
+
+# Social
+social:
+    weibo: 18535833487
+    github: leezhiy
+    # twitter: 
+    mail: 18535833487@163.com
+
+# 百度统计 
+# 使用博客模板请去掉或者更换 id 
+baidu:
+    id: bbfcf582d963fc544d48d35e736b88ac
+
+# Google Analytics
+# 使用博客模板请去掉或者更换 id
+#ga:
+#    id: UA-84134159-3   
+#    host: auto  
+
+
+# 《----------------- 上面的信息修改成你自己的 ---------------------------》
+#
+#
+#  _post/ 下的文章更换成你自己的文章
+#  帮忙star一下，感谢~😆 地址： https://github.com/leopardpan/leopardpan.github.io
+#
+#
+# 《--------------- 下面的信息可以自行选择是否修改 ------------------------》
+
+
+permalink: /:year/:month/:title/
+# Format
+highlighter: rouge
+
+# supported colors: blue, green, purple, red, orange or slate. If you need clear, leave it empty.
+cover_color: clear
+
+# The blog button should not be removed.
+blog_button:
+    title: 博客主页
+
+# Navigation buttons in the front page.s
+nav:
+    - {title: 所有文章, description: archive, url: '/archive'}   
+    - {title: 标签, description: tags, url: '/tags'}      
+    
+
+# 友情链接
+flink:
+    - {title: TakingDataSDK博客, description: TakingDataSDK博客, url: 'http://talkingdata.me'}     
+    
+
+# Pagination
+gems: [jekyll-paginate,jekyll-sitemap]
+paginate: 20
+paginate_path: "page/:num/"
+
+
