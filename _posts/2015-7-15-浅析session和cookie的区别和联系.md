@@ -2,7 +2,7 @@
 layout: post
 title: 浅析session和cookie的区别和联系
 date: 2015-7-15 
-tags: php   
+tags: PHP   
 ---
 
 ### COOKIE介绍
