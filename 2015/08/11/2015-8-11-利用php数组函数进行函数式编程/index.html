@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"manual"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="序言因为一个BUG， 我在一个摇摇欲坠，几乎碰一下就会散架的项目中某一个角落中发现下面这样一段代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用php数组函数进行函数式编程">
+<meta property="og:url" content="http://yoursite.com/2015/08/11/2015-8-11-%E5%88%A9%E7%94%A8php%E6%95%B0%E7%BB%84%E5%87%BD%E6%95%B0%E8%BF%9B%E8%A1%8C%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:site_name" content="李二狗的备忘录">
+<meta property="og:description" content="序言因为一个BUG， 我在一个摇摇欲坠，几乎碰一下就会散架的项目中某一个角落中发现下面这样一段代码">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/assets/images/php_function/php_function.png">
+<meta property="og:image" content="http://yoursite.com/assets/images/php_function/php_function_2.png">
+<meta property="og:image" content="http://yoursite.com/assets/images/php_function/php_function_3.png">
+<meta property="og:image" content="http://yoursite.com/assets/images/php_function/php_function_4.png">
+<meta property="og:image" content="http://yoursite.com/assets/images/php_function/php_function_5.png">
+<meta property="og:image" content="http://yoursite.com/assets/images/php_function/php_function_6.png">
+<meta property="og:image" content="http://yoursite.com/assets/images/php_function/php_function_7.png">
+<meta property="og:image" content="http://yoursite.com/assets/images/php_function/php_function_8.png">
+<meta property="og:image" content="http://yoursite.com/assets/images/php_function/php_function_9.png">
+<meta property="og:image" content="http://yoursite.com/assets/images/php_function/php_function_10.png">
+<meta property="og:image" content="http://yoursite.com/assets/images/php_function/php_function_11.png">
+<meta property="og:image" content="http://yoursite.com/assets/images/php_function/php_function_12.png">
+<meta property="og:image" content="http://yoursite.com/assets/images/php_function/php_function_13.png">
+<meta property="article:published_time" content="2015-08-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-04-13T14:48:40.957Z">
+<meta property="article:author" content="Li Zhiyuan">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="函数式编程">
+<meta property="article:tag" content="编程思想">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/assets/images/php_function/php_function.png">
+
+<link rel="canonical" href="http://yoursite.com/2015/08/11/2015-8-11-%E5%88%A9%E7%94%A8php%E6%95%B0%E7%BB%84%E5%87%BD%E6%95%B0%E8%BF%9B%E8%A1%8C%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>利用php数组函数进行函数式编程 | 李二狗的备忘录</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">李二狗的备忘录</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">我秃了，也变强了</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/custom-name/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/leezhiy" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/08/11/2015-8-11-%E5%88%A9%E7%94%A8php%E6%95%B0%E7%BB%84%E5%87%BD%E6%95%B0%E8%BF%9B%E8%A1%8C%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Li Zhiyuan">
+      <meta itemprop="description" content="程序，搞起来很轻松的，就是头冷">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李二狗的备忘录">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          利用php数组函数进行函数式编程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-08-11 00:00:00" itemprop="dateCreated datePublished" datetime="2015-08-11T00:00:00+08:00">2015-08-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-13 22:48:40" itemprop="dateModified" datetime="2020-04-13T22:48:40+08:00">2020-04-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h3><p>因为一个BUG， 我在一个摇摇欲坠，几乎碰一下就会散架的项目中某一个角落中发现下面这样一段代码</p>
+<a id="more"></a>
+
+<p><img data-src="/assets/images/php_function/php_function.png" alt=""></p>
+<p>这段程序与那个BUG有密切的关系。 我来回反复的捉摸这段代码， 发现这段代码实现了两个功能</p>
+<p>第一个是在一个从数据库中读取的列表数组中找出某个值是最大的一条记录， 并且把这个最大的值和跟这个值相关的时间给取出来。</p>
+<p>第二个比较复杂 ，是将这个列表数组中的值映射到另外一个列表数组中， 可以把这个过程看作是SQL中的JOIN操作， 只是JOIN的条件异常复杂 ，在这里我也不详述了，阅读的同学也不必去深入探究。</p>
+<p>就这段代码来说， 很难通过大致观察就理解代码的意思 ， 代码之中光循环就套了3层, 而且还有多处复杂的条件判断，代码格式混乱，连编码的底线缩进都没有满足。 可悲的是这种类型的代码广泛存在于全球范围内无数Web服务器之上， 每天运行着。</p>
+<p>在很久以前， 那会我还很年轻， 看到项目中哪个地方代码有问题，我就难受， 必须改掉它。 后来我发现， 烂代码就像地沟油， 在我所生活的城市， 到哪里都能碰的到， 除非不吃饭， 否则就只能睁一只眼闭一只眼，只要不是味道有问题， 吃也就吃了。</p>
+<p>然而，这次却不一样， 这段代码运行在某个功能项的关键部位， 不透彻的理解清晰这段代码， 以后出现问题还是会被卡在这里。虽然现在我理解了这段代码的意思 ，但过些天回过头来， 我又会忘掉这段代码所表达的意义。这并不是我的记忆力问题的， 而是因为这段代码所表达的意途不够清晰。</p>
+<p>于是我把代码重构成了下面这个样子， 代码本身的功能并没有变化</p>
+<p><img data-src="/assets/images/php_function/php_function_2.png" alt=""></p>
+<p>是不是还是看不明白代码所表达的意思？ 没关系， 因为这段代码所表示的功能太过于复杂 ，而且还依赖于代码所有的整个函数的上下文， 因此无法理解也无可厚非。 但是从代码结构上来看， 重构后的代码的却清晰了不少。</p>
+<p>我将原本拥挤在一起的两个功能进行了拆分， 上面部份是求最大值， 下面部份是对两个数组进行映射。 这里我用到了两个PHP中数组的函数 array_map和array_reduce， 这篇文章想表达的主线思路就是利用此类函数来提高PHP代码的可读性。 这类函数主要包括以下4个函数</p>
+<p>array_filter</p>
+<p>array_map</p>
+<p>array_walk</p>
+<p>array_reduce</p>
+<p>这4个函数威力巨大， 在处理列表数组方面可以完全替换掉for、foreach、while这些循环控制语句， 这也是函数式编程方式在PHP的一部份体现。</p>
+<h3 id="1-array-filter函数"><a href="#1-array-filter函数" class="headerlink" title="1.array_filter函数"></a>1.array_filter函数</h3><p><img data-src="/assets/images/php_function/php_function_3.png" alt=""></p>
+<p>这段代码比较好理解，将数组中性别字段为女的数据项提取出来。 整段代码的逻辑大致如下</p>
+<p>1.定义result数组， 用来存放结果</p>
+<p>2.循环数组， 对每一个数据项进行条件判断， 查看其中的性别字段是否为女</p>
+<p>3.如符合条件则放入result数组中</p>
+<p>这是原汁原味的命令式程序代码。</p>
+<p>如果data变量中的数据并非存放于php数组中， 而是存在于关系数库的表之中， 那何取得性别为女的数据结果呢？ 对于程序员来说这貌似是一个更加简单的问题，一句SQL语句就搞定了</p>
+<p><img data-src="/assets/images/php_function/php_function_4.png" alt=""></p>
+<p>显然， 利用SQL查询数据更加方便，意途也更加清晰，毕间一个SQL表达 式就将所有的程序逻辑都给表达了现来。这句SQL只表达了：“我需要性别为女的数据，至于怎么拿， 我不管 ”， 除了结果 ， 其它的它一概不知。</p>
+<p>我们不妨把这种思路引入到PHP程序设计之中，不也意味着我们的PHP程序的逻辑表达也更加清晰，代码的可读性也更高的。所幸， 这种利用表达式编程的方法在PHP中也完全可以实现。</p>
+<p><img data-src="/assets/images/php_function/php_function_5.png" alt=""></p>
+<p>利用array_filter函数，可以轻松的完成这个任务， 仔细观察一下， 是不是原来的程序逻辑都不见了，包括定义数组、循环、条件判断这些都不见了，逻辑方面是只剩下了一个性别比较语句，这对于代码所实现的功能一目了然。 和上面的SQL比较一下， 这里的性别判断语句就是SQL中where子句后面的条件判断， 而array_filter函数其实就是SQL中的where子句。 这就是SQL语句面向结果编程的逻辑原封不变的在PHP中的体现，也就是时下最流行的“声明性编程”或者也称为“表达式编程”。</p>
+<p>此外， 代码中性别判断语句所在的位置称之为lambda表达式， 更通俗一些的叫法是匿名函数。不难看出， 在SQL的where条件中编写条件判断远不如在匿名函数中写PHP代码来的灵活,在where条件中只能执行or和and逻辑，而在php匿名函数中可以随便怎么写，只要函数的返回值是个布尔值就可以了，这也是php声明性编程优于SQL声明性编程的地方。</p>
+<h3 id="2-array-map函数"><a href="#2-array-map函数" class="headerlink" title="2.array_map函数"></a>2.array_map函数</h3><p>再来看一个例子</p>
+<p><img data-src="/assets/images/php_function/php_function_6.png" alt=""></p>
+<p>数据中的性别字段是中文的，值也是中文的， 现在想把字段名和字段值都改为英文的, 就可以用上面这段代码实现， 至于实现的逻辑这里不赘述了。</p>
+<p>下面是利用SQL的实现方式</p>
+<p><img data-src="/assets/images/php_function/php_function_7.png" alt=""></p>
+<p>SQL中case when语句好像不太好看， 但是不影响整体逻辑的表达。 将这段SQL转换成PHP的方式实现</p>
+<p><img data-src="/assets/images/php_function/php_function_8.png" alt=""></p>
+<p>相比之前的PHP实现， 是不是简洁明了了许多。</p>
+<p>在这里使用到了 array_map函数 。 在SQL语句中以select语句最为常用， select的字面意思是“选择”，而select语句也被称之为选择查询， 事实上从关系数据库的角度来说，select被称之为“投影”， 并不是查询什么的。 换言之， select 语句只是将SQL的查询结果以一定的方式（选字段、计算值等等）提取出来了。 php中的array_map表达的也是这层意思， “映射”与“投影”完全是一种意思的不同表达。</p>
+<h3 id="3-array-walk函数"><a href="#3-array-walk函数" class="headerlink" title="3.array_walk函数"></a>3.array_walk函数</h3><p>array_walk函数没有像 array_map和array_filter这样深刻的意义， 但是它在设计可读性良好的代码时也是不可或缺的。</p>
+<p>array_walk是for或foreach语句的替代函数</p>
+<p><img data-src="/assets/images/php_function/php_function_9.png" alt=""></p>
+<p>以上代码分别是 foreach和array_walk对于遍历数组的实现方式。 看起来， 好像array_walk的实现方式更加复杂， 但是在更深层次的语义方面</p>
+<p>foreach表达的是循环遍历， 但是在这个循环的过程中，要做什么样的处理，是没有任何约束的， 删除被遍历的数组的某一项 ，或者修改一个十万八千里以外的变量的值，这便是所谓的“代码副作用”，俗话说“白蚁虽小， 危害无穷”， 当这些看似微不足道的副作用发展壮大时， 便会给程序员维护程序代码带来的障碍是致命的。</p>
+<p>而array_walk函数缺省情况下所有执行代码的作用域都在匿名函数内，如果要依赖或操作函数之外的数据， 必须通过匿名函数的use关键字导入。通俗一点的请， array_walk函数的权限不如foreach来的大， 因此，使用array_walk函数后，虽然无法让你随心所欲的编程，但是大限度的减少了你代码的副作用，两相权衡array_walk所带来的好处还是有值得使用它的理由的。 首先， 大多数时候写代码根本不需要太大的“权限”，其次， 把代码所影响的范围控制到最小好处不言而喻。微信张小龙讲过，微信做的最好的一点便是“克制”，我们写代码又何尝不是。这一点array_filter和array_map中也有体现， 宽泛的讲，所有使用匿名函数的地方都能享受到这个好处。</p>
+<p>array_walk所表达的语义就是“假如你需要用到我， 那么你除了遍历以外，其它的事情最好都别干，否则你还是去用原生的foreach吧”</p>
+<h3 id="4-array-reduce函数"><a href="#4-array-reduce函数" class="headerlink" title="4.array_reduce函数"></a>4.array_reduce函数</h3><p>array_reduce是上面所讲的三个函数的集大成者，这三个函数的底层完全可以由array_reduce实现。</p>
+<p>先看一下下面的php代码</p>
+<p><img data-src="/assets/images/php_function/php_function_10.png" alt=""></p>
+<p>常规的PHP写法，代码分别用于计算数组记录中平均年龄和最大年龄，代码需要循环数组，并把计算结果存入一个标量（单个值，区分于列表变量）。</p>
+<p>假如要以表达式编程的方式完成编写这两个功能， 利用array_filter、 array_walk、array_map三个函数是很难一部到位的实现的。</p>
+<p>于是， 就到了array_reduce大显身手的时候了</p>
+<p><img data-src="/assets/images/php_function/php_function_11.png" alt=""></p>
+<p>上面的代码是求平均年龄和最大年龄的表达式编程的实现，如果对array_reduce函数的工作机制不了解，看上面两段代码会觉得在看天书。</p>
+<p><img data-src="/assets/images/php_function/php_function_12.png" alt=""></p>
+<p>这是 array_reduce函数的实现代码，函数有3个参数， 3个参数的作用分别是</p>
+<p>第一个参数$data， 就要是处理的数据源</p>
+<p>第二个参数$callback，循环遍历时会被调用的函数，函数返回的结果在下一次循环调用时会被再次当成参数传入。</p>
+<p>第三个参数$initial，作为$callback函数被初次调用时的参数传递</p>
+<p>再来一个递归版本的array_reduce实现，帮助更好的理解这个函数的使用意义</p>
+<p><img data-src="/assets/images/php_function/php_function_13.png" alt=""></p>
+<p>善用array_reduce函数几乎可以替换掉绝大多数需要使用foreach、for、while语句的代码。</p>
+<p>在标准的函数式编程语言中， 是没有循环控制语句的，假如要进循环计算， 都是使用此类函数来实现的， 如果某些极端的情况下这些函数无法满足需求，那么就以手动写递归来实现循环， 以达到表达式编程的目的。</p>
+<p>总结一下， 为什么要在写php代码时使用这4个函数</p>
+<p>1.通过函数本身的意义就能表达出代码实现了什么样的功能，而不用去琢磨代码具体细节来理解代码的作用</p>
+<p>2.表达式编程相对于命令式编程能极大的简化功能的实现过程， 提升编码效率</p>
+<p>3.表达式编程对于代码的可读性、可维护性具有非凡的意义</p>
+<p>4.利用匿名函数控制代码的副作用</p>
+<p>5.由传统的面向过程式程序设计向现代化的函数式编程靠拢</p>
+<p>补充：</p>
+<p>通过前面示例的讲解， 利用这4个函数实现的代码相对于传统的实现方式并没有不可思议的变化， 然而， 当需要解决的问题复杂到一定程度时， 合理利用这4个函数会使代码的复杂性大规模下降。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Li Zhiyuan
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2015/08/11/2015-8-11-%E5%88%A9%E7%94%A8php%E6%95%B0%E7%BB%84%E5%87%BD%E6%95%B0%E8%BF%9B%E8%A1%8C%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" title="利用php数组函数进行函数式编程">http://yoursite.com/2015/08/11/2015-8-11-利用php数组函数进行函数式编程/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+              <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" rel="tag"># 函数式编程</a>
+              <a href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" rel="tag"># 编程思想</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2015/07/20/2015-7-20-ajax%E5%9F%BA%E7%A1%80/" rel="prev" title="ajax基础">
+      <i class="fa fa-chevron-left"></i> ajax基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2015/08/17/2015-8-17-php%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89/" rel="next" title="php面向对象编程（上）">
+      php面向对象编程（上） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#序言"><span class="nav-number">1.</span> <span class="nav-text">序言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-array-filter函数"><span class="nav-number">2.</span> <span class="nav-text">1.array_filter函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-array-map函数"><span class="nav-number">3.</span> <span class="nav-text">2.array_map函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-array-walk函数"><span class="nav-number">4.</span> <span class="nav-text">3.array_walk函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-array-reduce函数"><span class="nav-number">5.</span> <span class="nav-text">4.array_reduce函数</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Li Zhiyuan"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Li Zhiyuan</p>
+  <div class="site-description" itemprop="description">程序，搞起来很轻松的，就是头冷</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/leezhiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;leezhiy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:18500754397@163.com" title="E-Mail → mailto:18500754397@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/5678634433" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;5678634433" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/a605248452" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;a605248452" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://yoursite.com/" title="http:&#x2F;&#x2F;yoursite.com">Title</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Li Zhiyuan</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+    </div>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+  
+     <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+     <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+     <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":450},"mobile":{"show":false},"react":{"opacity":1},"log":false});</script></body>
+</html>

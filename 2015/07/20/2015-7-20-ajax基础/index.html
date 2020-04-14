@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"manual"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="AJAX 简介AJAX全称为“Asynchronous JavaScript and XML”（异步JavaScript和XML），是一种创建交互式网页应用的网页开发技术。类似于DHTML或LAMP，AJAX不是指一种单一的技术，而是有机地利用了一系列相关的技术。 AJAX 不是一种新的编程语言，而是一种用于创建更好更快以及交互性更强的 Web 应用程序的技术。通过 AJAX，您的 JavaScr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ajax基础">
+<meta property="og:url" content="http://yoursite.com/2015/07/20/2015-7-20-ajax%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="李二狗的备忘录">
+<meta property="og:description" content="AJAX 简介AJAX全称为“Asynchronous JavaScript and XML”（异步JavaScript和XML），是一种创建交互式网页应用的网页开发技术。类似于DHTML或LAMP，AJAX不是指一种单一的技术，而是有机地利用了一系列相关的技术。 AJAX 不是一种新的编程语言，而是一种用于创建更好更快以及交互性更强的 Web 应用程序的技术。通过 AJAX，您的 JavaScr">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/assets/images/ajax/form.png">
+<meta property="og:image" content="http://yoursite.com/assets/images/ajax/res.png">
+<meta property="article:published_time" content="2015-07-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-04-13T14:48:41.767Z">
+<meta property="article:author" content="Li Zhiyuan">
+<meta property="article:tag" content="Javascript">
+<meta property="article:tag" content="ajax">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/assets/images/ajax/form.png">
+
+<link rel="canonical" href="http://yoursite.com/2015/07/20/2015-7-20-ajax%E5%9F%BA%E7%A1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ajax基础 | 李二狗的备忘录</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">李二狗的备忘录</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">我秃了，也变强了</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/custom-name/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/leezhiy" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/07/20/2015-7-20-ajax%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Li Zhiyuan">
+      <meta itemprop="description" content="程序，搞起来很轻松的，就是头冷">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李二狗的备忘录">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ajax基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-07-20 00:00:00" itemprop="dateCreated datePublished" datetime="2015-07-20T00:00:00+08:00">2015-07-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-13 22:48:41" itemprop="dateModified" datetime="2020-04-13T22:48:41+08:00">2020-04-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Javascript/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="AJAX-简介"><a href="#AJAX-简介" class="headerlink" title="AJAX 简介"></a>AJAX 简介</h3><p>AJAX全称为“Asynchronous JavaScript and XML”（异步JavaScript和XML），是一种创建交互式网页应用的网页开发技术。类似于DHTML或LAMP，AJAX不是指一种单一的技术，而是有机地利用了一系列相关的技术。</p>
+<p>AJAX 不是一种新的编程语言，而是一种用于创建更好更快以及交互性更强的 Web 应用程序的技术。通过 AJAX，您的 JavaScript 可使用 JavaScript 的 XMLHttpRequest 对象来直接与服务器进行通信。通过这个对象，您的 JavaScript 可在不重载页面的情况与 Web 服务器交换数据。AJAX 在浏览器与 Web 服务器之间使用异步数据传输（HTTP 请求），这样就可使网页从服务器请求少量的信息，而不是整个页面。AJAX 可使因特网应用程序更小、更快，更友好。</p>
+<p>AJAX 是一种独立于 Web 服务器软件的浏览器技术。AJAX 基于下列 Web 标准：</p>
+<a id="more"></a>
+
+<p>JavaScript</p>
+<p>XML</p>
+<p>HTML</p>
+<p>CSS</p>
+<p>在 AJAX 中使用的 Web 标准已被良好定义，并被所有的主流浏览器支持。AJAX 应用程序独立于浏览器和平台。</p>
+<h3 id="AJAX-使用-Http-请求"><a href="#AJAX-使用-Http-请求" class="headerlink" title="AJAX 使用 Http 请求"></a>AJAX 使用 Http 请求</h3><p>在传统的 JavaScript 编程中，假如您希望从服务器上的文件或数据库中得到任何的信息，或者向服务器发送信息的话，就必须利用一个 HTML 表单向服务器 GET 或 POST 数据。而用户则需要单击“提交”按钮来发送/获取信息，等待服务器的响应，然后一张新的页面会加载结果。由于每当用户提交输入后服务器都会返回一张新的页面，传统的 web 应用程序变得运行缓慢，且越来越不友好。通过利用 AJAX，您的 JavaScript 会通过 JavaScript 的 XMLHttpRequest 对象，直接与服务器来通信。通过使用 HTTP 请求，web 页可向服务器进行请求，并得到来自服务器的响应，而不加载页面。用户可以停留在同一个页面，他或她不会注意到脚本在后台请求过页面，或向服务器发送过数据。</p>
+<p>XMLHttpRequest 对象:通过使用 XMLHttpRequest 对象，web开发者可以做到在页面已加载后从服务器更新页面！</p>
+<p>您的第一个 AJAX 应用程序：为了让您理解 AJAX 的工作原理，我们将创建一个小型的 AJAX 应用程序。</p>
+<p>首先，我们需要一个带有两个文本框的HTML表单：用户名和时间。用户名文本框由用户填写，而时间文本框使用 AJAX 进行填写。</p>
+<p>此 HTML 文件名为 “testAjax.htm”（请注意这个 HTML 表单没有提交按钮！）：</p>
+<p><img data-src="/assets/images/ajax/form.png" alt=""></p>
+<h3 id="AJAX-浏览器支持"><a href="#AJAX-浏览器支持" class="headerlink" title="AJAX - 浏览器支持"></a>AJAX - 浏览器支持</h3><p>AJAX 的要点是 XMLHttpRequest 对象。不同的浏览器创建 XMLHttpRequest 对象的方法是有差异的。IE浏览器使用 ActiveXObject，而其他的浏览器使用名为 XMLHttpRequest 的 JavaScript 内建对象。如需针对不同的浏览器来创建此对象，我们要使用一条 “try and catch” 语句。您可以在我们的 JavaScript 教程中阅读更多有关 try 和 catch 语句 的内容。</p>
+<p>让我们用这段创建 XMLHttpRequest 对象的 JavaScript 来更新一下我们的 “testAjax.htm” 文件：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript"><span class="function"><span class="keyword">function</span> <span class="title">ajaxFunction</span><span class="params">()</span></span></span></span><br><span class="line"> &#123;</span><br><span class="line"><span class="actionscript"> <span class="keyword">var</span> xmlHttp;</span></span><br><span class="line"><span class="actionscript"> <span class="keyword">try</span></span></span><br><span class="line">    &#123;</span><br><span class="line"><span class="actionscript">    xmlHttp=<span class="keyword">new</span> XMLHttpRequest();</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="actionscript"> <span class="keyword">catch</span> (e)</span></span><br><span class="line">    &#123;</span><br><span class="line"><span class="actionscript">   <span class="keyword">try</span></span></span><br><span class="line">      &#123;</span><br><span class="line"><span class="actionscript">      xmlHttp=<span class="keyword">new</span> ActiveXObject(<span class="string">"Msxml2.XMLHTTP"</span>);</span></span><br><span class="line">      &#125;</span><br><span class="line"><span class="actionscript">   <span class="keyword">catch</span> (e)</span></span><br><span class="line">      &#123;</span><br><span class="line"><span class="actionscript">      <span class="keyword">try</span></span></span><br><span class="line">         &#123;</span><br><span class="line"><span class="actionscript">         xmlHttp=<span class="keyword">new</span> ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</span></span><br><span class="line">         &#125;</span><br><span class="line"><span class="actionscript">      <span class="keyword">catch</span> (e)</span></span><br><span class="line">         &#123;</span><br><span class="line"><span class="actionscript">         alert(<span class="string">"您的浏览器不支持AJAX！"</span>);</span></span><br><span class="line"><span class="actionscript">         <span class="keyword">return</span> <span class="literal">false</span>;</span></span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">name</span>=<span class="string">"myForm"</span>&gt;</span></span><br><span class="line">用户: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span> /&gt;</span></span><br><span class="line">时间: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"time"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>例子解释：</p>
+<p>首先声明一个保存 XMLHttpRequest 对象的 xmlHttp 变量。</p>
+<p>然后使用 XMLHttp=new XMLHttpRequest() 来创建此对象。这条语句针对 Firefox、Opera 以及 Safari 浏览器。假如失败，则尝试针对 Internet Explorer 6.0+ 的 xmlHttp=new ActiveXObject(“Msxml2.XMLHTTP”)，假如也不成功，则尝试针对 Internet Explorer 5.5+ 的 xmlHttp=new ActiveXObject(“Microsoft.XMLHTTP”)。<br>假如这三种方法都不起作用，那么这个用户所使用的浏览器已经太过时了，他或她会看到一个声明此浏览器不支持 AJAX 的提示。</p>
+<p>注释：上面这些浏览器定制的代码很长，也很复杂。不过，每当您希望创建<br>XMLHttpRequest 对象时，这些代码就能派上用场，因此您可以在任何需要使用的时间拷贝粘贴这些代码。上面这些代码兼容所有的主流浏览器：Internet Explorer、Opera、Firefox 以及 Safari。</p>
+<h3 id="AJAX-XMLHttpRequest-对象"><a href="#AJAX-XMLHttpRequest-对象" class="headerlink" title="AJAX - XMLHttpRequest 对象"></a>AJAX - XMLHttpRequest 对象</h3><p>在向服务器发送数据之前，我们有必要解释一下 XMLHttpRequest 对象的三个重要的属性。</p>
+<p>onreadystatechange 属性</p>
+<p>onreadystatechange属性存有处理服务器响应的函数。下面的代码定义一个空的函数，可同时对 onreadystatechange 属性进行设置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xmlHttp.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">  <span class="comment">// 我们需要在这里写一些代码</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>readyState 属性</p>
+<p>readyState 属性存有服务器响应的状态信息。每当 readyState 改变时，onreadystatechange 函数就会被执行。</p>
+<p>这是 readyState 属性可能的值：</p>
+<p>状态  描述<br>0   请求未初始化（在调用 open() 之前）<br>1   请求已提出（调用 send() 之前）<br>2   请求已发送（这里通常可以从响应得到内容头部）<br>3   请求处理中（响应中通常有部分数据可用，但是服务器还没有完成响应）<br>4   请求已完成（可以访问服务器响应并使用它）</p>
+<p>我们要向这个 onreadystatechange 函数添加一条 If 语句，来测试我们的响应是否已完成（意味着可获得数据）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">xmlHttp.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(xmlHttp.readyState==<span class="number">4</span>)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="comment">// 从服务器的response获得数据</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>responseText 属性</p>
+<p>可以通过 responseText 属性来取回由服务器返回的数据。</p>
+<p>在我们的代码中，我们将把时间文本框的值设置为等于 responseText：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">xmlHttp.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(xmlHttp.readyState==<span class="number">4</span>)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="built_in">document</span>.myForm.time.value=xmlHttp.responseText;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="AJAX-请求服务器"><a href="#AJAX-请求服务器" class="headerlink" title="AJAX - 请求服务器"></a>AJAX - 请求服务器</h3><p>要想把请求发送到服务器，我们就需要使用 open() 方法和 send() 方法。</p>
+<p>open() 方法需要三个参数。第一个参数定义发送请求所使用的方法（GET 还是 POST）。第二个参数规定服务器端脚本的 URL。第三个参数规定应当对请求进行异步地处理。</p>
+<p>send() 方法可将请求送往服务器。如果我们假设 HTML 文件和 test.txt 文件位于相同的目录，那么代码是这样的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp.open(<span class="string">"GET"</span>, <span class="string">"test.txt"</span>,<span class="literal">true</span>);</span><br><span class="line"> xmlhttp.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (xmlhttp.readyState==<span class="number">4</span>) &#123;</span><br><span class="line">   alert(xmlhttp.responseText)</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> xmlhttp.send(<span class="literal">null</span>)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img data-src="/assets/images/ajax/res.png" alt=""></p>
+<p>发出 Ajax 请求 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">callServer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Get the city and state from the web form</span></span><br><span class="line">  <span class="keyword">var</span> city = <span class="built_in">document</span>.getElementById(<span class="string">"city"</span>).value;</span><br><span class="line">  <span class="keyword">var</span> state = <span class="built_in">document</span>.getElementById(<span class="string">"state"</span>).value;</span><br><span class="line">  <span class="comment">// Only go on if there are values for both fields</span></span><br><span class="line">  <span class="keyword">if</span> ((city == <span class="literal">null</span>) || (city == <span class="string">""</span>)) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">if</span> ((state == <span class="literal">null</span>) || (state == <span class="string">""</span>)) <span class="keyword">return</span>;</span><br><span class="line">  <span class="comment">// Build the URL to connect to</span></span><br><span class="line">  <span class="keyword">var</span> url = <span class="string">"/scripts/getZipCode.php?city="</span> + <span class="built_in">escape</span>(city) + <span class="string">"&amp;state="</span> + <span class="built_in">escape</span>(state);</span><br><span class="line">  <span class="comment">// Open a connection to the server</span></span><br><span class="line">  xmlHttp.open(<span class="string">"GET"</span>, url, <span class="literal">true</span>);</span><br><span class="line">  <span class="comment">// Setup a function for the server to run when it's done</span></span><br><span class="line">  xmlHttp.onreadystatechange = updatePage;</span><br><span class="line">  <span class="comment">// Send the request</span></span><br><span class="line">  xmlHttp.send(<span class="literal">null</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中大部分代码意义都很明确。开始的代码使用基本 JavaScript 代码获取几个表单字段的值。然后设置一个 PHP 脚本作为链接的目标。要注意脚本 URL 的指定方式，city 和 state（来自表单）使用简单的 GET 参数附加在 URL 之后。</p>
+<p>然后打开一个连接，这是您第一次看到使用 XMLHttpRequest。其中指定了连接方法（GET）和要连接的 URL。最后一个参数如果设为 true，那么将请求一个异步连接（这就是 Ajax 的由来）。如果使用 false，那么代码发出请求后将等待服务器返回的响应。如果设为 true，当服务器在后台处理请求的时候用户仍然可以使用表单（甚至调用其他 JavaScript 方法）。</p>
+<p>xmlHttp（要记住，这是 XMLHttpRequest 对象实例）的 onreadystatechange 属性可以告诉服务器在运行完成 后（可能要用五分钟或者五个小时）做什么。因为代码没有等待服务器，必须让服务器知道怎么做以便您能作出响应。在这个示例中，如果服务器处理完了请求，一个特殊的名为 updatePage() 的方法将被触发。</p>
+<p>最后，使用值 null 调用 send()。因为已经在请求 URL 中添加了要发送给服务器的数据（city 和 state），所以请求中不需要发送任何数据。这样就发出了请求，服务器按照您的要求工作。</p>
+<p>处理响应</p>
+<p>现在要面对服务器的响应了。现在只要知道两点：</p>
+<p>什么也不要做，直到 xmlHttp.readyState 属性的值等于 4。</p>
+<p>服务器将把响应填充到 xmlHttp.responseText 属性中。</p>
+<p>如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updatePage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (xmlHttp.readyState == <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> response = xmlHttp.responseText;</span><br><span class="line">    <span class="built_in">document</span>.getElementById(<span class="string">"zipCode"</span>).value = response;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>它等待服务器调用，如果是就绪状态，则使用服务器返回的值（这里是用户输入的城市和州的 ZIP 编码）设置另一个表单字段的值。 </p>
+<h3 id="连接-Web-表单"><a href="#连接-Web-表单" class="headerlink" title="连接 Web 表单"></a>连接 Web 表单</h3><p>一个 JavaScript 方法捕捉用户输入表单的信息并将其发送到服务器，另一个 JavaScript 方法监听和处理响应，并在响应返回时设置字段的值。所有这些实际上都依赖于调用 第一个 JavaScript 方法，它启动了整个过程。最明显的办法是在 HTML 表单中增加一个按钮，但这是 2001 年的办法，您不这样认为吗？还是像下面这样利用 JavaScript 技术吧。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">p</span>&gt;</span>City: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"city"</span> <span class="attr">id</span>=<span class="string">"city"</span> <span class="attr">size</span>=<span class="string">"25"</span> </span></span><br><span class="line"><span class="tag">       <span class="attr">onChange</span>=<span class="string">"callServer();"</span> /&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">p</span>&gt;</span>State: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"state"</span> <span class="attr">id</span>=<span class="string">"state"</span> <span class="attr">size</span>=<span class="string">"25"</span> </span></span><br><span class="line"><span class="tag">       <span class="attr">onChange</span>=<span class="string">"callServer();"</span> /&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">p</span>&gt;</span>Zip Code: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"zipCode"</span> <span class="attr">id</span>=<span class="string">"city"</span> <span class="attr">size</span>=<span class="string">"5"</span> /&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<p>如果感觉这像是一段相当普通的代码，那就对了，正是如此！当用户在 city 或 state 字段中输入新的值时，callServer() 方法就被触发，于是 Ajax 开始运行了。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Li Zhiyuan
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2015/07/20/2015-7-20-ajax%E5%9F%BA%E7%A1%80/" title="ajax基础">http://yoursite.com/2015/07/20/2015-7-20-ajax基础/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Javascript/" rel="tag"># Javascript</a>
+              <a href="/tags/ajax/" rel="tag"># ajax</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2015/07/18/2015-7-18-JavaScript%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/" rel="prev" title="javascript基础入门">
+      <i class="fa fa-chevron-left"></i> javascript基础入门
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2015/08/11/2015-8-11-%E5%88%A9%E7%94%A8php%E6%95%B0%E7%BB%84%E5%87%BD%E6%95%B0%E8%BF%9B%E8%A1%8C%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" rel="next" title="利用php数组函数进行函数式编程">
+      利用php数组函数进行函数式编程 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#AJAX-简介"><span class="nav-number">1.</span> <span class="nav-text">AJAX 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AJAX-使用-Http-请求"><span class="nav-number">2.</span> <span class="nav-text">AJAX 使用 Http 请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AJAX-浏览器支持"><span class="nav-number">3.</span> <span class="nav-text">AJAX - 浏览器支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AJAX-XMLHttpRequest-对象"><span class="nav-number">4.</span> <span class="nav-text">AJAX - XMLHttpRequest 对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AJAX-请求服务器"><span class="nav-number">5.</span> <span class="nav-text">AJAX - 请求服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接-Web-表单"><span class="nav-number">6.</span> <span class="nav-text">连接 Web 表单</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Li Zhiyuan"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Li Zhiyuan</p>
+  <div class="site-description" itemprop="description">程序，搞起来很轻松的，就是头冷</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/leezhiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;leezhiy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:18500754397@163.com" title="E-Mail → mailto:18500754397@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/5678634433" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;5678634433" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/a605248452" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;a605248452" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://yoursite.com/" title="http:&#x2F;&#x2F;yoursite.com">Title</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Li Zhiyuan</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+    </div>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+  
+     <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+     <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+     <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":450},"mobile":{"show":false},"react":{"opacity":1},"log":false});</script></body>
+</html>
