@@ -102,6 +102,7 @@ deploy:
   repo: https://github.com/leezhiy/leezhiy.github.io
   branch: master
 
+# 字数统计和阅读时长
 symbols_count_time:
   symbols: true
   time: true
@@ -112,7 +113,7 @@ symbols_count_time:
   wpm: 275
   suffix: "mins."
 
-
+# 看门2D小人
 live2d:
   enable: true
   scriptFrom: local

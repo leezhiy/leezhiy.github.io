@@ -1,4 +1,4 @@
-title: Hexo+Next搭建个人博客（从Jekyll迁移到Hexo）
+title: Hexo+Next搭建个人博客（安装Hexo及主题）
 author: Li Zhiyuan
 tags:
   - Hexo
@@ -9,7 +9,12 @@ categories:
   - Hexo
 date: 2020-04-16 13:09:00
 ---
-笔者以前使用的 {% label info@Jekyll+Github Pages %} 的方式搭建博客，后来从 Jekyll 迁移到了 Hexo, 并不是说 Jekyll 比 Hexo 差.技术没有好坏，只有合不合适，我完全是自己折腾着玩儿。在迁移的过程中也遇到一些问题，下面就简要说明一下 {% label info@Hexo+Github Pages %} 的搭建步骤。 认真阅读全文。 你将能独立搭建一个静态博客。
+## 前言
+
+最近将博客从 Jekyll 迁移到 Hexo，在迁移的过程中也遇到一些问题，下面就简单记录一下 {% label info@Hexo+NexT+Github Pages %} 的搭建步骤。 
+
+本章将从零开始，搭建一个 Hexo + NexT 的本地博客系统。
+
 <!-- more -->
 
 ## Hexo 简介
