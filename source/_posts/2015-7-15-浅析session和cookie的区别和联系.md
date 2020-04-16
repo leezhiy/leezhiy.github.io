@@ -42,7 +42,7 @@ setcookie('name','leezhiy',time()+24*60*60);//1day
 
 Cookie是面向路径的 ,默认存储在当前文件下,如果没有设置路径，不同文件下的cookie默认保存在不同文件夹下，如图：默认保存在mytest文件夹下
 
-![](/assets/images/sessionandcookie/save.png)
+![](/images/sessionandcookie/save.png)
 
 2. 接收和处理Cookie
 

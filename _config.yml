@@ -133,3 +133,9 @@ live2d:
     show: false
   react:
     opacity: 1.0
+
+# hexo-admin authentification
+admin:
+  username: leezhiy
+  password_hash: $2a$10$8Ha2L6VznayWZHHQ4SpqAu2Vg9c6lyTW8rtfM3d14Vqb9AC6uM7eu
+  secret: wygcYD1QEh0K8RjANF9SL25QApVmxKHb
