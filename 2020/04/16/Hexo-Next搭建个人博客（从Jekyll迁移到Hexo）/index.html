@@ -31,20 +31,24 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"manual"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="刚刚学习sql，对常用的sql进行总结，留着备用  连接数据库">
+  <meta name="description" content="笔者以前使用的 Jekyll+Github Pages 的方式搭建博客，后来从 Jekyll 迁移到了 Hexo, 并不是说 Jekyll 比 Hexo 差.技术没有好坏，只有合不合适，我完全是自己折腾着玩儿。在迁移的过程中也遇到一些问题，下面就简要说明一下 Hexo+Github Pages 的搭建步骤。 认真阅读全文。 你将能独立搭建一个静态博客。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql常用sql语句">
-<meta property="og:url" content="http://yoursite.com/2015/07/16/2015-7-16-mysql%E5%B8%B8%E7%94%A8%E7%9A%84sql%E8%AF%AD%E5%8F%A5/index.html">
+<meta property="og:title" content="Hexo+Next搭建个人博客（从Jekyll迁移到Hexo）">
+<meta property="og:url" content="http://yoursite.com/2020/04/16/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BB%8EJekyll%E8%BF%81%E7%A7%BB%E5%88%B0Hexo%EF%BC%89/index.html">
 <meta property="og:site_name" content="Leezhiy Blog">
-<meta property="og:description" content="刚刚学习sql，对常用的sql进行总结，留着备用  连接数据库">
+<meta property="og:description" content="笔者以前使用的 Jekyll+Github Pages 的方式搭建博客，后来从 Jekyll 迁移到了 Hexo, 并不是说 Jekyll 比 Hexo 差.技术没有好坏，只有合不合适，我完全是自己折腾着玩儿。在迁移的过程中也遇到一些问题，下面就简要说明一下 Hexo+Github Pages 的搭建步骤。 认真阅读全文。 你将能独立搭建一个静态博客。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2015-07-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-04-13T14:48:41.533Z">
+<meta property="og:image" content="http://yoursite.com/images/pasted-0.png">
+<meta property="article:published_time" content="2020-04-16T05:09:00.000Z">
+<meta property="article:modified_time" content="2020-04-16T08:25:18.728Z">
 <meta property="article:author" content="Li Zhiyuan">
-<meta property="article:tag" content="Mysql">
+<meta property="article:tag" content="博客">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Next">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-0.png">
 
-<link rel="canonical" href="http://yoursite.com/2015/07/16/2015-7-16-mysql%E5%B8%B8%E7%94%A8%E7%9A%84sql%E8%AF%AD%E5%8F%A5/">
+<link rel="canonical" href="http://yoursite.com/2020/04/16/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BB%8EJekyll%E8%BF%81%E7%A7%BB%E5%88%B0Hexo%EF%BC%89/">
 
 
 <script id="page-configurations">
@@ -83,7 +87,7 @@
   padding: 0 10px 0 14px;
 }
 </style>
-  <title>mysql常用sql语句 | Leezhiy Blog</title>
+  <title>Hexo+Next搭建个人博客（从Jekyll迁移到Hexo） | Leezhiy Blog</title>
   
 
 
@@ -232,7 +236,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/07/16/2015-7-16-mysql%E5%B8%B8%E7%94%A8%E7%9A%84sql%E8%AF%AD%E5%8F%A5/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/16/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BB%8EJekyll%E8%BF%81%E7%A7%BB%E5%88%B0Hexo%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -245,7 +249,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          mysql常用sql语句
+          Hexo+Next搭建个人博客（从Jekyll迁移到Hexo）
         </h1>
 
         <div class="post-meta">
@@ -254,28 +258,26 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2015-07-16 00:00:00" itemprop="dateCreated datePublished" datetime="2015-07-16T00:00:00+08:00">2015-07-16</time>
+              <time title="创建时间：2020-04-16 13:09:00 / 修改时间：16:25:18" itemprop="dateCreated datePublished" datetime="2020-04-16T13:09:00+08:00">2020-04-16</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-13 22:48:41" itemprop="dateModified" datetime="2020-04-13T22:48:41+08:00">2020-04-13</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MYSQL/" itemprop="url" rel="index"><span itemprop="name">MYSQL</span></a>
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">博客搭建</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
                 </span>
             </span>
 
           
-            <span id="/2015/07/16/2015-7-16-mysql%E5%B8%B8%E7%94%A8%E7%9A%84sql%E8%AF%AD%E5%8F%A5/" class="post-meta-item leancloud_visitors" data-flag-title="mysql常用sql语句" title="阅读次数">
+            <span id="/2020/04/16/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BB%8EJekyll%E8%BF%81%E7%A7%BB%E5%88%B0Hexo%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo+Next搭建个人博客（从Jekyll迁移到Hexo）" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -297,8 +299,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2015/07/16/2015-7-16-mysql%E5%B8%B8%E7%94%A8%E7%9A%84sql%E8%AF%AD%E5%8F%A5/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2015/07/16/2015-7-16-mysql%E5%B8%B8%E7%94%A8%E7%9A%84sql%E8%AF%AD%E5%8F%A5/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/04/16/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BB%8EJekyll%E8%BF%81%E7%A7%BB%E5%88%B0Hexo%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/16/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BB%8EJekyll%E8%BF%81%E7%A7%BB%E5%88%B0Hexo%EF%BC%89/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -308,14 +310,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.8k</span>
+              <span>3.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -327,208 +329,99 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>刚刚学习sql，对常用的sql进行总结，留着备用</p>
-<ol>
-<li>连接数据库</li>
-</ol>
+        <p>笔者以前使用的 <span class="label info">Jekyll+Github Pages</span> 的方式搭建博客，后来从 Jekyll 迁移到了 Hexo, 并不是说 Jekyll 比 Hexo 差.技术没有好坏，只有合不合适，我完全是自己折腾着玩儿。在迁移的过程中也遇到一些问题，下面就简要说明一下 <span class="label info">Hexo+Github Pages</span> 的搭建步骤。 认真阅读全文。 你将能独立搭建一个静态博客。</p>
 <a id="more"></a>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p   </span><br><span class="line">mysql -h localhost -u root -p database_name</span><br></pre></td></tr></table></figure>
+<h2 id="Hexo-简介"><a href="#Hexo-简介" class="headerlink" title="Hexo 简介"></a>Hexo 简介</h2><p><a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">Hexo</a> 是高效的静态站点生成框架，她基于 <a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a>，相较于Jekyll他有以下特点:</p>
+<ul>
+<li><h3 id="超快速度"><a href="#超快速度" class="headerlink" title=" 超快速度"></a><i class="fa fa-bolt"></i> 超快速度</h3><p>  Node.js 所带来的超快生成速度，让上百个页面在几秒内瞬间完成渲染。</p>
+</li>
+<li><h3 id="支持Markdown"><a href="#支持Markdown" class="headerlink" title=" 支持Markdown"></a><i class="fa fa-pencil"></i> 支持Markdown</h3><p>  Hexo 支持 GitHub Flavored Markdown 的所有功能，甚至可以整合 Octopress 的大多数插件。</p>
+</li>
+<li><h3 id="一键部署"><a href="#一键部署" class="headerlink" title=" 一键部署"></a><i class="fa fa-cloud-upload"></i> 一键部署</h3><p>  只需一条指令即可部署到Github Pages，或其他网站</p>
+</li>
+<li><h3 id="丰富的插件"><a href="#丰富的插件" class="headerlink" title=" 丰富的插件"></a><i class="fa fa-cog"></i> 丰富的插件</h3><p>  Hexo 拥有强大的插件系统，安装插件可以让 Hexo 支持 Jade, CoffeeScript。</p>
+</li>
+</ul>
+<p>通过 Hexo 你可以轻松地使用 Markdown 编写文章，除了 Markdown 本身的语法之外，还可以使用 Hexo 提供的<a href="https://hexo.io/zh-cn/docs/tag-plugins.html" target="_blank" rel="noopener">标签插件</a>来快速的插入特定形式的内容。</p>
+<p>基于 Hexo 这个优秀的博客框架，很多优秀的开发者奉献出了它们基于 Hexo 开发的<a href="https://hexo.io/themes/" target="_blank" rel="noopener">主题</a>。<br><a href="https://theme-next.org/" target="_blank" rel="noopener">NexT</a> 因其精简的风格，一直被广大用户所喜爱。</p>
+<h2 id="安装前提"><a href="#安装前提" class="headerlink" title="安装前提"></a>安装前提</h2><p>安装 Hexo 相当简单，只需要先安装下列应用程序即可：</p>
+<div class="note info">
+            <ul><li>Node.js (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)</li><li>Git</li></ul>
+          </div>
 
-<ol start="2">
-<li>列出数据库：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases;</span><br></pre></td></tr></table></figure>
+<p>如果您的电脑中已经安装上述必备程序，那么恭喜您！你可以直接前往 安装 Hexo 步骤。</p>
+<p>如果您的电脑中尚未安装所需要的程序，请根据以下安装指示完成安装。</p>
+<h2 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h2><p>Windows：下载并安装 <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">git</a>.<br>Mac：使用 <a href="http://mxcl.github.com/homebrew/" target="_blank" rel="noopener">Homebrew</a>, <a href="http://www.macports.org/" target="_blank" rel="noopener">MacPorts</a> 或者下载 <a href="http://sourceforge.net/projects/git-osx-installer/" target="_blank" rel="noopener">安装程序</a>。<br>Linux (Ubuntu, Debian)：<code>sudo apt-get install git-core</code><br>Linux (Fedora, Red Hat, CentOS)：<code>sudo yum install git-core</code></p>
+<div class="note danger">
+            <h3 id="Mac-用户"><a href="#Mac-用户" class="headerlink" title="Mac 用户"></a>Mac 用户</h3><p>如果在编译时可能会遇到问题，请先到 App Store 安装 Xcode，Xcode 完成后，启动并进入 <strong>Preferences -&gt; Download -&gt; Command Line Tools -&gt; Install</strong> 安装命令行工具。</p>
+          </div>
 
-<ol start="3">
-<li>选择数据库：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use databases_name;</span><br></pre></td></tr></table></figure>
+<div class="note info">
+            <h3 id="Windows-用户"><a href="#Windows-用户" class="headerlink" title="Windows 用户"></a>Windows 用户</h3><p>对于中国大陆地区用户，可以前往 <a href="https://npm.taobao.org/mirrors/git-for-windows/" target="_blank" rel="noopener">淘宝 Git for Windows 镜像</a> 下载 git 安装包。</p>
+          </div>
 
-<ol start="4">
-<li>列出数据表：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show tables;</span><br></pre></td></tr></table></figure>
+<h2 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h2><p>Node.js 为大多数平台提供了官方的 <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">安装程序</a>。对于中国大陆地区用户，可以前往 <a href="https://npm.taobao.org/mirrors/node" target="_blank" rel="noopener">淘宝 Node.js 镜像</a> 下载。</p>
+<p>其它的安装方法：</p>
+<ul>
+<li>Windows：通过 <a href="https://github.com/jasongin/nvs/" target="_blank" rel="noopener">nvs</a>（推荐）或者<a href="https://github.com/nvm-sh/nvm" target="_blank" rel="noopener">nvm</a> 安装。</li>
+<li>Mac：使用 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a> 或 <a href="http://www.macports.org/" target="_blank" rel="noopener">MacPorts</a> 安装。</li>
+<li>Linux（DEB/RPM-based）：从 <a href="https://github.com/nodesource/distributions" target="_blank" rel="noopener">NodeSource</a> 安装。</li>
+<li>其它：使用相应的软件包管理器进行安装，可以参考由 Node.js 提供的 <a href="https://nodejs.org/en/download/package-manager/" target="_blank" rel="noopener">指导</a></li>
+</ul>
+<p>对于 Mac 和 Linux 同样建议使用 nvs 或者 nvm，以避免可能会出现的权限问题。</p>
+<div class="note info">
+            <h3 id="Windows-用户"><a href="#Windows-用户" class="headerlink" title="Windows 用户"></a>Windows 用户</h3><p>使用 Node.js 官方安装程序时，请确保勾选 <strong>Add to PATH</strong> 选项（默认已勾选）</p>
+          </div>
 
-<ol start="5">
-<li>显示表格列的属性：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show columns from table_name;   </span><br><span class="line">describe table_name;</span><br></pre></td></tr></table></figure>
+<div class="note danger">
+            <h3 id="For-Mac-Linux-用户"><a href="#For-Mac-Linux-用户" class="headerlink" title="For Mac / Linux 用户"></a>For Mac / Linux 用户</h3><p>如果在尝试安装 Hexo 的过程中出现 <code>EACCES</code> 权限错误，请遵循 <a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally" target="_blank" rel="noopener">由 npmjs 发布的指导</a> 修复该问题。强烈建议 <strong>不要</strong> 使用 root、sudo 等方法覆盖权限</p>
+          </div>
 
-<ol start="6">
-<li>导出整个数据库：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u user_name -p database_name &gt; &#x2F;tmp&#x2F;file_name  </span><br><span class="line">例如：mysqldump -u root -p test_db &gt; d:&#x2F;test_db.sql</span><br></pre></td></tr></table></figure>
+<h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><p>打开git bash，为了避免出现错误后面的操作在git bash进行</p>
+<p>使用 npm 安装 Hexo</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install -g hexo-cli</span></span><br></pre></td></tr></table></figure>
+<p>此命令会把 hexo.cmd 安装到全局包仓库中，由于该仓库文件夹在 Windows 系统的 path 中。所以你就可以在任意位置执行 hexo 命令了。</p>
+<p>执行一下命令确认hexo安装完好</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo -v</span></span><br><span class="line">hexo: 4.2.0</span><br><span class="line">hexo-cli: 3.1.0</span><br><span class="line">os: Windows_NT 10.0.17763 win32 x64</span><br><span class="line">node: 12.16.2</span><br><span class="line">v8: 7.8.279.23-node.34</span><br><span class="line">uv: 1.34.2</span><br><span class="line">zlib: 1.2.11</span><br><span class="line">brotli: 1.0.7</span><br><span class="line">ares: 1.15.0</span><br><span class="line">modules: 72</span><br><span class="line">nghttp2: 1.40.0</span><br><span class="line">napi: 5</span><br><span class="line">llhttp: 2.0.4</span><br><span class="line">http_parser: 2.9.3</span><br><span class="line">openssl: 1.1.1e</span><br><span class="line">cldr: 36.0</span><br><span class="line">icu: 65.1</span><br><span class="line">tz: 2019c</span><br><span class="line">unicode: 12.1</span><br></pre></td></tr></table></figure>
 
-<ol start="7">
-<li>导出一个表：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u user_name -p database_name table_name &gt; &#x2F;tmp&#x2F;file_name  </span><br><span class="line">例如：mysqldump -u root -p test_db table1 &gt; d:&#x2F;table1.sql</span><br></pre></td></tr></table></figure>
+<p>安装 Hexo 完成后，我们需要为博客创建一个指定文件夹，在指定文件夹下执行以下命令，Hexo 将会在该文件夹中新建所需要的文件。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir blog</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> blog</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo init</span></span><br></pre></td></tr></table></figure>
 
-<ol start="8">
-<li>导出一个数据库结构：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u user_name -p -d --add-drop-table database_name &gt; file_name  </span><br><span class="line">例如：mysqldump -u root -p -d --add-drop-table test_db &gt; test_db.sql</span><br></pre></td></tr></table></figure>
+<p>安装完成后，指定文件夹目录如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.  </span><br><span class="line">├── _config.yml  </span><br><span class="line">├── package.json  </span><br><span class="line">├── scaffolds  </span><br><span class="line">├── source  </span><br><span class="line">|   ├── _drafts  </span><br><span class="line">|   └── _posts  </span><br><span class="line">└──</span><br></pre></td></tr></table></figure>
 
-<ol start="9">
-<li>导入数据库：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">source file_name;   </span><br><span class="line">或   </span><br><span class="line">mysql -u user_name -p database_name &lt; file_name  </span><br><span class="line">例如：</span><br><span class="line">source &#x2F;tmp&#x2F;bbs.sql；</span><br><span class="line"></span><br><span class="line">source d:&#x2F;bbs.sql；</span><br><span class="line"></span><br><span class="line">mysql -u root -p bbs &lt; &quot;d:&#x2F;bbs.sql&quot;</span><br><span class="line"></span><br><span class="line">mysql -u root -p bbs &lt; &quot;&#x2F;tmp&#x2F;bbs.sql&quot;</span><br></pre></td></tr></table></figure>
+<p>我们继续执行命令</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo generate <span class="comment"># 生成静态资源</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo server --debug <span class="comment"># 启动服务器 并开启调试模式</span></span></span><br></pre></td></tr></table></figure>
 
-<ol start="10">
-<li>将文本文件导入数据表中（excel与之相同）</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">load data infile &quot;tables.txt&quot; into table table_name;  </span><br><span class="line">例如：</span><br><span class="line"></span><br><span class="line">load data infile &quot;&#x2F;tmp&#x2F;bbs.txt&quot; into table bbs；</span><br><span class="line"></span><br><span class="line">load data infile &quot;&#x2F;tmp&#x2F;bbs.xls&quot; into table bbs；</span><br><span class="line"></span><br><span class="line">load data infile &quot;d:&#x2F;bbs.txt&quot; into table bbs；</span><br><span class="line"></span><br><span class="line">load data infile &quot;d:&#x2F;bbs.xls&quot; into table bbs；</span><br></pre></td></tr></table></figure>
+<p>我们在浏览器中访问 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> ，就可以看到基于 Hexo 的默认主题的原型</p>
+<h2 id="安装-Hexo-主题"><a href="#安装-Hexo-主题" class="headerlink" title="安装 Hexo 主题"></a>安装 Hexo 主题</h2><p>指定文件夹目录下的 <code>theme</code> 文件夹下存放的就是博客的主题，Hexo 便是依据主题来生成静态文件的，挑选主题可以在 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">官方网站</a> 查找，根据自己的喜好来挑选。</p>
+<p>下载主题的方式如下：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> your-hexo-site  <span class="comment">#eg: blog</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> &#123;主题链接&#125; themes/&#123;主题名称&#125;</span></span><br></pre></td></tr></table></figure>
 
-<ol start="11">
-<li>将数据表导出为文本文件（excel与之相同）</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select * into outfile &quot;path_file_name&quot; from table_name;  </span><br><span class="line">例如：</span><br><span class="line"></span><br><span class="line">select * into outfile &quot;&#x2F;tmp&#x2F;bbs.txt&quot; from bbs；</span><br><span class="line"></span><br><span class="line">select * into outfile &quot;&#x2F;tmp&#x2F;bbs.xls&quot; from bbs where id&#x3D;1;</span><br><span class="line"></span><br><span class="line">select * into outfile &quot;d:&#x2F;bbs.txt&quot; from bbs;</span><br><span class="line"></span><br><span class="line">select * into outfile &quot;d:&#x2F;bbs.xls&quot; from bbs where id&#x3D;1;</span><br></pre></td></tr></table></figure>
+<p>启用主题的方式也很简单</p>
+<p>打开指定文件夹下 Hexo 的配置文件 <code>_config.yml</code>, Ctrl+F 搜索 <code>theme</code> 关键字，修改其主题名称为下载的主题名称即可。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: &#123;主题名称&#125;</span><br></pre></td></tr></table></figure>
 
-<ol start="12">
-<li>创建数据库时先判断数据库是否存在：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create database if not exists database_name;  </span><br><span class="line">例如：create database if not exists bbs</span><br></pre></td></tr></table></figure>
+<p>以本人使用的 NexT 主题为例：</p>
+<h3 id="下载-NexT"><a href="#下载-NexT" class="headerlink" title="下载 NexT"></a>下载 NexT</h3><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> blog</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span></span><br></pre></td></tr></table></figure>
+<h3 id="启用-NexT"><a href="#启用-NexT" class="headerlink" title="启用 NexT"></a>启用 NexT</h3><p>修改 Hexo 目录下的 <code>_config.yml</code></p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
 
-<ol start="13">
-<li>创建数据库：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create database database_name;  </span><br><span class="line">例如：create database bbs;</span><br></pre></td></tr></table></figure>
+<h3 id="验证主题是否安装成功"><a href="#验证主题是否安装成功" class="headerlink" title="验证主题是否安装成功"></a>验证主题是否安装成功</h3><p>启动 Hexo 本地站点，<strong>在服务启动的过程，注意观察命令行输出是否有任何异常信息。</strong></p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo clean <span class="comment"># 清除生成的静态资源</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo s -d  <span class="comment"># hexo server -debug 的缩写</span></span></span><br></pre></td></tr></table></figure>
 
-<ol start="14">
-<li>删除数据库：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">drop database database_name;  </span><br><span class="line">例如：drop database bbs;</span><br></pre></td></tr></table></figure>
+<p>当命令行输出中提示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INFO Hexo is running at http:&#x2F;&#x2F;0.0.0.0:4000&#x2F;. Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure>
+<p>此时即可使用浏览器访问 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> ，检查站点是否正确运行</p>
+<p>当你看到站点的外观与下图所示类似时即说明你已成功安装 NexT 主题。这是 NexT 默认的 Scheme —— Muse<br><img data-src="/images/pasted-0.png" alt="博客首页"></p>
+<p>现在，我们已经成功安装并启用了 NexT 主题。</p>
+<p>关于更多基本操作和基础知识，请查阅 <a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">Hexo</a> 与 <a href="https://theme-next.org/" target="_blank" rel="noopener">NexT</a> 官方文档.</p>
+<h2 id="Hexo-常用命令"><a href="#Hexo-常用命令" class="headerlink" title="Hexo 常用命令"></a>Hexo 常用命令</h2><h3 id="博客操作类"><a href="#博客操作类" class="headerlink" title="博客操作类"></a>博客操作类</h3><h4 id="初始化博客"><a href="#初始化博客" class="headerlink" title="初始化博客"></a>初始化博客</h4><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo init [folder]</span></span><br></pre></td></tr></table></figure>
+<h4 id="启动本地服务器"><a href="#启动本地服务器" class="headerlink" title="启动本地服务器"></a>启动本地服务器</h4><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo clean &amp;&amp; hexo s -d</span></span><br></pre></td></tr></table></figure>
+<h4 id="部署到-Github-Pages"><a href="#部署到-Github-Pages" class="headerlink" title="部署到 Github Pages"></a>部署到 Github Pages</h4><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo clean &amp;&amp; hexo g -d</span></span><br></pre></td></tr></table></figure>
 
-<ol start="15">
-<li>创建数据表：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create table &lt;table_name&gt; ( &lt;column 1 name&gt; &lt;col. 1 type&gt; &lt;col. 1 details&gt;,&lt;column 2 name&gt; &lt;col. 2 type&gt; &lt;col. 2 details&gt;, ...);  </span><br><span class="line">例如：create table (id int not null auto_increment primary key,name char(16) not null default &quot;jack&quot;,date_year date not null);</span><br></pre></td></tr></table></figure>
-
-<ol start="16">
-<li>删除数据表中数据：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">delete from table_name;  </span><br><span class="line">例如：</span><br><span class="line"></span><br><span class="line">delete from bbs;</span><br><span class="line"></span><br><span class="line">delete from bbs where id&#x3D;2;</span><br></pre></td></tr></table></figure>
-
-<ol start="17">
-<li>删除数据库中的数据表：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">drop table table_name;  </span><br><span class="line">例如：</span><br><span class="line"></span><br><span class="line">drop table test_db;</span><br><span class="line"></span><br><span class="line">rm -f database_name&#x2F;table_name.* (linux下）</span><br><span class="line"></span><br><span class="line">例如：</span><br><span class="line"></span><br><span class="line">rm -rf bbs&#x2F;accp.*</span><br></pre></td></tr></table></figure>
-
-<ol start="18">
-<li>向数据库中添加数据：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">insert into table_name set column_name1&#x3D;value1,column_name2&#x3D;value2;  </span><br><span class="line">例如：insert into bbs set name&#x3D;&quot;jack&quot;,date_year&#x3D;&quot;1993-10-01&quot;;</span><br><span class="line"></span><br><span class="line">insert into table_name values (column1,column2,...);  </span><br><span class="line">例如：insert into bbs (&quot;2&quot;,&quot;jack&quot;,&quot;1993-10-02&quot;)</span><br><span class="line"></span><br><span class="line">insert into table_name (column_name1,column_name2,...) values (value1,value2);  </span><br><span class="line">例如：insert into bbs (name,data_year) values (&quot;jack&quot;,&quot;1993-10-01&quot;);</span><br></pre></td></tr></table></figure>
-
-<ol start="19">
-<li>查询数据表中的数据：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from table_name;  </span><br><span class="line">例如：select * from bbs where id&#x3D;1;</span><br></pre></td></tr></table></figure>
-
-<ol start="20">
-<li>修改数据表中的数据：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">update table_name set col_name&#x3D;new_value where id&#x3D;1;  </span><br><span class="line">例如：update bbs set name&#x3D;&quot;tom&quot; where name&#x3D;&quot;jack&quot;;</span><br></pre></td></tr></table></figure>
-
-<ol start="21">
-<li>增加一个字段：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table table_name add column field_name datatype not null default &quot;1&quot;;  </span><br><span class="line">例如：alter table bbs add column tel char(16) not null;</span><br></pre></td></tr></table></figure>
-
-<ol start="22">
-<li>增加多个字段：(column可省略不写）</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table table_name add column filed_name1 datatype,add column filed_name2 datatype;  </span><br><span class="line">例如：alter table bbs add column tel char(16) not null,add column address text;</span><br></pre></td></tr></table></figure>
-
-<ol start="23">
-<li>删除一个字段：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table table_name drop field_name;  </span><br><span class="line">例如：alter table bbs drop tel;</span><br></pre></td></tr></table></figure>
-
-<ol start="24">
-<li>修改字段的数据类型：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table table_name modify id int unsigned;&#x2F;&#x2F;修改列id的类型为int unsigned    </span><br><span class="line">alter table table_name change id sid int unsigned;&#x2F;&#x2F;修改列id的名字为sid，而且把属性修改为int unsigned</span><br></pre></td></tr></table></figure>
-
-<ol start="25">
-<li>修改一个字段的默认值：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table table_name modify column_name datatype not null default &quot;&quot;;  </span><br><span class="line">例如：alter table test_db modify name char(16) default not null &quot;yourname&quot;;</span><br></pre></td></tr></table></figure>
-
-<ol start="26">
-<li>对表重新命名：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">alter table table_name rename as new_table_name;  </span><br><span class="line">例如：alter table bbs rename as bbs_table;</span><br><span class="line"></span><br><span class="line">rename table old_table_name to new_table_name;  </span><br><span class="line">例如：rename table test_db to accp;</span><br></pre></td></tr></table></figure>
-
-<ol start="27">
-<li>从已经有的表中复制表的结构：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create table table2 select * from table1 where 1&lt;&gt;1;  </span><br><span class="line">例如：create table test_db select * from accp where 1&lt;&gt;1;</span><br></pre></td></tr></table></figure>
-
-<ol start="28">
-<li>查询时间：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select now();</span><br></pre></td></tr></table></figure>
-
-<ol start="29">
-<li>查询当前用户：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select user();</span><br></pre></td></tr></table></figure>
-
-<ol start="30">
-<li>查询数据库版本：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select version();</span><br></pre></td></tr></table></figure>
-
-<ol start="31">
-<li>创建索引：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alter table table1 add index ind_id(id);   </span><br><span class="line">create index ind_id on table1(id);   </span><br><span class="line">create unique index ind_id on table1(id);&#x2F;&#x2F;建立唯一性索引</span><br></pre></td></tr></table></figure>
-
-<ol start="32">
-<li>删除索引：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">drop index idx_id on table1;   </span><br><span class="line">alter table table1 drop index ind_id;</span><br></pre></td></tr></table></figure>
-
-<ol start="33">
-<li>联合字符或者多个列（将id与”:”和列name和”=”连接）</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select concat(id，&#39;:&#39;,name,&#39;&#x3D;&#39;) from table;</span><br></pre></td></tr></table></figure>
-
-<ol start="34">
-<li>limit（选出10到20条）</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from bbs order by id limit 9,10;  </span><br><span class="line">（从查询结果中列出第几到几条的记录）</span><br></pre></td></tr></table></figure>
-
-<ol start="35">
-<li>增加一个管理员账号：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant all on *.* to user@localhost identified by &quot;password&quot;;</span><br></pre></td></tr></table></figure>
-
-<ol start="36">
-<li>创建表是先判断表是否存在</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table if not exists students(……);</span><br></pre></td></tr></table></figure>
-
-<ol start="37">
-<li>复制表：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create table table2 select * from table1;  </span><br><span class="line">例如：create table test_db select * from accp;</span><br></pre></td></tr></table></figure>
-
-<ol start="38">
-<li>授于用户远程访问mysql的权限</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">grant all privileges on *.* to &quot;root&quot;@&quot;%&quot; identified by &quot;password&quot; with grant option;  </span><br><span class="line">或者是修改mysql数据库中的user表中的host字段</span><br><span class="line"></span><br><span class="line">use mysql;   </span><br><span class="line">select user,host from user;   </span><br><span class="line">update user set host&#x3D;&quot;%&quot; where user&#x3D;&quot;user_name&quot;;</span><br></pre></td></tr></table></figure>
-
-<ol start="39">
-<li>查看当前状态</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show status;</span><br></pre></td></tr></table></figure>
-
-<ol start="40">
-<li>查看当前连接的用户</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show processlist;  </span><br><span class="line">（如果是root用户，则查看全部的线程，得到的用户连接数同show status;里的 Threads_connected值是相同的）</span><br></pre></td></tr></table></figure>
+<h3 id="文章操作类"><a href="#文章操作类" class="headerlink" title="文章操作类"></a>文章操作类</h3><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo new <span class="string">'postName'</span> <span class="comment">#新建文章</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo new page <span class="string">'pageName'</span> <span class="comment"># 新建页面</span></span></span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -579,7 +472,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://yoursite.com/2015/07/16/2015-7-16-mysql%E5%B8%B8%E7%94%A8%E7%9A%84sql%E8%AF%AD%E5%8F%A5/" title="mysql常用sql语句">http://yoursite.com/2015/07/16/2015-7-16-mysql常用的sql语句/</a>
+    <a href="http://yoursite.com/2020/04/16/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BB%8EJekyll%E8%BF%81%E7%A7%BB%E5%88%B0Hexo%EF%BC%89/" title="Hexo+Next搭建个人博客（从Jekyll迁移到Hexo）">http://yoursite.com/2020/04/16/Hexo-Next搭建个人博客（从Jekyll迁移到Hexo）/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -620,7 +513,9 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/Mysql/" rel="tag"><i class="fa fa-tag"></i> Mysql</a>
+              <a href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag"><i class="fa fa-tag"></i> 博客</a>
+              <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+              <a href="/tags/Next/" rel="tag"><i class="fa fa-tag"></i> Next</a>
           </div>
 
         
@@ -629,13 +524,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2015/07/15/2015-7-15-mysql%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F/" rel="prev" title="mysql连接方式">
-      <i class="fa fa-chevron-left"></i> mysql连接方式
+    <a href="/2020/03/19/2020-03-19-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%83%EF%BC%89%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/" rel="prev" title="php 设计模式（七）装饰器模式">
+      <i class="fa fa-chevron-left"></i> php 设计模式（七）装饰器模式
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2015/07/18/2015-7-18-javascript%E4%B9%8BDOM%E6%93%8D%E4%BD%9C/" rel="next" title="javascript之DOM操作">
-      javascript之DOM操作 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -695,6 +587,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo-简介"><span class="nav-number">1.</span> <span class="nav-text">Hexo 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#超快速度"><span class="nav-number">1.1.</span> <span class="nav-text"> 超快速度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#支持Markdown"><span class="nav-number">1.2.</span> <span class="nav-text"> 支持Markdown</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一键部署"><span class="nav-number">1.3.</span> <span class="nav-text"> 一键部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#丰富的插件"><span class="nav-number">1.4.</span> <span class="nav-text"> 丰富的插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装前提"><span class="nav-number">2.</span> <span class="nav-text">安装前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Git"><span class="nav-number">3.</span> <span class="nav-text">安装 Git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mac-用户"><span class="nav-number">3.1.</span> <span class="nav-text">Mac 用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-用户"><span class="nav-number">3.2.</span> <span class="nav-text">Windows 用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Node-js"><span class="nav-number">4.</span> <span class="nav-text">安装 Node.js</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-用户"><span class="nav-number">4.1.</span> <span class="nav-text">Windows 用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#For-Mac-Linux-用户"><span class="nav-number">4.2.</span> <span class="nav-text">For Mac &#x2F; Linux 用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Hexo"><span class="nav-number">5.</span> <span class="nav-text">安装 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Hexo-主题"><span class="nav-number">6.</span> <span class="nav-text">安装 Hexo 主题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载-NexT"><span class="nav-number">6.1.</span> <span class="nav-text">下载 NexT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启用-NexT"><span class="nav-number">6.2.</span> <span class="nav-text">启用 NexT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证主题是否安装成功"><span class="nav-number">6.3.</span> <span class="nav-text">验证主题是否安装成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo-常用命令"><span class="nav-number">7.</span> <span class="nav-text">Hexo 常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#博客操作类"><span class="nav-number">7.1.</span> <span class="nav-text">博客操作类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化博客"><span class="nav-number">7.1.1.</span> <span class="nav-text">初始化博客</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动本地服务器"><span class="nav-number">7.1.2.</span> <span class="nav-text">启动本地服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#部署到-Github-Pages"><span class="nav-number">7.1.3.</span> <span class="nav-text">部署到 Github Pages</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文章操作类"><span class="nav-number">7.2.</span> <span class="nav-text">文章操作类</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
