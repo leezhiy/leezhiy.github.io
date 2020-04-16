@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+    app_id: '4e6b4c7f',   // 必填，您的 APP 标识
+  }, {
+    launcher: {
+      disableLauncherIcon: true, // 悬浮 ICON 是否显示
+      defaultEnterView: 'list', // 'list' 或 'new' 默认是 list(在对话列表是空的时候默认切换到 new)
+    }
+  });
+  daovoice('update');
+  </script>
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Amita:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"manual"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言最近将博客从 Jekyll 迁移到 Hexo，在迁移的过程中也遇到一些问题，下面就简单记录一下 Hexo+NexT+Github Pages 的搭建步骤。 在上一章，我们已经将 Hexo + Next 安装到了本地， 在本章我们将对 NexT 主题进行一些个性化的设置。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo+Next搭建个人博客（Next 主题设置）">
+<meta property="og:url" content="http://yoursite.com/2020/04/16/2020-04-16-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88NexT%20%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE%EF%BC%89/index.html">
+<meta property="og:site_name" content="Leezhiy Blog">
+<meta property="og:description" content="前言最近将博客从 Jekyll 迁移到 Hexo，在迁移的过程中也遇到一些问题，下面就简单记录一下 Hexo+NexT+Github Pages 的搭建步骤。 在上一章，我们已经将 Hexo + Next 安装到了本地， 在本章我们将对 NexT 主题进行一些个性化的设置。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-16T07:30:17.000Z">
+<meta property="article:modified_time" content="2020-04-16T15:37:36.704Z">
+<meta property="article:author" content="Li Zhiyuan">
+<meta property="article:tag" content="博客">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Next">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/16/2020-04-16-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88NexT%20%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style><style>
+#needsharebutton-float {
+  bottom: 88px;
+  cursor: pointer;
+  left: -8px;
+  position: fixed;
+  z-index: 9999;
+}
+#needsharebutton-float .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 4px;
+  padding: 0 10px 0 14px;
+}
+</style>
+  <title>Hexo+Next搭建个人博客（Next 主题设置） | Leezhiy Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Leezhiy Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Leezhiy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">我秃了，也变强了</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/custom-name/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/leezhiy" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#607d8b;color:#fff;position: absolute;top: 0;border: 0;right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/16/2020-04-16-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88NexT%20%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Li Zhiyuan">
+      <meta itemprop="description" content="程序，搞起来很轻松的，就是头冷">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leezhiy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo+Next搭建个人博客（Next 主题设置）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-16 15:30:17 / 修改时间：23:37:36" itemprop="dateCreated datePublished" datetime="2020-04-16T15:30:17+08:00">2020-04-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">博客搭建</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/16/2020-04-16-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88NexT%20%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/16/2020-04-16-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88NexT%20%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE%EF%BC%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>12k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>11 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近将博客从 Jekyll 迁移到 Hexo，在迁移的过程中也遇到一些问题，下面就简单记录一下 <span class="label info">Hexo+NexT+Github Pages</span> 的搭建步骤。</p>
+<p>在上一章，我们已经将 Hexo + Next 安装到了本地， 在本章我们将对 NexT 主题进行一些个性化的设置。</p>
+<a id="more"></a>
+
+<h2 id="基本设置"><a href="#基本设置" class="headerlink" title="基本设置"></a>基本设置</h2><p>在 Hexo 中有两份主要的配置文件，其名称都是 <code>_config.yml</code> 。其中，一份位于站点根目录下，主要包含 Hexo 本身的配置；另一份位于主题目录下，这份配置由主题作者提供，主要用于配置主题相关的选项。</p>
+<p>我们约定，将前者称为 <span class="label primary">站点配置文件</span>，后者称为 <span class="label success">主题配置文件</span></p>
+<h3 id="站点初始设置"><a href="#站点初始设置" class="headerlink" title="站点初始设置"></a>站点初始设置</h3><p>打开 <span class="label primary">站点配置文件</span> ，修改内容如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Site</span></span><br><span class="line">title: Leezhiy Blog # 博客标题</span><br><span class="line">subtitle: '我秃了，也变强了' # 副标题</span><br><span class="line">description: '程序，搞起来很轻松的，就是头冷' # 个人详情</span><br><span class="line">keywords:  # 关键字</span><br><span class="line">author: Li Zhiyuan # 博客作者</span><br><span class="line">language: zh-CN # 语言 参见主题的文档进行设置</span><br><span class="line">timezone: 'Asia/Shanghai' # 时区 默认为电脑的时区</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置主题风格"><a href="#设置主题风格" class="headerlink" title="设置主题风格"></a>设置主题风格</h3><p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>scheme</code> 关键字，将你需用启用的 <code>scheme</code> 前面注释 # 去除即可。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ---------------------------------------------------------------</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Scheme Settings</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ---------------------------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Schemes</span></span><br><span class="line"><span class="meta">#</span><span class="bash">scheme: Muse <span class="comment"># 默认 Scheme，这是 NexT 最初的版本，黑白主调，大量留白</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">scheme: Mist <span class="comment"># Muse 的紧凑版本，整洁有序的单栏外观</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">scheme: Pisces <span class="comment"># 双栏 Scheme，小家碧玉似的清新</span></span></span><br><span class="line">scheme: Gemini # 类似 Pisces</span><br></pre></td></tr></table></figure>
+
+<h3 id="菜单设置"><a href="#菜单设置" class="headerlink" title="菜单设置"></a>菜单设置</h3><p>打开 git bash, 创建页面</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> blog</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo new page categories <span class="comment"># 创建分类页面</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo new page tags <span class="comment"># 创建标签页面</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo new custom_name <span class="comment"># 创建关于页面</span></span></span><br></pre></td></tr></table></figure>
+<p>设置各个页面的头信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">blog&#x2F;source&#x2F;custom-name&#x2F;index.md</span><br><span class="line"></span><br><span class="line">title: 关于我</span><br><span class="line">date: 2020-04-13 12:39:04</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">blog&#x2F;source&#x2F;tags&#x2F;index.md</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">title: 标签</span><br><span class="line">date: 2020-04-13 21:37:23</span><br><span class="line">type: tags</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">blog&#x2F;source&#x2F;categories&#x2F;index.md</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">title: 分类</span><br><span class="line">date: 2020-04-13 21:37:23</span><br><span class="line">type: categories</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>menu</code> 关键字，修改如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ---------------------------------------------------------------</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Menu Settings 菜单设置</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ---------------------------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 用法: `Key: /link/ || icon` </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Key 表示菜单名称。 如果可以翻译，则将加载翻译后文本，否则将使用原来的名称。Key 区分大小写</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  `||` 分隔符之前是菜单的链接，之后是 Font Awesome icon </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 在子目录（例如：yoursite.com/blog）中运行站点时，需要去掉链接前面的斜杠  (例如：/archives -&gt; archives)。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 外部url应以http://或https开头：</span></span><br><span class="line">menu:</span><br><span class="line">  home: / || fa fa-home</span><br><span class="line">  archives: /archives/ || fa fa-archive</span><br><span class="line">  categories: /categories/ || fa fa-th</span><br><span class="line">  tags: /tags/ || fa fa-tags</span><br><span class="line">  about: /custom-name/ || fa fa-user</span><br><span class="line"><span class="meta">  #</span><span class="bash">schedule: /schedule/ || fa fa-calendar</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">sitemap: /sitemap.xml || fa fa-sitemap</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">commonweal: /404/ || fa fa-heartbeat</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 开启/关闭菜单图标 </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Enable / Disable menu icons / item badges.</span></span><br><span class="line">menu_settings:</span><br><span class="line">  icons: true</span><br><span class="line">  badges: false</span><br></pre></td></tr></table></figure>
+
+<h3 id="头像设置"><a href="#头像设置" class="headerlink" title="头像设置"></a>头像设置</h3><p>准备一个网络图片地址或一张图片放到 blog/themes/next/source/images/ 目录下，打开 <span class="label success">主题配置文件</span> ，搜索 <code>avatar</code> 关键字，修改如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Sidebar Avatar</span></span><br><span class="line">avatar:</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Replace the default image and <span class="built_in">set</span> the url here.</span></span><br><span class="line">  url: /images/avatar.png # 你自己的图片名称或完整的网络图片地址</span><br><span class="line"><span class="meta">  #</span><span class="bash"> If <span class="literal">true</span>, the avatar will be dispalyed <span class="keyword">in</span> circle.</span></span><br><span class="line">  rounded: true # 是否为圆形头像</span><br><span class="line"><span class="meta">  #</span><span class="bash"> If <span class="literal">true</span>, the avatar will be rotated with the cursor.</span></span><br><span class="line">  rotated: false # 设置成 true ,鼠标放上去会不停转圈</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码块样式设置"><a href="#代码块样式设置" class="headerlink" title="代码块样式设置"></a>代码块样式设置</h3><p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>codeblock</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">codeblock:</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Code Highlight theme</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> Available values: normal | night | night eighties | night blue | night bright | solarized | solarized dark | galactic</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> See: https://github.com/chriskempson/tomorrow-theme</span></span><br><span class="line">  highlight_theme: night eighties # 高亮主题</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Add copy button on codeblock</span></span><br><span class="line">  copy_button:</span><br><span class="line">    enable: true # 是否显示复制按钮</span><br><span class="line">    # Show text copy result.</span><br><span class="line">    show_result: true # 是否显示复制结果</span><br><span class="line">    # Available values: default | flat | mac</span><br><span class="line">    style: default # 复制按钮样式</span><br></pre></td></tr></table></figure>
+
+<h3 id="回到顶部按钮设置"><a href="#回到顶部按钮设置" class="headerlink" title="回到顶部按钮设置"></a>回到顶部按钮设置</h3><p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>back2top</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">back2top:</span><br><span class="line">  enable: true</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Back to top <span class="keyword">in</span> sidebar.</span></span><br><span class="line">  sidebar: true</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Scroll percent label <span class="keyword">in</span> b2t button.</span></span><br><span class="line">  scrollpercent: true</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="社交媒体联系方式修改"><a href="#社交媒体联系方式修改" class="headerlink" title="社交媒体联系方式修改"></a>社交媒体联系方式修改</h3><p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>social</code> 关键字，将其中地址替换成自己的便可</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Social Links</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Usage: `Key: permalink || icon`</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Key is the link label showing to end users.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.</span></span><br><span class="line">social:</span><br><span class="line">  GitHub: https://github.com/leezhiy || fab fa-github</span><br><span class="line">  E-Mail: mailto:18500754397@163.com || fa fa-envelope</span><br><span class="line">  微博: https://weibo.com/5678634433 || fab fa-weibo</span><br><span class="line">  知乎: https://www.zhihu.com/people/li-zhi-yuan-13-7 || fa fa-globe</span><br><span class="line">  Gitee: https://gitee.com/leezhiy || fab fa-git</span><br><span class="line">  网易云: https://music.163.com/#/user/home?id=131550901 || fa fa-music</span><br><span class="line"><span class="meta">  #</span><span class="bash">Google: https://plus.google.com/youname || fab fa-google</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">Twitter: https://twitter.com/yourname || fab fa-twitter</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">FB Page: https://www.facebook.com/yourname || fab fa-facebook</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">StackOverflow: https://stackoverflow.com/yourname || fab fa-stack-overflow</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">YouTube: https://youtube.com/yourname || fab fa-youtube</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">Instagram: https://instagram.com/yourname || fab fa-instagram</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">Skype: skype:yourname?call|chat || fab fa-skype</span></span><br><span class="line"></span><br><span class="line">social_icons:</span><br><span class="line">  enable: true # 图标是否开启</span><br><span class="line">  icons_only: false # 是否只有图标</span><br><span class="line">  transition: false  # 动画效果</span><br></pre></td></tr></table></figure>
+
+<h3 id="增加友情链接"><a href="#增加友情链接" class="headerlink" title="增加友情链接"></a>增加友情链接</h3><p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>links_settings</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Blog rolls</span></span><br><span class="line">links_settings:</span><br><span class="line">  icon: fa fa-link</span><br><span class="line">  title: 友情连接</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Available values: block | inline</span></span><br><span class="line">  layout: block</span><br><span class="line"></span><br><span class="line">links:</span><br><span class="line">  友情链接1: https://www.baidu.com</span><br><span class="line">  友情链接2: https://www.baidu.com</span><br><span class="line">  友情链接3: https://www.baidu.com</span><br><span class="line">  友情链接4: https://www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<h3 id="将文章底部-换成标签图标"><a href="#将文章底部-换成标签图标" class="headerlink" title="将文章底部 # 换成标签图标"></a>将文章底部 # 换成标签图标</h3><p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>tag_icon</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Use icon instead of the symblo <span class="comment"># to indicate the tag at the bottom of the post</span></span></span><br><span class="line">tag_icon: true</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置打赏"><a href="#设置打赏" class="headerlink" title="设置打赏"></a>设置打赏</h3><p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>reward</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Reward (Donate)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Front-matter variable (unsupport animation).</span></span><br><span class="line">reward_settings:</span><br><span class="line"><span class="meta">  #</span><span class="bash"> If <span class="literal">true</span>, reward will be displayed <span class="keyword">in</span> every article by default.</span></span><br><span class="line">  enable: ture #打赏开关</span><br><span class="line">  animation: false</span><br><span class="line">  comment: 如果你觉得这篇文章对你有用，欢迎赞赏哦~</span><br><span class="line"></span><br><span class="line">reward:</span><br><span class="line">  wechatpay: /images/wechatpay.png # 你自己的微信收款码</span><br><span class="line">  alipay: /images/alipay.png # 你自己的支付宝收款码</span><br><span class="line"><span class="meta">  #</span><span class="bash">paypal: /images/paypal.png</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">bitcoin: /images/bitcoin.png</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="设置订阅"><a href="#设置订阅" class="headerlink" title="设置订阅"></a>设置订阅</h3><p>安装 hexo-generator-feed 插件</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-generator-feed --save</span></span><br></pre></td></tr></table></figure>
+
+<p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>reward</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Subscribe through Telegram Channel, Twitter, etc.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Usage: `Key: permalink || icon` (Font Awesome)</span></span><br><span class="line">follow_me:</span><br><span class="line"><span class="meta">  #</span><span class="bash">Twitter: https://twitter.com/username || fab fa-twitter</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">Telegram: https://t.me/channel_name || fab fa-telegram</span></span><br><span class="line">  WeChat: /images/wechat_channel.png || fab fa-weixin # 你自己的微信频道二维码</span><br><span class="line">  RSS: /atom.xml || fa fa-rss</span><br></pre></td></tr></table></figure>
+
+<h3 id="开启阅读进度条"><a href="#开启阅读进度条" class="headerlink" title="开启阅读进度条"></a>开启阅读进度条</h3><p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>reading_progress</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Reading progress bar</span></span><br><span class="line">reading_progress:</span><br><span class="line">  enable: true</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Available values: top | bottom</span></span><br><span class="line">  position: top</span><br><span class="line">  color: "#37c6c0"</span><br><span class="line">  height: 3px</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="右上角-Github-按钮开启"><a href="#右上角-Github-按钮开启" class="headerlink" title="右上角 Github 按钮开启"></a>右上角 Github 按钮开启</h3><p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>github_banner</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> `Follow me on GitHub` banner <span class="keyword">in</span> the top-right corner.</span></span><br><span class="line">github_banner:</span><br><span class="line">  enable: ture</span><br><span class="line">  permalink: https://github.com/leezhiy</span><br><span class="line">  title: Follow me on GitHub</span><br></pre></td></tr></table></figure>
+
+<h3 id="字体设置"><a href="#字体设置" class="headerlink" title="字体设置"></a>字体设置</h3><p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>Font Settings</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ---------------------------------------------------------------</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Font Settings</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> See: https://theme-next.org/docs/theme-settings/<span class="comment">#Fonts-Customization</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ---------------------------------------------------------------</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Find fonts on Google Fonts (https://www.google.com/fonts)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> All fonts <span class="built_in">set</span> here will have the following styles:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   light | light italic | normal | normal italic | bold | bold italic</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Be aware that setting too much fonts will cause site running slowly</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ---------------------------------------------------------------</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> To avoid space between header and sidebar <span class="keyword">in</span> scheme Pisces / Gemini, Web Safe fonts are recommended <span class="keyword">for</span> `global` (and `title`):</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Arial | Tahoma | Helvetica | Times New Roman | Courier New | Verdana | Georgia | Palatino | Garamond | Comic Sans MS | Trebuchet MS</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ---------------------------------------------------------------</span></span><br><span class="line"></span><br><span class="line">font:</span><br><span class="line">  enable: true</span><br><span class="line"></span><br><span class="line"><span class="meta">  #</span><span class="bash"> Uri of fonts host, e.g. https://fonts.googleapis.com (Default).</span></span><br><span class="line">  host:</span><br><span class="line"></span><br><span class="line"><span class="meta">  #</span><span class="bash"> Font options:</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> `external: <span class="literal">true</span>` will load this font family from `host` above.</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> `family: Times New Roman`. Without any quotes.</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> `size: x.x`. Use `em` as unit. Default: 1 (16px)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">  #</span><span class="bash"> Global font settings used <span class="keyword">for</span> all elements inside &lt;body&gt;.</span></span><br><span class="line">  global:</span><br><span class="line">    external: true</span><br><span class="line">    family: Lato</span><br><span class="line">    size:</span><br><span class="line"></span><br><span class="line"><span class="meta">  #</span><span class="bash"> Font settings <span class="keyword">for</span> site title (.site-title).</span></span><br><span class="line">  title:</span><br><span class="line">    external: true</span><br><span class="line">    family: Lobster Two</span><br><span class="line">    size:</span><br><span class="line"></span><br><span class="line"><span class="meta">  #</span><span class="bash"> Font settings <span class="keyword">for</span> headlines (&lt;h1&gt; to &lt;h6&gt;).</span></span><br><span class="line">  headings:</span><br><span class="line">    external: true</span><br><span class="line">    family: Amita</span><br><span class="line">    size:</span><br><span class="line"></span><br><span class="line"><span class="meta">  #</span><span class="bash"> Font settings <span class="keyword">for</span> posts (.post-body).</span></span><br><span class="line">  posts:</span><br><span class="line">    external: true</span><br><span class="line">    family:</span><br><span class="line"></span><br><span class="line"><span class="meta">  #</span><span class="bash"> Font settings <span class="keyword">for</span> &lt;code&gt; and code blocks.</span></span><br><span class="line">  codes:</span><br><span class="line">    external: true</span><br><span class="line">    family:</span><br></pre></td></tr></table></figure>
+
+<h3 id="底部设置"><a href="#底部设置" class="headerlink" title="底部设置"></a>底部设置</h3><p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>footer</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">footer:</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Specify the date when the site was setup. If not defined, current year will be used.</span></span><br><span class="line">  since: 2015 # 网站开始年份</span><br><span class="line"></span><br><span class="line"><span class="meta">  #</span><span class="bash"> Icon between year and copyright info.</span></span><br><span class="line">  icon:</span><br><span class="line">    # Icon name in Font Awesome. See: https://fontawesome.com/icons</span><br><span class="line">    name: fa fa-heart # 底部图标</span><br><span class="line">    # If you want to animate the icon, set it to true.</span><br><span class="line">    animated: true # 动画效果</span><br><span class="line">    # Change the color of icon, using Hex Code.</span><br><span class="line">    color: "#ff0000"</span><br><span class="line"></span><br><span class="line"><span class="meta">  #</span><span class="bash"> If not defined, `author` from Hexo `_config.yml` will be used.</span></span><br><span class="line">  copyright: # 版权信息</span><br><span class="line"></span><br><span class="line"><span class="meta">  #</span><span class="bash"> Powered by Hexo &amp; NexT</span></span><br><span class="line">  powered: false # 是否显示 Powered by Hexo &amp; NexT</span><br><span class="line"></span><br><span class="line"><span class="meta">  #</span><span class="bash"> Beian ICP and gongan information <span class="keyword">for</span> Chinese users. See: http://www.beian.miit.gov.cn, http://www.beian.gov.cn</span></span><br><span class="line">  beian: # 备案信息</span><br><span class="line">    enable: false</span><br><span class="line">    icp: </span><br><span class="line">    # The digit in the num of gongan beian.</span><br><span class="line">    gongan_id: # 公安备案ID</span><br><span class="line">    # The full num of gongan beian.</span><br><span class="line">    gongan_num: # 公安备案编号</span><br><span class="line">    # The icon for gongan beian. See: http://www.beian.gov.cn/portal/download</span><br><span class="line">    gongan_icon_url: # 公安备案图标</span><br></pre></td></tr></table></figure>
+
+<h3 id="版权信息设置"><a href="#版权信息设置" class="headerlink" title="版权信息设置"></a>版权信息设置</h3><p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>creative_commons</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Creative Commons 4.0 International License.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> See: https://creativecommons.org/share-your-work/licensing-types-examples</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Available values of license: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> You can <span class="built_in">set</span> a language value <span class="keyword">if</span> you prefer a translated version of CC license, e.g. deed.zh</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> CC licenses are available <span class="keyword">in</span> 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org</span></span><br><span class="line">creative_commons:</span><br><span class="line">  license: by-nc-sa # 版权信息类别 选项： by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero</span><br><span class="line">  sidebar: true # 侧边栏显示状态</span><br><span class="line">  post: true # 文章底部显示状态</span><br><span class="line">  language:</span><br></pre></td></tr></table></figure>
+
+<h2 id="第三方插件"><a href="#第三方插件" class="headerlink" title="第三方插件"></a>第三方插件</h2><h3 id="本地搜索"><a href="#本地搜索" class="headerlink" title="本地搜索"></a>本地搜索</h3><p>打开博客目录，运行 git bash ，安装插件</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-generator-searchdb --save</span></span><br></pre></td></tr></table></figure>
+
+<p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>local_search</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Local Search</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Dependencies: https://github.com/theme-next/hexo-generator-searchdb</span></span><br><span class="line">local_search:</span><br><span class="line">  enable: true</span><br><span class="line"><span class="meta">  #</span><span class="bash"> If auto, trigger search by changing input.</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> If manual, trigger search by pressing enter key or search button.</span></span><br><span class="line">  trigger: auto</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Show top n results per article, show all results by setting to -1</span></span><br><span class="line">  top_n_per_article: 3</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Unescape html strings to the readable one.</span></span><br><span class="line">  unescape: false</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Preload the search data when the page loads.</span></span><br><span class="line">  preload: false</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加相关文章"><a href="#添加相关文章" class="headerlink" title="添加相关文章"></a>添加相关文章</h3><p>打开博客目录，运行 git bash ，安装插件</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-related-popular-posts --save</span></span><br></pre></td></tr></table></figure>
+<p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>related_posts</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Related popular posts</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Dependencies: https://github.com/tea3/hexo-related-popular-posts</span></span><br><span class="line">related_posts:</span><br><span class="line">  enable: true</span><br><span class="line">  title: # Custom header, leave empty to use the default one</span><br><span class="line">  display_in_home: false</span><br><span class="line">  params:</span><br><span class="line">    maxCount: 5</span><br><span class="line">    #PPMixingRate: 0.0</span><br><span class="line">    #isDate: false</span><br><span class="line">    #isImage: false</span><br><span class="line">    #isExcerpt: false</span><br></pre></td></tr></table></figure>
+
+<h3 id="博客图片插件"><a href="#博客图片插件" class="headerlink" title="博客图片插件"></a>博客图片插件</h3><p>打开博客目录，运行 git bash ，安装插件</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install medium-zoom</span></span><br></pre></td></tr></table></figure>
+<p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>mediumzoom</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> A JavaScript library <span class="keyword">for</span> zooming images like Medium.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Do not <span class="built_in">enable</span> both `fancybox` and `mediumzoom`.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> For more information: https://github.com/francoischalifour/medium-zoom</span></span><br><span class="line">mediumzoom: true</span><br></pre></td></tr></table></figure>
+
+<h3 id="中英文之间自动加空格"><a href="#中英文之间自动加空格" class="headerlink" title="中英文之间自动加空格"></a>中英文之间自动加空格</h3><p>打开博客目录，运行 git bash ，安装插件</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install pangu --save</span></span><br></pre></td></tr></table></figure>
+<p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>pangu</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Pangu Support</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> For more information: https://github.com/vinta/pangu.js</span></span><br><span class="line">pangu: true</span><br></pre></td></tr></table></figure>
+
+<h3 id="网页加载进度条"><a href="#网页加载进度条" class="headerlink" title="网页加载进度条"></a>网页加载进度条</h3><p>打开博客目录，运行 git bash </p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> blog/themes/next</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/theme-next/theme-next-pace <span class="built_in">source</span>/lib/pace</span></span><br></pre></td></tr></table></figure>
+<p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>pace</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pace:</span><br><span class="line">  enable: true</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Themes list:</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> big-counter | bounce | barber-shop | center-atom | center-circle | center-radar | center-simple</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> corner-indicator | fill-left | flat-top | flash | loading-bar | mac-osx | material | minimal</span></span><br><span class="line">  theme: minimal</span><br></pre></td></tr></table></figure>
+<h2 id="博客速度优化"><a href="#博客速度优化" class="headerlink" title="博客速度优化"></a>博客速度优化</h2><h3 id="Pjax"><a href="#Pjax" class="headerlink" title="Pjax"></a>Pjax</h3><p>打开博客目录，运行 git bash </p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> blog/themes/next</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/theme-next/theme-next-pjax <span class="built_in">source</span>/lib/pjax</span></span><br></pre></td></tr></table></figure>
+<p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>pjax</code> 关键字，设置 Pjax 为开启状态</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Easily <span class="built_in">enable</span> fast Ajax navigation on your website.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Dependencies: https://github.com/theme-next/theme-next-pjax</span></span><br><span class="line">pjax: true</span><br></pre></td></tr></table></figure>
+
+<h3 id="懒加载"><a href="#懒加载" class="headerlink" title="懒加载"></a>懒加载</h3><p>打开博客目录，运行 git bash ，安装插件</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install --save lozad</span></span><br></pre></td></tr></table></figure>
+<p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>lazyloag</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 修改一</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Vanilla JavaScript plugin <span class="keyword">for</span> lazyloading images.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> For more information: https://github.com/ApoorvSaxena/lozad.js</span></span><br><span class="line">lazyload: true</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改二</span></span><br><span class="line">comments:</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Available values: tabs | buttons</span></span><br><span class="line">  style: tabs</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Choose a comment system to be displayed by default.</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> Available values: changyan | disqus | disqusjs | gitalk | livere | valine</span></span><br><span class="line">  active:</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Setting `<span class="literal">true</span>` means remembering the comment system selected by the visitor.</span></span><br><span class="line">  storage: true</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Lazyload all comment systems.</span></span><br><span class="line">  lazyload: true</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="网站动态元素延时加载"><a href="#网站动态元素延时加载" class="headerlink" title="网站动态元素延时加载"></a>网站动态元素延时加载</h3><p>我们的网站添加了许多动态元素之后，加载速度会变慢，所以可以先不加载动态元素，等静态元素加载完之后再加载动态元素，这样就加速了网站的登入。可打开<span class="label success">主题配置文件</span> ，搜索 `` 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ---------------------------------------------------------------</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Animation Settings</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ---------------------------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Use velocity to animate everything.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> For more information: http://velocityjs.org</span></span><br><span class="line">motion:</span><br><span class="line">  enable: false</span><br><span class="line">  async: false</span><br><span class="line">  transition:</span><br><span class="line">    # Transition variants:</span><br><span class="line">    # fadeIn | flipXIn | flipYIn | flipBounceXIn | flipBounceYIn</span><br><span class="line">    # swoopIn | whirlIn | shrinkIn | expandIn</span><br><span class="line">    # bounceIn | bounceUpIn | bounceDownIn | bounceLeftIn | bounceRightIn</span><br><span class="line">    # slideUpIn | slideDownIn | slideLeftIn | slideRightIn</span><br><span class="line">    # slideUpBigIn | slideDownBigIn | slideLeftBigIn | slideRightBigIn</span><br><span class="line">    # perspectiveUpIn | perspectiveDownIn | perspectiveLeftIn | perspectiveRightIn</span><br><span class="line">    post_block: fadeIn</span><br><span class="line">    post_header: slideDownIn</span><br><span class="line">    post_body: slideDownIn</span><br><span class="line">    coll_header: slideLeftIn</span><br><span class="line">    # Only for Pisces | Gemini.</span><br><span class="line">    sidebar: slideUpIn</span><br></pre></td></tr></table></figure>
+
+
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\04\16\2020-04-16-Hexo-Next搭建个人博客（安装Hexo及主题）\" rel="bookmark">Hexo+Next搭建个人博客（安装Hexo及主题）</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2015\07\14\2015-7-14-jekyll搭建个人博客\" rel="bookmark">Jekyll搭建个人博客</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        <div class="reward-container">
+  <div>如果你觉得这篇文章对你有用，欢迎赞赏哦~</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Li Zhiyuan 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="Li Zhiyuan 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------------- 本 文 结 束<i class="fa fa-paw"></i>感 谢 您 的 阅 读 -------------</div>
+    
+</div>
+
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Li Zhiyuan
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2020/04/16/2020-04-16-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88NexT%20%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE%EF%BC%89/" title="Hexo+Next搭建个人博客（Next 主题设置）">http://yoursite.com/2020/04/16/2020-04-16-Hexo-Next搭建个人博客（NexT 主题设置）/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.png">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag"><i class="fa fa-tag"></i> 博客</a>
+              <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+              <a href="/tags/Next/" rel="tag"><i class="fa fa-tag"></i> Next</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/16/2020-04-16-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%AE%89%E8%A3%85Hexo%E5%8F%8A%E4%B8%BB%E9%A2%98%EF%BC%89/" rel="prev" title="Hexo+Next搭建个人博客（安装Hexo及主题）">
+      <i class="fa fa-chevron-left"></i> Hexo+Next搭建个人博客（安装Hexo及主题）
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本设置"><span class="nav-number">2.</span> <span class="nav-text">基本设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#站点初始设置"><span class="nav-number">2.1.</span> <span class="nav-text">站点初始设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置主题风格"><span class="nav-number">2.2.</span> <span class="nav-text">设置主题风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#菜单设置"><span class="nav-number">2.3.</span> <span class="nav-text">菜单设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#头像设置"><span class="nav-number">2.4.</span> <span class="nav-text">头像设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码块样式设置"><span class="nav-number">2.5.</span> <span class="nav-text">代码块样式设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回到顶部按钮设置"><span class="nav-number">2.6.</span> <span class="nav-text">回到顶部按钮设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#社交媒体联系方式修改"><span class="nav-number">2.7.</span> <span class="nav-text">社交媒体联系方式修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加友情链接"><span class="nav-number">2.8.</span> <span class="nav-text">增加友情链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将文章底部-换成标签图标"><span class="nav-number">2.9.</span> <span class="nav-text">将文章底部 # 换成标签图标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置打赏"><span class="nav-number">2.10.</span> <span class="nav-text">设置打赏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置订阅"><span class="nav-number">2.11.</span> <span class="nav-text">设置订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启阅读进度条"><span class="nav-number">2.12.</span> <span class="nav-text">开启阅读进度条</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#右上角-Github-按钮开启"><span class="nav-number">2.13.</span> <span class="nav-text">右上角 Github 按钮开启</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字体设置"><span class="nav-number">2.14.</span> <span class="nav-text">字体设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#底部设置"><span class="nav-number">2.15.</span> <span class="nav-text">底部设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版权信息设置"><span class="nav-number">2.16.</span> <span class="nav-text">版权信息设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三方插件"><span class="nav-number">3.</span> <span class="nav-text">第三方插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本地搜索"><span class="nav-number">3.1.</span> <span class="nav-text">本地搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加相关文章"><span class="nav-number">3.2.</span> <span class="nav-text">添加相关文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#博客图片插件"><span class="nav-number">3.3.</span> <span class="nav-text">博客图片插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中英文之间自动加空格"><span class="nav-number">3.4.</span> <span class="nav-text">中英文之间自动加空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网页加载进度条"><span class="nav-number">3.5.</span> <span class="nav-text">网页加载进度条</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博客速度优化"><span class="nav-number">4.</span> <span class="nav-text">博客速度优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pjax"><span class="nav-number">4.1.</span> <span class="nav-text">Pjax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#懒加载"><span class="nav-number">4.2.</span> <span class="nav-text">懒加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网站动态元素延时加载"><span class="nav-number">4.3.</span> <span class="nav-text">网站动态元素延时加载</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Li Zhiyuan"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Li Zhiyuan</p>
+  <div class="site-description" itemprop="description">程序，搞起来很轻松的，就是头冷</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/leezhiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;leezhiy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:18500754397@163.com" title="E-Mail → mailto:18500754397@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/5678634433" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;5678634433" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/li-zhi-yuan-13-7" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;li-zhi-yuan-13-7" rel="noopener" target="_blank"><i class="fa fa-globe fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://gitee.com/leezhiy" title="Gitee → https:&#x2F;&#x2F;gitee.com&#x2F;leezhiy" rel="noopener" target="_blank"><i class="fab fa-git fa-fw"></i>Gitee</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://music.163.com/#/user/home?id=131550901" title="网易云 → https:&#x2F;&#x2F;music.163.com&#x2F;#&#x2F;user&#x2F;home?id&#x3D;131550901" rel="noopener" target="_blank"><i class="fa fa-music fa-fw"></i>网易云</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情连接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://music.163.com/#/user/home?id=131550901" title="https:&#x2F;&#x2F;music.163.com&#x2F;#&#x2F;user&#x2F;home?id&#x3D;131550901" rel="noopener" target="_blank">😆 网易云音乐 😆</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div style="background-image:linear-gradient(90deg,#6dba82 0,#07b39b 15%,#1098ad 30%,#5073b8 44%,#a166ab 58%,#ef4e7b 72%,#f37055 86%,#f79533 100%);background-size:cover;-webkit-background-clip:text;-webkit-text-fill-color:transparent;user-select:none"><i>Tip: 本站电脑访问体验更佳耶&nbsp;<i class="fa fa-angellist" style="display:inline"></i></i></div>
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Li Zhiyuan</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">101k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:32</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<div id="needsharebutton-float">
+      <span class="btn">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </span>
+    </div>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "default";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook,Linkedin,Mailto,Reddit,Delicious,StumbleUpon,Pinterest,GooglePlus,Tumblr,GoogleBookmarks,Newsvine,Evernote,Friendfeed,Vkontakte,Odnoklassniki,Mailru";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+      flOptions = {};
+        flOptions.iconStyle = "box";
+        flOptions.boxForm = "horizontal";
+        flOptions.position = "middleRight";
+        flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook,Linkedin";
+      new needShareButton('#needsharebutton-float', flOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'JVvuWX6nMNxhJHtTykHi9eAw-gzGzoHsz',
+      appKey     : 'rx4Oj2FCD7V0UGv8lLuRJaGa',
+      placeholder: "聊五分钱的天吗？|ω･)و ̑̑༉",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button" onclick="moonMenuClick()">
+    <svg class="moon-menu-svg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+      <g class="moon-menu-points">
+        <circle class="moon-menu-point" r=".2rem" cx="0" cy="-.8rem"></circle>
+        <circle class="moon-menu-point" r=".2rem"></circle>
+        <circle class="moon-menu-point" r=".2rem" cx="0" cy=".8rem"></circle>
+      </g>
+    </svg>
+    <div class="moon-menu-icon">
+    </div>
+    <div class="moon-menu-text">
+    </div>
+  </div>
+</div>
+<script src="/js/injector.js"></script>
+    </div>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+  
+     <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+     <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+     <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+
+  
+     <!-- require APlayer -->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+     <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+     <!-- require MetingJS -->
+     <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+     <meting-js
+       server="netease"
+       type="playlist"
+       fixed="true"
+       id="3099335800"
+       auto=""
+       mini="true"
+       autoplay="true"
+       theme=""
+       loop="all"
+       order="random"
+       preload="auto"
+       volume="0.7"
+       mutex="true"
+       list-folded="true"
+       list-max-height="340px"
+       storage-name="metingjs" >
+     </meting-js>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":450,"hOffset":10,"vOffset":150},"mobile":{"show":false},"react":{"opacity":1},"log":false});</script></body>
+</html>
