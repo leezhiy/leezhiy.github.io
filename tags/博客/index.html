@@ -251,6 +251,26 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
+              datetime="2020-04-16T23:22:00+08:00"
+              content="2020-04-16">
+          04-16
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2020/04/16/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E9%9B%86%E6%88%90Valine%E6%96%87%E7%AB%A0%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%EF%BC%89/" itemprop="url">
+            <span itemprop="name">Hexo+Next搭建个人博客（集成Valine文章评论功能）</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
               datetime="2020-03-15T18:30:17+08:00"
               content="2020-03-15">
           03-15
@@ -402,7 +422,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -491,13 +511,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">105k</span>
+    <span title="站点总字数">106k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:35</span>
+    <span title="站点阅读时长">1:37</span>
 </div>
 
         
@@ -657,7 +677,7 @@ window.addEventListener('pjax:success', () => {
 
 <script>
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', () => {
+  NexT.utils.getScript('//cdn.bootcss.com/valine/1.4.4/Valine.min.js', () => {
     var GUEST = ['nick', 'mail', 'link'];
     var guest = 'nick,mail,link';
     guest = guest.split(',').filter(item => {

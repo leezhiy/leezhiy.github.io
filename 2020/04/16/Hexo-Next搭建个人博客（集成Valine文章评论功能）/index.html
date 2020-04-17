@@ -36,17 +36,28 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"manual"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="程序，搞起来很轻松的，就是头冷">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Leezhiy Blog">
-<meta property="og:url" content="http://yoursite.com/tags/BOM%E6%93%8D%E4%BD%9C/index.html">
+  <meta name="description" content="前言最近将博客从 Jekyll 迁移到 Hexo，在迁移的过程中也遇到一些问题，下面就简单记录一下 Hexo+NexT+Github Pages 的搭建步骤。 在上一章，我们已经将 Hexo + Next 部署到了 GitHub Pages 中， 在本章我们将集成 Valine 评论系统。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo+Next搭建个人博客（集成Valine文章评论功能）">
+<meta property="og:url" content="http://yoursite.com/2020/04/16/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E9%9B%86%E6%88%90Valine%E6%96%87%E7%AB%A0%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%EF%BC%89/index.html">
 <meta property="og:site_name" content="Leezhiy Blog">
-<meta property="og:description" content="程序，搞起来很轻松的，就是头冷">
+<meta property="og:description" content="前言最近将博客从 Jekyll 迁移到 Hexo，在迁移的过程中也遇到一些问题，下面就简单记录一下 Hexo+NexT+Github Pages 的搭建步骤。 在上一章，我们已经将 Hexo + Next 部署到了 GitHub Pages 中， 在本章我们将集成 Valine 评论系统。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/valine-create-app.png">
+<meta property="og:image" content="http://yoursite.com/images/valine-app.png">
+<meta property="og:image" content="http://yoursite.com/images/valine-app-create-class.png">
+<meta property="og:image" content="http://yoursite.com/images/valine-app-close-service.png">
+<meta property="og:image" content="http://yoursite.com/images/valine-bootcdn.png">
+<meta property="article:published_time" content="2020-04-16T15:22:00.000Z">
+<meta property="article:modified_time" content="2020-04-17T08:15:43.874Z">
 <meta property="article:author" content="Li Zhiyuan">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Next">
+<meta property="article:tag" content="博客">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/valine-create-app.png">
 
-<link rel="canonical" href="http://yoursite.com/tags/BOM%E6%93%8D%E4%BD%9C/">
+<link rel="canonical" href="http://yoursite.com/2020/04/16/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E9%9B%86%E6%88%90Valine%E6%96%87%E7%AB%A0%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%EF%BC%89/">
 
 
 <script id="page-configurations">
@@ -54,7 +65,7 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
@@ -85,7 +96,7 @@
   padding: 0 10px 0 14px;
 }
 </style>
-  <title>标签: BOM操作 | Leezhiy Blog</title>
+  <title>Hexo+Next搭建个人博客（集成Valine文章评论功能） | Leezhiy Blog</title>
   
 
 
@@ -227,57 +238,278 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/16/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E9%9B%86%E6%88%90Valine%E6%96%87%E7%AB%A0%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Li Zhiyuan">
+      <meta itemprop="description" content="程序，搞起来很轻松的，就是头冷">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leezhiy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo+Next搭建个人博客（集成Valine文章评论功能）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-16 23:22:00" itemprop="dateCreated datePublished" datetime="2020-04-16T23:22:00+08:00">2020-04-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-17 16:15:43" itemprop="dateModified" datetime="2020-04-17T16:15:43+08:00">2020-04-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">博客搭建</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">BOM操作
-          <small>标签</small>
-        </h2>
-      </div>
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/16/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E9%9B%86%E6%88%90Valine%E6%96%87%E7%AB%A0%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/16/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E9%9B%86%E6%88%90Valine%E6%96%87%E7%AB%A0%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%EF%BC%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2015</span>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近将博客从 Jekyll 迁移到 Hexo，在迁移的过程中也遇到一些问题，下面就简单记录一下 <span class="label info">Hexo+NexT+Github Pages</span> 的搭建步骤。</p>
+<p>在上一章，我们已经将 Hexo + Next 部署到了 GitHub Pages 中， 在本章我们将集成 Valine 评论系统。</p>
+<a id="more"></a>
+
+<h2 id="为什么选择-Valine"><a href="#为什么选择-Valine" class="headerlink" title="为什么选择 Valine"></a>为什么选择 Valine</h2><p>在笔者进行评论系统选择时，主要对比了 disqus Valine gittalk 三种:</p>
+<ul>
+<li><p>disqus 漂亮，全球化评论插件，但需要翻墙</p>
+</li>
+<li><p>valine 样式简约 无登录 自带Leancloud的阅读统计功能</p>
+</li>
+<li><p>gitalk 支持github登录</p>
+</li>
+</ul>
+<p>对比之下，最终选定了这款 Valine</p>
+<h2 id="注册-LeanClound-获取APP-ID-和-APP-Key"><a href="#注册-LeanClound-获取APP-ID-和-APP-Key" class="headerlink" title="注册 LeanClound,获取APP ID 和 APP Key"></a>注册 LeanClound,获取APP ID 和 APP Key</h2><p>Valine 是基于 <a href="https://www.leancloud.cn/" target="_blank" rel="noopener">LeanCloud</a> 作为数据存储的，所以需要注册一个账号，注册完成后，我们找到创建应用</p>
+<p><img data-src="/images/valine-create-app.png" alt="创建应用"></p>
+<p>在这里填写你的应用名称,名称可以自己定义，然后下面选择 <strong>开发版</strong> 点击 <strong>创建</strong>。</p>
+<p><img data-src="/images/valine-app.png" alt="应用"></p>
+<p>然后点击应用进入设置</p>
+<p>在设置页，我们首先点击存储，查看是否有 Comment 表和 Counter 表，没有则创建，权限设为无限制。</p>
+<p><img data-src="/images/valine-app-create-class.png" alt="添加表"></p>
+<p>然后点击设置 &gt; 安全中心 ,将除了数据存储的服务全部关闭。</p>
+<p><img data-src="/images/valine-app-close-service.png" alt="关闭其他服务"></p>
+<p>最后点击 <strong>应用 Keys</strong> 取得我们 <strong>AppKey</strong> 和 <strong>App id</strong></p>
+<h2 id="在-Hexo-NexT-主题中配置"><a href="#在-Hexo-NexT-主题中配置" class="headerlink" title="在 Hexo NexT 主题中配置"></a>在 Hexo NexT 主题中配置</h2><p>首先打开 <a href="https://www.bootcdn.cn/" target="_blank" rel="noopener">BootCND</a> 获取最新 valine.min.js 的 CDN 地址</p>
+<p><img data-src="/images/valine-bootcdn.png" alt="BootCDN"></p>
+<p>然后打开 <span class="label success">主题配置文件</span> ，搜索 <code>valine</code> 关键字，配置 CDN</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Valine</span></span><br><span class="line"><span class="meta"> #</span><span class="bash"> valine: //cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js</span></span><br><span class="line"><span class="meta"> #</span><span class="bash"> valine: //cdnjs.cloudflare.com/ajax/libs/valine/1.3.10/Valine.min.js</span></span><br><span class="line"> valine: //cdn.bootcss.com/valine/1.4.4/Valine.min.js</span><br></pre></td></tr></table></figure>
+
+<p>继续搜索，配置 Valine 功能</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Valine</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> For more information: https://valine.js.org, https://github.com/xCss/Valine</span></span><br><span class="line">valine:</span><br><span class="line">  enable: true</span><br><span class="line">  appid: # 你自己的 Appid</span><br><span class="line">  appkey:  # 你自己的 Appkey</span><br><span class="line">  notify: false  # 邮件提醒</span><br><span class="line">  verify: false # 验证码</span><br><span class="line">  placeholder: 聊五分钱的天吗？|ω･)و ̑̑༉ # 聊天框默认显示</span><br><span class="line">  avatar: mm # 头像设置</span><br><span class="line">  guest_info: nick,mail,link # 游客信息 名称 邮件 网络地址</span><br><span class="line">  pageSize: 10 # 每页数量</span><br><span class="line">  language: zh-cn # 语言</span><br><span class="line">  visitor: false # 文章阅读统计</span><br><span class="line">  comment_count: true # 评论数量显示</span><br><span class="line">  recordIP: false # 评论者的IP</span><br><span class="line">  serverURLs: # 博客启用自定义域名后，请在此填写（默认情况下会自动检测到，无需填写）</span><br><span class="line"><span class="meta">  #</span><span class="bash">post_meta_order: 0</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="其他设置"><a href="#其他设置" class="headerlink" title="其他设置"></a>其他设置</h2><h3 id="指定文章（页面）评论功能是否开启"><a href="#指定文章（页面）评论功能是否开启" class="headerlink" title="指定文章（页面）评论功能是否开启"></a>指定文章（页面）评论功能是否开启</h3><p>在 Hexo 博客中，评论的功能是在所有页面都默认开启的，但是有的时候我们在页面上不需要显示评论功能，例如分类，标记页面我们并不需要评论功能。</p>
+<p>我们可以在 Front-matter 中通过 <strong>comments</strong> 属性设置true或false控制该页面或者是文章的评论功能是否打开，如我设置标签页面的评论功能关闭：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: 标签</span><br><span class="line">date: 2020-03-14 21:37:23</span><br><span class="line">type: "tags"</span><br><span class="line">comments: false</span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义头像"><a href="#自定义头像" class="headerlink" title="自定义头像"></a>自定义头像</h3><p>参考：<a href="https://valine.js.org/avatar.html" target="_blank" rel="noopener">https://valine.js.org/avatar.html</a></p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2015-07-18T00:00:00+08:00"
-              content="2015-07-18">
-          07-18
-        </time>
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\03\14\2020-03-14-Hexo-Next搭建个人博客（安装Hexo及主题）\" rel="bookmark">Hexo+Next搭建个人博客（安装Hexo及主题）</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\03\15\2020-03-15-Hexo-Next搭建个人博客（Github-Pages-托管-Hexo）\" rel="bookmark">Hexo+Next搭建个人博客（Github Pages 托管 Hexo）</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\03\15\2020-03-15-Hexo-Next搭建个人博客（NexT 主题设置）\" rel="bookmark">Hexo+Next搭建个人博客（Next 主题设置）</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2015\07\14\2015-7-14-jekyll搭建个人博客\" rel="bookmark">Jekyll搭建个人博客</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        <div class="reward-container">
+  <div>如果你觉得这篇文章对你有用，欢迎赞赏哦~</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Li Zhiyuan 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="Li Zhiyuan 支付宝">
+        <p>支付宝</p>
       </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2015/07/18/2015-7-18-javascript%E4%B9%8BBOM%EF%BC%88windows%E5%AF%B9%E8%B1%A1%EF%BC%89/" itemprop="url">
-            <span itemprop="name">javascript之BOM（windows对象）</span>
+  </div>
+</div>
+
+
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------------- 本 文 结 束<i class="fa fa-paw"></i>感 谢 您 的 阅 读 -------------</div>
+    
+</div>
+
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Li Zhiyuan
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2020/04/16/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E9%9B%86%E6%88%90Valine%E6%96%87%E7%AB%A0%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%EF%BC%89/" title="Hexo+Next搭建个人博客（集成Valine文章评论功能）">http://yoursite.com/2020/04/16/Hexo-Next搭建个人博客（集成Valine文章评论功能）/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.png">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
           </a>
-      </div>
+        </div>
 
-    </header>
-  </article>
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
 
+            <span class="label">RSS</span>
+          </a>
+        </div>
     </div>
   </div>
-  
-  
-  
 
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+              <a href="/tags/Next/" rel="tag"><i class="fa fa-tag"></i> Next</a>
+              <a href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag"><i class="fa fa-tag"></i> 博客</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/19/2020-03-19-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%83%EF%BC%89%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/" rel="prev" title="php 设计模式（七）装饰器模式">
+      <i class="fa fa-chevron-left"></i> php 设计模式（七）装饰器模式
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -324,6 +556,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么选择-Valine"><span class="nav-number">2.</span> <span class="nav-text">为什么选择 Valine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注册-LeanClound-获取APP-ID-和-APP-Key"><span class="nav-number">3.</span> <span class="nav-text">注册 LeanClound,获取APP ID 和 APP Key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在-Hexo-NexT-主题中配置"><span class="nav-number">4.</span> <span class="nav-text">在 Hexo NexT 主题中配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他设置"><span class="nav-number">5.</span> <span class="nav-text">其他设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指定文章（页面）评论功能是否开启"><span class="nav-number">5.1.</span> <span class="nav-text">指定文章（页面）评论功能是否开启</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义头像"><span class="nav-number">5.2.</span> <span class="nav-text">自定义头像</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
