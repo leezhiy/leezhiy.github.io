@@ -102,17 +102,6 @@ deploy:
   repo: https://github.com/leezhiy/leezhiy.github.io
   branch: master
 
-# 字数统计和阅读时长
-symbols_count_time:
-  symbols: true
-  time: true
-  total_symbols: true
-  total_time: true
-  exclude_codeblock: false
-  awl: 4
-  wpm: 275
-  suffix: "mins."
-
 # 看门2D小人
 live2d:
   enable: true
@@ -134,6 +123,21 @@ live2d:
     show: false
   react:
     opacity: 1.0
+
+moon_menu:
+  chat:
+    icon: fa fa-comments
+    func: openDaoCloud
+  back2top:
+    enable: true
+    icon: fa fa-chevron-up
+    func: back2top
+    order: -1
+  back2bottom:
+    enable: true
+    icon: fa fa-chevron-down
+    func: back2bottom
+    order: -2
 
 # hexo-admin authentification
 admin:

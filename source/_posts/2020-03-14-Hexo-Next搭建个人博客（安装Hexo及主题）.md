@@ -7,7 +7,7 @@ tags:
 categories:
   - 博客搭建
   - Hexo
-date: 2020-04-16 13:09:00
+date: 2020-03-14 13:09:00
 ---
 ## 前言
 
@@ -210,7 +210,7 @@ INFO Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.
 此时即可使用浏览器访问 http://localhost:4000/ ，检查站点是否正确运行
 
 当你看到站点的外观与下图所示类似时即说明你已成功安装 NexT 主题。这是 NexT 默认的 Scheme —— Muse
-![博客首页](/images/pasted-0.png)
+![博客首页](/images/hexo-next-finished.png)
 
 现在，我们已经成功安装并启用了 NexT 主题。
 

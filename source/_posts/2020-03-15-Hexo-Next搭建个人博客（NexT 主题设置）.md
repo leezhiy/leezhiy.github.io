@@ -7,7 +7,7 @@ tags:
 categories:
   - 博客搭建
   - Hexo
-date: 2020-04-16 15:30:17
+date: 2020-03-15 18:30:17
 ---
 ## 前言
 
@@ -70,14 +70,14 @@ $ hexo new custom_name # 创建关于页面
 blog/source/custom-name/index.md
 
 title: 关于我
-date: 2020-04-13 12:39:04
+date: 2020-03-14 12:39:04
 ---
 
 blog/source/tags/index.md
 
 ---
 title: 标签
-date: 2020-04-13 21:37:23
+date: 2020-03-14 21:37:23
 type: tags
 ---
 
@@ -85,7 +85,7 @@ blog/source/categories/index.md
 
 ---
 title: 分类
-date: 2020-04-13 21:37:23
+date: 2020-03-14 21:37:23
 type: categories
 ---
 
@@ -508,6 +508,47 @@ pace:
   # corner-indicator | fill-left | flat-top | flash | loading-bar | mac-osx | material | minimal
   theme: minimal
 ```
+
+### 分享插件
+
+打开博客目录，运行 git bash 
+
+```shell script
+$ npm install theme-next/hexo-next-share
+```
+
+打开 {% label success@主题配置文件 %} ，在最底部添加
+```shell script
+# NeedMoreShare2
+# Dependencies: https://github.com/theme-next/theme-next-needmoreshare2
+# For more information: https://github.com/revir/need-more-share2
+# iconStyle: default | box
+# boxForm: horizontal | vertical
+# position: top / middle / bottom + Left / Center / Right
+# networks:
+# Weibo | Wechat | Douban | QQZone | Twitter | Facebook | Linkedin | Mailto | Reddit | Delicious | StumbleUpon | Pinterest
+# GooglePlus | Tumblr | GoogleBookmarks | Newsvine | Evernote | Friendfeed | Vkontakte | Odnoklassniki | Mailru
+needmoreshare:
+  enable: true
+  cdn:
+    js: //cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js
+    css: //cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css
+  postbottom:
+    enable: true
+    options:
+      iconStyle: default
+      boxForm: horizontal
+      position: bottomCenter
+      networks: Weibo,Wechat,Douban,QQZone,Twitter,Facebook,Linkedin,Mailto,Reddit,Delicious,StumbleUpon,Pinterest,GooglePlus,Tumblr,GoogleBookmarks,Newsvine,Evernote,Friendfeed,Vkontakte,Odnoklassniki,Mailru
+  float:
+    enable: ture
+    options:
+      iconStyle: box
+      boxForm: horizontal
+      position: middleRight
+      networks: Weibo,Wechat,Douban,QQZone,Twitter,Facebook,Linkedin
+```
+
 ## 博客速度优化
 
 ### Pjax
@@ -554,7 +595,7 @@ comments:
 
 
 ### 网站动态元素延时加载
-我们的网站添加了许多动态元素之后，加载速度会变慢，所以可以先不加载动态元素，等静态元素加载完之后再加载动态元素，这样就加速了网站的登入。可打开{% label success@主题配置文件 %} ，搜索 `` 关键字，设置如下
+我们的网站添加了许多动态元素之后，加载速度会变慢，所以可以先不加载动态元素，等静态元素加载完之后再加载动态元素，这样就加速了网站的登入。可打开{% label success@主题配置文件 %} ，搜索 `motion` 关键字，设置如下
 
 ```shell script
 # ---------------------------------------------------------------
