@@ -10,20 +10,6 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-  <script>
-  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
-  daovoice('init', {
-    app_id: '4e6b4c7f',   // 必填，您的 APP 标识
-  }, {
-    launcher: {
-      disableLauncherIcon: true, // 悬浮 ICON 是否显示
-      defaultEnterView: 'list', // 'list' 或 'new' 默认是 list(在对话列表是空的时候默认切换到 new)
-    }
-  });
-  daovoice('update');
-  </script>
-
-
 <link rel="stylesheet" href="/css/main.css">
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Amita:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
@@ -42,7 +28,7 @@
 <meta property="og:site_name" content="Leezhiy Blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-13T13:27:01.000Z">
-<meta property="article:modified_time" content="2020-04-14T18:22:33.454Z">
+<meta property="article:modified_time" content="2020-04-17T11:31:34.083Z">
 <meta property="article:author" content="Li Zhiyuan">
 <meta name="twitter:card" content="summary">
 
@@ -85,6 +71,41 @@
   padding: 0 10px 0 14px;
 }
 </style>
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+    app_id: '4e6b4c7f',   // 必填，您的 APP 标识
+  }, {
+    launcher: {
+      disableLauncherIcon: true, // 悬浮 ICON 是否显示
+      defaultEnterView: 'list', // 'list' 或 'new' 默认是 list(在对话列表是空的时候默认切换到 new)
+    }
+  });
+  daovoice('update');
+
+  var DaoCloudIsShow = false;
+  // 监听显示事件回调
+  daovoice('onShow', function(){
+    DaoCloudIsShow = ture;
+  });
+  // 监听隐藏事件回调
+  daovoice('onHide', function(){
+    DaoCloudIsShow = false;
+  });
+  // 点击按钮时运行的方法
+  var openDaoCloud = function() {
+    if( DaoCloudIsShow ) {
+      daovoice('hide')
+    } else {
+      daovoice('show')
+    }
+  };
+  </script>
+
+
+
+
   <title>标题 | Leezhiy Blog
 </title>
   
@@ -258,7 +279,7 @@
               目前共计 19 个标签
             </div>
             <div class="tag-cloud-tags">
-              <a href="/tags/Apache/" style="font-size: 12px; color: #ccc">Apache</a> <a href="/tags/BOM%E6%93%8D%E4%BD%9C/" style="font-size: 12px; color: #ccc">BOM操作</a> <a href="/tags/Cookie/" style="font-size: 12px; color: #ccc">Cookie</a> <a href="/tags/DOM%E6%93%8D%E4%BD%9C/" style="font-size: 12px; color: #ccc">DOM操作</a> <a href="/tags/Hexo/" style="font-size: 19.71px; color: #7c7c7c">Hexo</a> <a href="/tags/Javascript/" style="font-size: 19.71px; color: #7c7c7c">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 12px; color: #ccc">Jekyll</a> <a href="/tags/Mysql/" style="font-size: 17.14px; color: #979797">Mysql</a> <a href="/tags/Next/" style="font-size: 19.71px; color: #7c7c7c">Next</a> <a href="/tags/PHP/" style="font-size: 30px; color: #111">PHP</a> <a href="/tags/Ruby/" style="font-size: 12px; color: #ccc">Ruby</a> <a href="/tags/Session/" style="font-size: 12px; color: #ccc">Session</a> <a href="/tags/ajax/" style="font-size: 12px; color: #ccc">ajax</a> <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" style="font-size: 12px; color: #ccc">函数式编程</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 22.29px; color: #616161">博客</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" style="font-size: 14.57px; color: #b1b1b1">编程思想</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 24.86px; color: #464646">设计模式</a> <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" style="font-size: 12px; color: #ccc">面向对象编程</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98/" style="font-size: 27.43px; color: #2c2c2c">面试问题</a>
+              <a href="/tags/Apache/" style="font-size: 12px; color: #ccc">Apache</a> <a href="/tags/BOM%E6%93%8D%E4%BD%9C/" style="font-size: 12px; color: #ccc">BOM操作</a> <a href="/tags/Cookie/" style="font-size: 12px; color: #ccc">Cookie</a> <a href="/tags/DOM%E6%93%8D%E4%BD%9C/" style="font-size: 12px; color: #ccc">DOM操作</a> <a href="/tags/Hexo/" style="font-size: 21px; color: #6f6f6f">Hexo</a> <a href="/tags/Javascript/" style="font-size: 18.75px; color: #868686">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 12px; color: #ccc">Jekyll</a> <a href="/tags/Mysql/" style="font-size: 16.5px; color: #9d9d9d">Mysql</a> <a href="/tags/Next/" style="font-size: 21px; color: #6f6f6f">Next</a> <a href="/tags/PHP/" style="font-size: 30px; color: #111">PHP</a> <a href="/tags/Ruby/" style="font-size: 12px; color: #ccc">Ruby</a> <a href="/tags/Session/" style="font-size: 12px; color: #ccc">Session</a> <a href="/tags/ajax/" style="font-size: 12px; color: #ccc">ajax</a> <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" style="font-size: 12px; color: #ccc">函数式编程</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 23.25px; color: #575757">博客</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" style="font-size: 14.25px; color: #b5b5b5">编程思想</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 25.5px; color: #404040">设计模式</a> <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" style="font-size: 12px; color: #ccc">面向对象编程</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98/" style="font-size: 27.75px; color: #282828">面试问题</a>
             </div>
           </div>
         
@@ -276,7 +297,6 @@
 
           </div>
           
-    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -338,7 +358,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -426,14 +446,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-      <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">106k</span>
+    <span title="站点总字数">111k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:37</span>
+    <span title="站点阅读时长">1:41</span>
 </div>
 
         
@@ -626,6 +644,9 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     
     <div class="moon-menu-item" onclick="back2top()">
       <i class='fa fa-chevron-up'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="openDaoCloud()">
+      <i class='fa fa-comments'></i>    </div>
     
   </div>
   <div class="moon-menu-button" onclick="moonMenuClick()">

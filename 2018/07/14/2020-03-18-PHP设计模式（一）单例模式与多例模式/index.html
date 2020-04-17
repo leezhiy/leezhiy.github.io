@@ -10,20 +10,6 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-  <script>
-  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
-  daovoice('init', {
-    app_id: '4e6b4c7f',   // 必填，您的 APP 标识
-  }, {
-    launcher: {
-      disableLauncherIcon: true, // 悬浮 ICON 是否显示
-      defaultEnterView: 'list', // 'list' 或 'new' 默认是 list(在对话列表是空的时候默认切换到 new)
-    }
-  });
-  daovoice('update');
-  </script>
-
-
 <link rel="stylesheet" href="/css/main.css">
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Amita:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
@@ -90,6 +76,41 @@
   padding: 0 10px 0 14px;
 }
 </style>
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+    app_id: '4e6b4c7f',   // 必填，您的 APP 标识
+  }, {
+    launcher: {
+      disableLauncherIcon: true, // 悬浮 ICON 是否显示
+      defaultEnterView: 'list', // 'list' 或 'new' 默认是 list(在对话列表是空的时候默认切换到 new)
+    }
+  });
+  daovoice('update');
+
+  var DaoCloudIsShow = false;
+  // 监听显示事件回调
+  daovoice('onShow', function(){
+    DaoCloudIsShow = ture;
+  });
+  // 监听隐藏事件回调
+  daovoice('onHide', function(){
+    DaoCloudIsShow = false;
+  });
+  // 点击按钮时运行的方法
+  var openDaoCloud = function() {
+    if( DaoCloudIsShow ) {
+      daovoice('hide')
+    } else {
+      daovoice('show')
+    }
+  };
+  </script>
+
+
+
+
   <title>php 设计模式（一）单例模式与多例模式 | Leezhiy Blog</title>
   
 
@@ -306,19 +327,17 @@
     </a>
   </span>
   
-  <br>
+  
             <span class="post-meta-item" title="本文字数">
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">本文字数：</span>
               <span>2.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
               <span>2 分钟</span>
             </span>
 
@@ -387,7 +406,7 @@
       </div>
     </div>
         <div class="reward-container">
-  <div>如果你觉得这篇文章对你有用，欢迎赞赏哦~</div>
+  <div>Buy me a cup of milkshake 🍨.</div>
   <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
     打赏
   </button>
@@ -410,7 +429,7 @@
       
         <div>
     
-        <div style="text-align:center;color: #ccc;font-size:14px;">------------- 本 文 结 束<i class="fa fa-paw"></i>感 谢 您 的 阅 读 -------------</div>
+        <div style="text-align:center;color: #ccc;font-size:14px;">------------- 💖 🌞 本 文 结 束 😚 感 谢 您 的 阅 读 🌞 💖 -------------</div>
     
 </div>
 
@@ -558,7 +577,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -646,14 +665,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-      <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">106k</span>
+    <span title="站点总字数">111k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:37</span>
+    <span title="站点阅读时长">1:41</span>
 </div>
 
         
@@ -846,6 +863,9 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     
     <div class="moon-menu-item" onclick="back2top()">
       <i class='fa fa-chevron-up'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="openDaoCloud()">
+      <i class='fa fa-comments'></i>    </div>
     
   </div>
   <div class="moon-menu-button" onclick="moonMenuClick()">

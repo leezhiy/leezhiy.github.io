@@ -20,7 +20,7 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --body-bg-color: #282828;
+    --body-bg-color: url("/images/background2.png");
     --content-bg-color: #333;
     --card-bg-color: #555;
     --text-color: #ccc;
@@ -1293,7 +1293,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #a67a41;
+  background: #a1da2e;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2708,7 +2708,7 @@ ul.breadcrumb li + li:last-child {
 }
 .links-of-author-item a:hover,
 .links-of-author-item span.exturl:hover {
-  background: var(--body-bg-color);
+  background: var(--menu-item-bg-color);
   border-radius: 4px;
 }
 .links-of-author-item .fa,
@@ -2728,6 +2728,43 @@ ul.breadcrumb li + li:last-child {
   margin-top: 16px;
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
+}
+#valine-comments button {
+  padding: 0.3rem 1rem;
+  border-color: #fff;
+  background-color: #8e8cd8;
+  color: #fff;
+  font-size: 0.7rem;
+}
+#valine-comments button:hover {
+  background-color: #ff7242;
+}
+#valine-comments textarea {
+  background: url("/images/comment_bg.png") 100% 100% no-repeat;
+}
+#valine-comments .info {
+  display: none;
+}
+#valine-comments .vimg {
+  border: 0;
+}
+#valine-comments .vimg:hover {
+  -webkit-transform: rotate(540deg);
+  -moz-transform: rotate(540deg);
+  -o-transform: rotate(540deg);
+  -ms-transform: rotate(540deg);
+  transform: rotate(540deg);
+}
+#valine-comments .vat {
+  padding: 0 0.8rem;
+  border: 1px solid #8e8cd8;
+  border-radius: 5px;
+  color: #8e8cd8;
+  font-size: 0.7125rem;
+}
+#valine-comments .vat:hover {
+  background-color: #8e8cd8;
+  color: #fff;
 }
 .content-wrap {
   background: initial;

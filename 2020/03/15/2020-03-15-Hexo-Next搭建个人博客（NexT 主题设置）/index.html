@@ -10,20 +10,6 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-  <script>
-  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
-  daovoice('init', {
-    app_id: '4e6b4c7f',   // 必填，您的 APP 标识
-  }, {
-    launcher: {
-      disableLauncherIcon: true, // 悬浮 ICON 是否显示
-      defaultEnterView: 'list', // 'list' 或 'new' 默认是 list(在对话列表是空的时候默认切换到 new)
-    }
-  });
-  daovoice('update');
-  </script>
-
-
 <link rel="stylesheet" href="/css/main.css">
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Amita:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
@@ -44,7 +30,7 @@
 <meta property="og:description" content="前言最近将博客从 Jekyll 迁移到 Hexo，在迁移的过程中也遇到一些问题，下面就简单记录一下 Hexo+NexT+Github Pages 的搭建步骤。 在上一章，我们已经将 Hexo + Next 安装到了本地， 在本章我们将对 NexT 主题进行一些个性化的设置。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-15T10:30:17.000Z">
-<meta property="article:modified_time" content="2020-04-17T08:15:27.190Z">
+<meta property="article:modified_time" content="2020-04-17T12:02:44.045Z">
 <meta property="article:author" content="Li Zhiyuan">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Next">
@@ -90,6 +76,41 @@
   padding: 0 10px 0 14px;
 }
 </style>
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+    app_id: '4e6b4c7f',   // 必填，您的 APP 标识
+  }, {
+    launcher: {
+      disableLauncherIcon: true, // 悬浮 ICON 是否显示
+      defaultEnterView: 'list', // 'list' 或 'new' 默认是 list(在对话列表是空的时候默认切换到 new)
+    }
+  });
+  daovoice('update');
+
+  var DaoCloudIsShow = false;
+  // 监听显示事件回调
+  daovoice('onShow', function(){
+    DaoCloudIsShow = ture;
+  });
+  // 监听隐藏事件回调
+  daovoice('onHide', function(){
+    DaoCloudIsShow = false;
+  });
+  // 点击按钮时运行的方法
+  var openDaoCloud = function() {
+    if( DaoCloudIsShow ) {
+      daovoice('hide')
+    } else {
+      daovoice('show')
+    }
+  };
+  </script>
+
+
+
+
   <title>Hexo+Next搭建个人博客（Next 主题设置） | Leezhiy Blog</title>
   
 
@@ -269,7 +290,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-17 16:15:27" itemprop="dateModified" datetime="2020-04-17T16:15:27+08:00">2020-04-17</time>
+                <time title="修改时间：2020-04-17 20:02:44" itemprop="dateModified" datetime="2020-04-17T20:02:44+08:00">2020-04-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -306,20 +327,18 @@
     </a>
   </span>
   
-  <br>
+  
             <span class="post-meta-item" title="本文字数">
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>12k</span>
+              <span>13k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>11 分钟</span>
+              <span>12 分钟</span>
             </span>
 
         </div>
@@ -420,6 +439,13 @@
 <figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> blog/themes/next</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/theme-next/theme-next-pace <span class="built_in">source</span>/lib/pace</span></span><br></pre></td></tr></table></figure>
 <p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>pace</code> 关键字，设置如下</p>
 <figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pace:</span><br><span class="line">  enable: true</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Themes list:</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> big-counter | bounce | barber-shop | center-atom | center-circle | center-radar | center-simple</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> corner-indicator | fill-left | flat-top | flash | loading-bar | mac-osx | material | minimal</span></span><br><span class="line">  theme: minimal</span><br></pre></td></tr></table></figure>
+
+<h3 id="分享插件"><a href="#分享插件" class="headerlink" title="分享插件"></a>分享插件</h3><p>打开博客目录，运行 git bash </p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install theme-next/hexo-next-share</span></span><br></pre></td></tr></table></figure>
+
+<p>打开 <span class="label success">主题配置文件</span> ，在最底部添加</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> NeedMoreShare2</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Dependencies: https://github.com/theme-next/theme-next-needmoreshare2</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> For more information: https://github.com/revir/need-more-share2</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> iconStyle: default | box</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> boxForm: horizontal | vertical</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> position: top / middle / bottom + Left / Center / Right</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> networks:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Weibo | Wechat | Douban | QQZone | Twitter | Facebook | Linkedin | Mailto | Reddit | Delicious | StumbleUpon | Pinterest</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> GooglePlus | Tumblr | GoogleBookmarks | Newsvine | Evernote | Friendfeed | Vkontakte | Odnoklassniki | Mailru</span></span><br><span class="line">needmoreshare:</span><br><span class="line">  enable: true</span><br><span class="line">  cdn:</span><br><span class="line">    js: //cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js</span><br><span class="line">    css: //cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css</span><br><span class="line">  postbottom:</span><br><span class="line">    enable: true</span><br><span class="line">    options:</span><br><span class="line">      iconStyle: default</span><br><span class="line">      boxForm: horizontal</span><br><span class="line">      position: bottomCenter</span><br><span class="line">      networks: Weibo,Wechat,Douban,QQZone,Twitter,Facebook,Linkedin,Mailto,Reddit,Delicious,StumbleUpon,Pinterest,GooglePlus,Tumblr,GoogleBookmarks,Newsvine,Evernote,Friendfeed,Vkontakte,Odnoklassniki,Mailru</span><br><span class="line">  float:</span><br><span class="line">    enable: ture</span><br><span class="line">    options:</span><br><span class="line">      iconStyle: box</span><br><span class="line">      boxForm: horizontal</span><br><span class="line">      position: middleRight</span><br><span class="line">      networks: Weibo,Wechat,Douban,QQZone,Twitter,Facebook,Linkedin</span><br></pre></td></tr></table></figure>
+
 <h2 id="博客速度优化"><a href="#博客速度优化" class="headerlink" title="博客速度优化"></a>博客速度优化</h2><h3 id="Pjax"><a href="#Pjax" class="headerlink" title="Pjax"></a>Pjax</h3><p>打开博客目录，运行 git bash </p>
 <figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> blog/themes/next</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/theme-next/theme-next-pjax <span class="built_in">source</span>/lib/pjax</span></span><br></pre></td></tr></table></figure>
 <p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>pjax</code> 关键字，设置 Pjax 为开启状态</p>
@@ -454,6 +480,9 @@
       <div class="popular-posts-title"><a href="\2020\03\20\2020-03-20-Hexo-Next搭建个人博客（集成Valine文章评论功能）\" rel="bookmark">Hexo+Next搭建个人博客（集成Valine文章评论功能）</a></div>
     </li>
     <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\04\16\Hexo-Next搭建个人博客-（集成DaoVoice在线联系功能）\" rel="bookmark">Hexo+Next搭建个人博客 （集成DaoVoice在线联系功能）</a></div>
+    </li>
+    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\2015\07\14\2015-7-14-jekyll搭建个人博客\" rel="bookmark">Jekyll搭建个人博客</a></div>
     </li>
   </ul>
@@ -465,7 +494,7 @@
       </div>
     </div>
         <div class="reward-container">
-  <div>如果你觉得这篇文章对你有用，欢迎赞赏哦~</div>
+  <div>Buy me a cup of milkshake 🍨.</div>
   <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
     打赏
   </button>
@@ -488,7 +517,7 @@
       
         <div>
     
-        <div style="text-align:center;color: #ccc;font-size:14px;">------------- 本 文 结 束<i class="fa fa-paw"></i>感 谢 您 的 阅 读 -------------</div>
+        <div style="text-align:center;color: #ccc;font-size:14px;">------------- 💖 🌞 本 文 结 束 😚 感 谢 您 的 阅 读 🌞 💖 -------------</div>
     
 </div>
 
@@ -620,7 +649,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本设置"><span class="nav-number">2.</span> <span class="nav-text">基本设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#站点初始设置"><span class="nav-number">2.1.</span> <span class="nav-text">站点初始设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置主题风格"><span class="nav-number">2.2.</span> <span class="nav-text">设置主题风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#菜单设置"><span class="nav-number">2.3.</span> <span class="nav-text">菜单设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#头像设置"><span class="nav-number">2.4.</span> <span class="nav-text">头像设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码块样式设置"><span class="nav-number">2.5.</span> <span class="nav-text">代码块样式设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回到顶部按钮设置"><span class="nav-number">2.6.</span> <span class="nav-text">回到顶部按钮设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#社交媒体联系方式修改"><span class="nav-number">2.7.</span> <span class="nav-text">社交媒体联系方式修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加友情链接"><span class="nav-number">2.8.</span> <span class="nav-text">增加友情链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将文章底部-换成标签图标"><span class="nav-number">2.9.</span> <span class="nav-text">将文章底部 # 换成标签图标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置打赏"><span class="nav-number">2.10.</span> <span class="nav-text">设置打赏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置订阅"><span class="nav-number">2.11.</span> <span class="nav-text">设置订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启阅读进度条"><span class="nav-number">2.12.</span> <span class="nav-text">开启阅读进度条</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#右上角-Github-按钮开启"><span class="nav-number">2.13.</span> <span class="nav-text">右上角 Github 按钮开启</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字体设置"><span class="nav-number">2.14.</span> <span class="nav-text">字体设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#底部设置"><span class="nav-number">2.15.</span> <span class="nav-text">底部设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版权信息设置"><span class="nav-number">2.16.</span> <span class="nav-text">版权信息设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三方插件"><span class="nav-number">3.</span> <span class="nav-text">第三方插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本地搜索"><span class="nav-number">3.1.</span> <span class="nav-text">本地搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加相关文章"><span class="nav-number">3.2.</span> <span class="nav-text">添加相关文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#博客图片插件"><span class="nav-number">3.3.</span> <span class="nav-text">博客图片插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中英文之间自动加空格"><span class="nav-number">3.4.</span> <span class="nav-text">中英文之间自动加空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网页加载进度条"><span class="nav-number">3.5.</span> <span class="nav-text">网页加载进度条</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博客速度优化"><span class="nav-number">4.</span> <span class="nav-text">博客速度优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pjax"><span class="nav-number">4.1.</span> <span class="nav-text">Pjax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#懒加载"><span class="nav-number">4.2.</span> <span class="nav-text">懒加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网站动态元素延时加载"><span class="nav-number">4.3.</span> <span class="nav-text">网站动态元素延时加载</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本设置"><span class="nav-number">2.</span> <span class="nav-text">基本设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#站点初始设置"><span class="nav-number">2.1.</span> <span class="nav-text">站点初始设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置主题风格"><span class="nav-number">2.2.</span> <span class="nav-text">设置主题风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#菜单设置"><span class="nav-number">2.3.</span> <span class="nav-text">菜单设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#头像设置"><span class="nav-number">2.4.</span> <span class="nav-text">头像设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码块样式设置"><span class="nav-number">2.5.</span> <span class="nav-text">代码块样式设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回到顶部按钮设置"><span class="nav-number">2.6.</span> <span class="nav-text">回到顶部按钮设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#社交媒体联系方式修改"><span class="nav-number">2.7.</span> <span class="nav-text">社交媒体联系方式修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加友情链接"><span class="nav-number">2.8.</span> <span class="nav-text">增加友情链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将文章底部-换成标签图标"><span class="nav-number">2.9.</span> <span class="nav-text">将文章底部 # 换成标签图标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置打赏"><span class="nav-number">2.10.</span> <span class="nav-text">设置打赏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置订阅"><span class="nav-number">2.11.</span> <span class="nav-text">设置订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启阅读进度条"><span class="nav-number">2.12.</span> <span class="nav-text">开启阅读进度条</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#右上角-Github-按钮开启"><span class="nav-number">2.13.</span> <span class="nav-text">右上角 Github 按钮开启</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字体设置"><span class="nav-number">2.14.</span> <span class="nav-text">字体设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#底部设置"><span class="nav-number">2.15.</span> <span class="nav-text">底部设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版权信息设置"><span class="nav-number">2.16.</span> <span class="nav-text">版权信息设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三方插件"><span class="nav-number">3.</span> <span class="nav-text">第三方插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本地搜索"><span class="nav-number">3.1.</span> <span class="nav-text">本地搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加相关文章"><span class="nav-number">3.2.</span> <span class="nav-text">添加相关文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#博客图片插件"><span class="nav-number">3.3.</span> <span class="nav-text">博客图片插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中英文之间自动加空格"><span class="nav-number">3.4.</span> <span class="nav-text">中英文之间自动加空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网页加载进度条"><span class="nav-number">3.5.</span> <span class="nav-text">网页加载进度条</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分享插件"><span class="nav-number">3.6.</span> <span class="nav-text">分享插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博客速度优化"><span class="nav-number">4.</span> <span class="nav-text">博客速度优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pjax"><span class="nav-number">4.1.</span> <span class="nav-text">Pjax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#懒加载"><span class="nav-number">4.2.</span> <span class="nav-text">懒加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网站动态元素延时加载"><span class="nav-number">4.3.</span> <span class="nav-text">网站动态元素延时加载</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -636,7 +665,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -724,14 +753,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-      <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">106k</span>
+    <span title="站点总字数">111k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:37</span>
+    <span title="站点阅读时长">1:41</span>
 </div>
 
         
@@ -924,6 +951,9 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     
     <div class="moon-menu-item" onclick="back2top()">
       <i class='fa fa-chevron-up'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="openDaoCloud()">
+      <i class='fa fa-comments'></i>    </div>
     
   </div>
   <div class="moon-menu-button" onclick="moonMenuClick()">
