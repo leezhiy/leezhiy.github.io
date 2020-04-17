@@ -36,24 +36,30 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"manual"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="前言最近将博客从 Jekyll 迁移到 Hexo，在迁移的过程中也遇到一些问题，下面就简单记录一下 Hexo+NexT+Github Pages 的搭建步骤。  本章将从零开始，搭建一个 Hexo + NexT 的本地博客系统。">
+  <meta name="description" content="前言最近将博客从 Jekyll 迁移到 Hexo，在迁移的过程中也遇到一些问题，下面就简单记录一下 Hexo+NexT+Github Pages 的搭建步骤。 在上一章，我们对博客进行了一些基础设置并安装了几个第三方插件， 在本章我们将把博客部署到 Github Pages 中。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo+Next搭建个人博客（安装Hexo及主题）">
-<meta property="og:url" content="http://yoursite.com/2020/04/16/2020-04-16-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%AE%89%E8%A3%85Hexo%E5%8F%8A%E4%B8%BB%E9%A2%98%EF%BC%89/index.html">
+<meta property="og:title" content="Hexo+Next搭建个人博客（Github Pages 托管 Hexo）">
+<meta property="og:url" content="http://yoursite.com/2020/03/15/2020-03-15-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Github-Pages-%E6%89%98%E7%AE%A1-Hexo%EF%BC%89/index.html">
 <meta property="og:site_name" content="Leezhiy Blog">
-<meta property="og:description" content="前言最近将博客从 Jekyll 迁移到 Hexo，在迁移的过程中也遇到一些问题，下面就简单记录一下 Hexo+NexT+Github Pages 的搭建步骤。  本章将从零开始，搭建一个 Hexo + NexT 的本地博客系统。">
+<meta property="og:description" content="前言最近将博客从 Jekyll 迁移到 Hexo，在迁移的过程中也遇到一些问题，下面就简单记录一下 Hexo+NexT+Github Pages 的搭建步骤。 在上一章，我们对博客进行了一些基础设置并安装了几个第三方插件， 在本章我们将把博客部署到 Github Pages 中。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/images/pasted-0.png">
-<meta property="article:published_time" content="2020-04-16T05:09:00.000Z">
-<meta property="article:modified_time" content="2020-04-16T09:18:27.888Z">
+<meta property="og:image" content="http://yoursite.com/images/pasted-2.png">
+<meta property="og:image" content="http://yoursite.com/images/github-email-verified.png">
+<meta property="og:image" content="http://yoursite.com/images/github-create-repository.png">
+<meta property="og:image" content="http://yoursite.com/images/github-setting.png/">
+<meta property="og:image" content="http://yoursite.com/images/github-ssh-setting.png">
+<meta property="og:image" content="http://yoursite.com/images/github-ssh-new.png">
+<meta property="og:image" content="http://yoursite.com/images/github-create-ssh.png">
+<meta property="article:published_time" content="2020-03-15T08:55:05.000Z">
+<meta property="article:modified_time" content="2020-04-17T05:19:44.075Z">
 <meta property="article:author" content="Li Zhiyuan">
-<meta property="article:tag" content="博客">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Next">
+<meta property="article:tag" content="博客">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/images/pasted-0.png">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-2.png">
 
-<link rel="canonical" href="http://yoursite.com/2020/04/16/2020-04-16-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%AE%89%E8%A3%85Hexo%E5%8F%8A%E4%B8%BB%E9%A2%98%EF%BC%89/">
+<link rel="canonical" href="http://yoursite.com/2020/03/15/2020-03-15-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Github-Pages-%E6%89%98%E7%AE%A1-Hexo%EF%BC%89/">
 
 
 <script id="page-configurations">
@@ -92,7 +98,7 @@
   padding: 0 10px 0 14px;
 }
 </style>
-  <title>Hexo+Next搭建个人博客（安装Hexo及主题） | Leezhiy Blog</title>
+  <title>Hexo+Next搭建个人博客（Github Pages 托管 Hexo） | Leezhiy Blog</title>
   
 
 
@@ -241,7 +247,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/16/2020-04-16-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%AE%89%E8%A3%85Hexo%E5%8F%8A%E4%B8%BB%E9%A2%98%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/15/2020-03-15-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Github-Pages-%E6%89%98%E7%AE%A1-Hexo%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -254,7 +260,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hexo+Next搭建个人博客（安装Hexo及主题）
+          Hexo+Next搭建个人博客（Github Pages 托管 Hexo）
         </h1>
 
         <div class="post-meta">
@@ -263,10 +269,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-04-16 13:09:00 / 修改时间：17:18:27" itemprop="dateCreated datePublished" datetime="2020-04-16T13:09:00+08:00">2020-04-16</time>
+              <time title="创建时间：2020-03-15 16:55:05" itemprop="dateCreated datePublished" datetime="2020-03-15T16:55:05+08:00">2020-03-15</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-17 13:19:44" itemprop="dateModified" datetime="2020-04-17T13:19:44+08:00">2020-04-17</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -297,8 +309,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/04/16/2020-04-16-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%AE%89%E8%A3%85Hexo%E5%8F%8A%E4%B8%BB%E9%A2%98%EF%BC%89/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/16/2020-04-16-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%AE%89%E8%A3%85Hexo%E5%8F%8A%E4%B8%BB%E9%A2%98%EF%BC%89/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/03/15/2020-03-15-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Github-Pages-%E6%89%98%E7%AE%A1-Hexo%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/15/2020-03-15-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Github-Pages-%E6%89%98%E7%AE%A1-Hexo%EF%BC%89/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -308,14 +320,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3k</span>
+              <span>4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -327,30 +339,29 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近将博客从 Jekyll 迁移到 Hexo，在迁移的过程中也遇到一些问题，下面就简单记录一下 <span class="label info">Hexo+NexT+Github Pages</span> 的搭建步骤。 </p>
-<p>本章将从零开始，搭建一个 Hexo + NexT 的本地博客系统。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近将博客从 Jekyll 迁移到 Hexo，在迁移的过程中也遇到一些问题，下面就简单记录一下 <span class="label info">Hexo+NexT+Github Pages</span> 的搭建步骤。</p>
+<p>在上一章，我们对博客进行了一些基础设置并安装了几个第三方插件， 在本章我们将把博客部署到 Github Pages 中。</p>
 <a id="more"></a>
 
-<h2 id="Hexo-简介"><a href="#Hexo-简介" class="headerlink" title="Hexo 简介"></a>Hexo 简介</h2><p><a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">Hexo</a> 是高效的静态站点生成框架，她基于 <a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a>，相较于Jekyll他有以下特点:</p>
+<h2 id="什么是-GitHub-Pages"><a href="#什么是-GitHub-Pages" class="headerlink" title="什么是 GitHub Pages"></a>什么是 GitHub Pages</h2><p><code>GitHub Pages</code> 是一个静态站点托管服务。</p>
+<p><code>Github page</code> 旨在直接从 <code>GitHub</code> 仓库中直接托管您的个人、组织或项目页面。了解关于 <code>GitHub Pages</code> 网站不同类型的更多信息，请参阅<a href="https://help.github.com/articles/user-organization-and-project-pages/" target="_blank" rel="noopener">用户、组织和项目页面</a>。</p>
+<p><code>GitHub Pages</code> 是静态站点托管服务器，不支持 PHP ，Ruby 或 Python 等服务器端代码。</p>
+<h3 id="GitHub-Pages使用指南"><a href="#GitHub-Pages使用指南" class="headerlink" title="GitHub Pages使用指南"></a>GitHub Pages使用指南</h3><p>在2016年6月15日之后创建的 GitHub Pages 并且使用 github.io 作为域名的网站提供了 HTTPS 支持。如果您在2016年6月15日之前创建了您的网站，您可以为您的网站启用 HTTPS 支持。</p>
+<p>GitHub Pages 网站不应用于敏感交易，如发送密码或信用卡号码。</p>
+<p>您使用 GitHub 页面需遵守 GitHub 服务条款，包括禁止转售。</p>
+<p>警告：GitHub Pages网站在互联网上是公开的，即使他们的存储库是私有的。 如果您的页面存储库中有敏感数据，则可能需要在发布之前将其删除。</p>
+<h3 id="使用限制"><a href="#使用限制" class="headerlink" title="使用限制"></a>使用限制</h3><p>GitHub Pages 网站受到以下使用限制：</p>
 <ul>
-<li><h3 id="超快速度"><a href="#超快速度" class="headerlink" title=" 超快速度"></a><i class="fa fa-bolt"></i> 超快速度</h3><p>  Node.js 所带来的超快生成速度，让上百个页面在几秒内瞬间完成渲染。</p>
+<li><p>GitHub Pages 源仓库建议限制为1GB；</p>
 </li>
-<li><h3 id="支持Markdown"><a href="#支持Markdown" class="headerlink" title=" 支持Markdown"></a><i class="fa fa-pencil"></i> 支持Markdown</h3><p>  Hexo 支持 GitHub Flavored Markdown 的所有功能，甚至可以整合 Octopress 的大多数插件。</p>
+<li><p>发布的 GitHub Pages 网站可能不超过1GB；</p>
 </li>
-<li><h3 id="一键部署"><a href="#一键部署" class="headerlink" title=" 一键部署"></a><i class="fa fa-cloud-upload"></i> 一键部署</h3><p>  只需一条指令即可部署到Github Pages，或其他网站</p>
+<li><p>GitHub Pages 网站每月的带宽限制为100GB；</p>
 </li>
-<li><h3 id="丰富的插件"><a href="#丰富的插件" class="headerlink" title=" 丰富的插件"></a><i class="fa fa-cog"></i> 丰富的插件</h3><p>  Hexo 拥有强大的插件系统，安装插件可以让 Hexo 支持 Jade, CoffeeScript。</p>
+<li><p>GitHub Pages 网站每小时限制10个软件。</p>
 </li>
 </ul>
-<p>通过 Hexo 你可以轻松地使用 Markdown 编写文章，除了 Markdown 本身的语法之外，还可以使用 Hexo 提供的<a href="https://hexo.io/zh-cn/docs/tag-plugins.html" target="_blank" rel="noopener">标签插件</a>来快速的插入特定形式的内容。</p>
-<p>基于 Hexo 这个优秀的博客框架，很多优秀的开发者奉献出了它们基于 Hexo 开发的<a href="https://hexo.io/themes/" target="_blank" rel="noopener">主题</a>。<br><a href="https://theme-next.org/" target="_blank" rel="noopener">NexT</a> 因其精简的风格，一直被广大用户所喜爱。</p>
-<h2 id="安装前提"><a href="#安装前提" class="headerlink" title="安装前提"></a>安装前提</h2><p>安装 Hexo 相当简单，只需要先安装下列应用程序即可：</p>
-<div class="note info">
-            <ul><li>Node.js (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)</li><li>Git</li></ul>
-          </div>
-
-<p>如果您的电脑中已经安装上述必备程序，那么恭喜您！你可以直接前往 安装 Hexo 步骤。</p>
-<p>如果您的电脑中尚未安装所需要的程序，请根据以下安装指示完成安装。</p>
+<p>如果您的网站超过这些使用配额，我们可能无法为您的网站提供服务，或者您可能会收到 GitHub Support 的礼貌的电子邮件，建议您减少网站对我们的服务器影响的策略，包括放置第三方内容分发网络 ，利用其他GitHub功能（如发行版），或转移到可能更适合您需求的其他托管服务。</p>
 <h2 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h2><p>Windows：下载并安装 <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">git</a>.<br>Mac：使用 <a href="http://mxcl.github.com/homebrew/" target="_blank" rel="noopener">Homebrew</a>, <a href="http://www.macports.org/" target="_blank" rel="noopener">MacPorts</a> 或者下载 <a href="http://sourceforge.net/projects/git-osx-installer/" target="_blank" rel="noopener">安装程序</a>。<br>Linux (Ubuntu, Debian)：<code>sudo apt-get install git-core</code><br>Linux (Fedora, Red Hat, CentOS)：<code>sudo yum install git-core</code></p>
 <div class="note danger">
             <h3 id="Mac-用户"><a href="#Mac-用户" class="headerlink" title="Mac 用户"></a>Mac 用户</h3><p>如果在编译时可能会遇到问题，请先到 App Store 安装 Xcode，Xcode 完成后，启动并进入 <strong>Preferences -&gt; Download -&gt; Command Line Tools -&gt; Install</strong> 安装命令行工具。</p>
@@ -360,67 +371,105 @@
             <h3 id="Windows-用户"><a href="#Windows-用户" class="headerlink" title="Windows 用户"></a>Windows 用户</h3><p>对于中国大陆地区用户，可以前往 <a href="https://npm.taobao.org/mirrors/git-for-windows/" target="_blank" rel="noopener">淘宝 Git for Windows 镜像</a> 下载 git 安装包。</p>
           </div>
 
-<h2 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h2><p>Node.js 为大多数平台提供了官方的 <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">安装程序</a>。对于中国大陆地区用户，可以前往 <a href="https://npm.taobao.org/mirrors/node" target="_blank" rel="noopener">淘宝 Node.js 镜像</a> 下载。</p>
-<p>其它的安装方法：</p>
+<p>安装完成后，还需要最后一步设置，在命令行输入</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git config --global user.name <span class="string">"Your Name"</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git config --global user.email <span class="string">"email@example.com"</span></span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong> <code>git config</code>命令的<code>--global</code>参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。</p>
+<h2 id="注册-GitHub-账号"><a href="#注册-GitHub-账号" class="headerlink" title="注册 GitHub 账号"></a>注册 GitHub 账号</h2><p>GitHub官方网站：<a href="https://github.com/" target="_blank" rel="noopener">https://github.com/</a></p>
+<p>进入<a href="https://github.com/join" target="_blank" rel="noopener">GitHub官网注册页面</a>，会见到所示界面，分别输入Username，Email和Password，然后点击Create account。</p>
+<p>注意：该处的Username、Email和Pssword一定要记住，后边要多次使用，如果太长比较难记，建议最好记在本子上。</p>
+<p><img data-src="/images/pasted-2.png" alt="GitHub 注册页面"></p>
+<p>然后我们直接去注册填写的邮箱进行邮箱验证，验证通过后点击 Create a repository 创建版本仓库，如下图<br><img data-src="/images/github-email-verified.png" alt="邮箱验证成功"></p>
+<p>来到创建版本库页面如下图所示，填写Repository name，注意其格式不要写错。</p>
+<p>例如：你的Username是xiaoming，那你的Repository name就是xiaoming.github.io。</p>
+<p><img data-src="/images/github-create-repository.png" alt="创建版本库"></p>
+<p>点击Create repository，完成创建。</p>
+<h2 id="配置-SSH"><a href="#配置-SSH" class="headerlink" title="配置 SSH"></a>配置 SSH</h2><p>配置shh key是让本地git项目与远程的github建立联系</p>
 <ul>
-<li>Windows：通过 <a href="https://github.com/jasongin/nvs/" target="_blank" rel="noopener">nvs</a>（推荐）或者<a href="https://github.com/nvm-sh/nvm" target="_blank" rel="noopener">nvm</a> 安装。</li>
-<li>Mac：使用 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a> 或 <a href="http://www.macports.org/" target="_blank" rel="noopener">MacPorts</a> 安装。</li>
-<li>Linux（DEB/RPM-based）：从 <a href="https://github.com/nodesource/distributions" target="_blank" rel="noopener">NodeSource</a> 安装。</li>
-<li>其它：使用相应的软件包管理器进行安装，可以参考由 Node.js 提供的 <a href="https://nodejs.org/en/download/package-manager/" target="_blank" rel="noopener">指导</a></li>
+<li><p>检查是否已经有SSH Key，打开Git Bash，输入</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ~/.ssh</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果没有.ssh这个目录，则生成一个新的SSH，输入</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ssh-keygen -t rsa -C <span class="string">"your e-mail"</span></span></span><br></pre></td></tr></table></figure>
+
+</li>
 </ul>
-<p>对于 Mac 和 Linux 同样建议使用 nvs 或者 nvm，以避免可能会出现的权限问题。</p>
-<div class="note info">
-            <h3 id="Windows-用户"><a href="#Windows-用户" class="headerlink" title="Windows 用户"></a>Windows 用户</h3><p>使用 Node.js 官方安装程序时，请确保勾选 <strong>Add to PATH</strong> 选项（默认已勾选）</p>
-          </div>
+<p><strong>注意:</strong>  </p>
+<ol>
+<li>此处的邮箱地址，你可以输入自己的邮箱地址；</li>
+<li>此处的「-C」的是大写的「C」</li>
+</ol>
+<ul>
+<li><p>之后会出现</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Generating public/private rsa key pair.  </span><br><span class="line">Enter file in which to save the key (/c/Users/you/.ssh/id_rsa):  </span><br><span class="line">//到这里可以直接回车将密钥按默认文件进行存储</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后会出现</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Enter passphrase (empty for no passphrase):  </span><br><span class="line">//这个密码会在你提交项目时使用，如果为空的话提交项目时则不用输入。这个设置是防止别人往你的项目里提交内容。这里我们暂时不输入</span><br><span class="line">Enter same passphrase again:</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接下来会显示</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Your identification has been saved in /c/Users/you/.ssh/id_rsa.  </span><br><span class="line">Your public key has been saved in /c/Users/you/.ssh/id_rsa.pub.  </span><br><span class="line">The key fingerprint is:  </span><br><span class="line">这里是各种字母数字组成的字符串，结尾是你的邮箱  </span><br><span class="line">The key's randomart image is:  </span><br><span class="line">这里也是各种字母数字符号组成的字符串</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行以下命令，将公钥的内容复制到系统粘贴板上</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> clip &lt; ~/.ssh/id_rsa.pub</span></span><br></pre></td></tr></table></figure>
+<h2 id="添加-SSH-Key-到-GitHub"><a href="#添加-SSH-Key-到-GitHub" class="headerlink" title="添加 SSH Key 到 GitHub"></a>添加 SSH Key 到 GitHub</h2></li>
+<li><p>登陆 GitHub，进入 Settings：<br><img data-src="/images/github-setting.png/" alt="GitHub 设置"></p>
+</li>
+<li><p>点击左侧菜单 SSH and GPG Keys：<br><img data-src="/images/github-ssh-setting.png" alt="GitHub SSH 设置"></p>
+</li>
+<li><p>选择 New SSH key：<br><img data-src="/images/github-ssh-new.png" alt="GitHub 新建SSH"></p>
+</li>
+<li><p>粘贴密钥：<br><img data-src="/images/github-create-ssh.png" alt="粘贴秘钥"></p>
+</li>
+</ul>
+<h2 id="测试-SSH-Key-是否配置成功"><a href="#测试-SSH-Key-是否配置成功" class="headerlink" title="测试 SSH Key 是否配置成功"></a>测试 SSH Key 是否配置成功</h2><ul>
+<li><p>输入以下命令：注意：<a href="mailto:git@github.com">git@github.com</a>不要做任何更改！</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ssh -T git@github.com</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如配置了密码则要输入密码,输完按回车</p>
+<p>如果显示以下内容，则说明Github中的ssh配置成功。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi username! You've successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure>
 
-<div class="note danger">
-            <h3 id="For-Mac-Linux-用户"><a href="#For-Mac-Linux-用户" class="headerlink" title="For Mac / Linux 用户"></a>For Mac / Linux 用户</h3><p>如果在尝试安装 Hexo 的过程中出现 <code>EACCES</code> 权限错误，请遵循 <a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally" target="_blank" rel="noopener">由 npmjs 发布的指导</a> 修复该问题。强烈建议 <strong>不要</strong> 使用 root、sudo 等方法覆盖权限</p>
-          </div>
+</li>
+</ul>
+<h2 id="将博客网站上传到-GitHub"><a href="#将博客网站上传到-GitHub" class="headerlink" title="将博客网站上传到 GitHub"></a>将博客网站上传到 GitHub</h2><ul>
+<li><p>打开 Hexo 文件夹中的 <code>_config.yml</code> 文件，搜索 <code>deploy</code> 关键字，修改如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Deployment</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Docs: https://hexo.io/docs/deployment.html</span></span></span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/leezhiy/leezhiy.github.io # 这里换成自己的仓库地址</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开 <code>git bash</code> 执行以下命令</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo g  </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo d</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>或者直接执行</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo g -d</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行完之后会让你输入你的 Github 的账号和密码，如果此时报以下错误，说明你的 deployer 没有安装成功</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR Deployer not found: git</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>需要执行以下命令再安装一次：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>再执行 <code>hexo g -d</code>，你的博客就会部署到 Github 上了</p>
+<p>此时, 通过访问 <a href="http://yourname.github.io" target="_blank" rel="noopener">http://yourname.github.io</a> 可以看到默认的Hexo首页面（与之前本地测试时一样）。</p>
+</li>
+</ul>
+<h2 id="在博客上发表文章"><a href="#在博客上发表文章" class="headerlink" title="在博客上发表文章"></a>在博客上发表文章</h2><p>博客已经成功搭建了，但是我们该怎么写博客呢？</p>
+<ul>
+<li><p>新建一个空文章，输入以下命令，会在项目 <strong>\Hexo\source_posts</strong> 中生成 文章标题 <strong>.md</strong> 文件，文章标题根据需要命名</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo n <span class="string">"文章标题"</span></span></span><br></pre></td></tr></table></figure>
+<p>当然也可以直接在 <strong>\Hexo\source_posts</strong> 目录下右键鼠标新建文本文档，改后缀为 <strong>.md</strong> 即可，这种方法比较方便</p>
+</li>
+<li><p>用编辑器编写文章</p>
+<p><strong>md</strong> 全称 <strong>Markdown</strong>， Markdown 是 2004 年由 John Gruberis 设计和开发的纯文本格式的语法，非常的简单实用，常用的标记符号屈指可数，几分钟即可学会， <strong>.md</strong> 文件可以使用支持 Markdown 语法的编辑器编辑，然后保存文件到 <strong>\Hexo\source_posts</strong>文件夹下即可</p>
+<p>文章标题，标签，分类，封面图片，摘要等，可以在 Front-matter 里面配置（Front-matter 是文件最上方以 — 分隔的区域，用于指定个别文件的变量，更多可以查看 <a href="https://hexo.io/zh-cn/docs/front-matter" target="_blank" rel="noopener">官方文档</a> ），举个例子：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">---</span><br><span class="line">layout: 页面布局（配合主题文档使用）</span><br><span class="line">title: 文章名称</span><br><span class="line">date: 文章日期</span><br><span class="line">comments: 文章是否开启评论</span><br><span class="line">photos: 文章封面图（仅部分主题支持）</span><br><span class="line">tags: </span><br><span class="line">  - 文章标签一</span><br><span class="line">  - 文章标签二</span><br><span class="line">categories: 文章分类</span><br><span class="line">description: 文章描述，即要在首页显示的摘要（仅部分主题支持）</span><br><span class="line">---</span><br><span class="line">这里是摘要</span><br><span class="line"></span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line"></span><br><span class="line">这里是正文</span><br><span class="line"></span><br><span class="line">注意：description 和 &lt;!-- more --&gt; 方式显示摘要二选一即可，部分主题不支持description，每个配置英文冒号后面要空一格，不同主题配置有所差异，具体要参考主题文档</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当我们用编辑器写好文章后，可以使用以下命令将其推送到服务器上</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo g  </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo d</span></span><br></pre></td></tr></table></figure></li>
+<li><p>或者将两个命令合二为一输入以下命令：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo d -g</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><p>打开git bash，为了避免出现错误后面的操作在git bash进行</p>
-<p>使用 npm 安装 Hexo</p>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install -g hexo-cli</span></span><br></pre></td></tr></table></figure>
-<p>此命令会把 hexo.cmd 安装到全局包仓库中，由于该仓库文件夹在 Windows 系统的 path 中。所以你就可以在任意位置执行 hexo 命令了。</p>
-<p>执行一下命令确认hexo安装完好</p>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo -v</span></span><br><span class="line">hexo: 4.2.0</span><br><span class="line">hexo-cli: 3.1.0</span><br><span class="line">os: Windows_NT 10.0.17763 win32 x64</span><br><span class="line">node: 12.16.2</span><br><span class="line">v8: 7.8.279.23-node.34</span><br><span class="line">uv: 1.34.2</span><br><span class="line">zlib: 1.2.11</span><br><span class="line">brotli: 1.0.7</span><br><span class="line">ares: 1.15.0</span><br><span class="line">modules: 72</span><br><span class="line">nghttp2: 1.40.0</span><br><span class="line">napi: 5</span><br><span class="line">llhttp: 2.0.4</span><br><span class="line">http_parser: 2.9.3</span><br><span class="line">openssl: 1.1.1e</span><br><span class="line">cldr: 36.0</span><br><span class="line">icu: 65.1</span><br><span class="line">tz: 2019c</span><br><span class="line">unicode: 12.1</span><br></pre></td></tr></table></figure>
-
-<p>安装 Hexo 完成后，我们需要为博客创建一个指定文件夹，在指定文件夹下执行以下命令，Hexo 将会在该文件夹中新建所需要的文件。</p>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir blog</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> blog</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo init</span></span><br></pre></td></tr></table></figure>
-
-<p>安装完成后，指定文件夹目录如下</p>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.  </span><br><span class="line">├── _config.yml  </span><br><span class="line">├── package.json  </span><br><span class="line">├── scaffolds  </span><br><span class="line">├── source  </span><br><span class="line">|   ├── _drafts  </span><br><span class="line">|   └── _posts  </span><br><span class="line">└──</span><br></pre></td></tr></table></figure>
-
-<p>我们继续执行命令</p>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo generate <span class="comment"># 生成静态资源</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo server --debug <span class="comment"># 启动服务器 并开启调试模式</span></span></span><br></pre></td></tr></table></figure>
-
-<p>我们在浏览器中访问 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> ，就可以看到基于 Hexo 的默认主题的原型</p>
-<h2 id="安装-Hexo-主题"><a href="#安装-Hexo-主题" class="headerlink" title="安装 Hexo 主题"></a>安装 Hexo 主题</h2><p>指定文件夹目录下的 <code>theme</code> 文件夹下存放的就是博客的主题，Hexo 便是依据主题来生成静态文件的，挑选主题可以在 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">官方网站</a> 查找，根据自己的喜好来挑选。</p>
-<p>下载主题的方式如下：</p>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> your-hexo-site  <span class="comment">#eg: blog</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> &#123;主题链接&#125; themes/&#123;主题名称&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>启用主题的方式也很简单</p>
-<p>打开指定文件夹下 Hexo 的配置文件 <code>_config.yml</code>, Ctrl+F 搜索 <code>theme</code> 关键字，修改其主题名称为下载的主题名称即可。</p>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: &#123;主题名称&#125;</span><br></pre></td></tr></table></figure>
-
-<p>以本人使用的 NexT 主题为例：</p>
-<h3 id="下载-NexT"><a href="#下载-NexT" class="headerlink" title="下载 NexT"></a>下载 NexT</h3><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> blog</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span></span><br></pre></td></tr></table></figure>
-<h3 id="启用-NexT"><a href="#启用-NexT" class="headerlink" title="启用 NexT"></a>启用 NexT</h3><p>修改 Hexo 目录下的 <code>_config.yml</code></p>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
-
-<h3 id="验证主题是否安装成功"><a href="#验证主题是否安装成功" class="headerlink" title="验证主题是否安装成功"></a>验证主题是否安装成功</h3><p>启动 Hexo 本地站点，<strong>在服务启动的过程，注意观察命令行输出是否有任何异常信息。</strong></p>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo clean <span class="comment"># 清除生成的静态资源</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo s -d  <span class="comment"># hexo server -debug 的缩写</span></span></span><br></pre></td></tr></table></figure>
-
-<p>当命令行输出中提示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INFO Hexo is running at http:&#x2F;&#x2F;0.0.0.0:4000&#x2F;. Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure>
-<p>此时即可使用浏览器访问 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> ，检查站点是否正确运行</p>
-<p>当你看到站点的外观与下图所示类似时即说明你已成功安装 NexT 主题。这是 NexT 默认的 Scheme —— Muse<br><img data-src="/images/pasted-0.png" alt="博客首页"></p>
-<p>现在，我们已经成功安装并启用了 NexT 主题。</p>
-<p>关于更多基本操作和基础知识，请查阅 <a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">Hexo</a> 与 <a href="https://theme-next.org/" target="_blank" rel="noopener">NexT</a> 官方文档.</p>
-<h2 id="Hexo-常用命令"><a href="#Hexo-常用命令" class="headerlink" title="Hexo 常用命令"></a>Hexo 常用命令</h2><h3 id="博客操作类"><a href="#博客操作类" class="headerlink" title="博客操作类"></a>博客操作类</h3><h4 id="初始化博客"><a href="#初始化博客" class="headerlink" title="初始化博客"></a>初始化博客</h4><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo init [folder]</span></span><br></pre></td></tr></table></figure>
-<h4 id="启动本地服务器"><a href="#启动本地服务器" class="headerlink" title="启动本地服务器"></a>启动本地服务器</h4><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo clean &amp;&amp; hexo s -d</span></span><br></pre></td></tr></table></figure>
-<h4 id="部署到-Github-Pages"><a href="#部署到-Github-Pages" class="headerlink" title="部署到 Github Pages"></a>部署到 Github Pages</h4><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo clean &amp;&amp; hexo g -d</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="文章操作类"><a href="#文章操作类" class="headerlink" title="文章操作类"></a>文章操作类</h3><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo new <span class="string">'postName'</span> <span class="comment">#新建文章</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo new page <span class="string">'pageName'</span> <span class="comment"># 新建页面</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>现在访问你的博客就可以看见写好的文章啦！</p>
 
     </div>
 
@@ -431,7 +480,10 @@
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\04\16\2020-04-16-Hexo-Next搭建个人博客（NexT 主题设置）\" rel="bookmark">Hexo+Next搭建个人博客（Next 主题设置）</a></div>
+      <div class="popular-posts-title"><a href="\2020\03\14\2020-03-14-Hexo-Next搭建个人博客（安装Hexo及主题）\" rel="bookmark">Hexo+Next搭建个人博客（安装Hexo及主题）</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\03\15\2020-03-15-Hexo-Next搭建个人博客（NexT 主题设置）\" rel="bookmark">Hexo+Next搭建个人博客（Next 主题设置）</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\2015\07\14\2015-7-14-jekyll搭建个人博客\" rel="bookmark">Jekyll搭建个人博客</a></div>
@@ -482,7 +534,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://yoursite.com/2020/04/16/2020-04-16-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%AE%89%E8%A3%85Hexo%E5%8F%8A%E4%B8%BB%E9%A2%98%EF%BC%89/" title="Hexo+Next搭建个人博客（安装Hexo及主题）">http://yoursite.com/2020/04/16/2020-04-16-Hexo-Next搭建个人博客（安装Hexo及主题）/</a>
+    <a href="http://yoursite.com/2020/03/15/2020-03-15-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Github-Pages-%E6%89%98%E7%AE%A1-Hexo%EF%BC%89/" title="Hexo+Next搭建个人博客（Github Pages 托管 Hexo）">http://yoursite.com/2020/03/15/2020-03-15-Hexo-Next搭建个人博客（Github-Pages-托管-Hexo）/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -523,9 +575,9 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag"><i class="fa fa-tag"></i> 博客</a>
               <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
               <a href="/tags/Next/" rel="tag"><i class="fa fa-tag"></i> Next</a>
+              <a href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag"><i class="fa fa-tag"></i> 博客</a>
           </div>
 
         
@@ -534,11 +586,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/19/2020-03-19-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%83%EF%BC%89%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/" rel="prev" title="php 设计模式（七）装饰器模式">
-      <i class="fa fa-chevron-left"></i> php 设计模式（七）装饰器模式
+    <a href="/2020/03/14/2020-03-14-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%AE%89%E8%A3%85Hexo%E5%8F%8A%E4%B8%BB%E9%A2%98%EF%BC%89/" rel="prev" title="Hexo+Next搭建个人博客（安装Hexo及主题）">
+      <i class="fa fa-chevron-left"></i> Hexo+Next搭建个人博客（安装Hexo及主题）
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/04/16/2020-04-16-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88NexT%20%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE%EF%BC%89/" rel="next" title="Hexo+Next搭建个人博客（Next 主题设置）">
+    <a href="/2020/03/15/2020-03-15-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88NexT%20%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE%EF%BC%89/" rel="next" title="Hexo+Next搭建个人博客（Next 主题设置）">
       Hexo+Next搭建个人博客（Next 主题设置） <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -600,7 +652,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo-简介"><span class="nav-number">2.</span> <span class="nav-text">Hexo 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#超快速度"><span class="nav-number">2.1.</span> <span class="nav-text"> 超快速度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#支持Markdown"><span class="nav-number">2.2.</span> <span class="nav-text"> 支持Markdown</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一键部署"><span class="nav-number">2.3.</span> <span class="nav-text"> 一键部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#丰富的插件"><span class="nav-number">2.4.</span> <span class="nav-text"> 丰富的插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装前提"><span class="nav-number">3.</span> <span class="nav-text">安装前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Git"><span class="nav-number">4.</span> <span class="nav-text">安装 Git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mac-用户"><span class="nav-number">4.1.</span> <span class="nav-text">Mac 用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-用户"><span class="nav-number">4.2.</span> <span class="nav-text">Windows 用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Node-js"><span class="nav-number">5.</span> <span class="nav-text">安装 Node.js</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-用户"><span class="nav-number">5.1.</span> <span class="nav-text">Windows 用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#For-Mac-Linux-用户"><span class="nav-number">5.2.</span> <span class="nav-text">For Mac &#x2F; Linux 用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Hexo"><span class="nav-number">6.</span> <span class="nav-text">安装 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Hexo-主题"><span class="nav-number">7.</span> <span class="nav-text">安装 Hexo 主题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载-NexT"><span class="nav-number">7.1.</span> <span class="nav-text">下载 NexT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启用-NexT"><span class="nav-number">7.2.</span> <span class="nav-text">启用 NexT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证主题是否安装成功"><span class="nav-number">7.3.</span> <span class="nav-text">验证主题是否安装成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo-常用命令"><span class="nav-number">8.</span> <span class="nav-text">Hexo 常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#博客操作类"><span class="nav-number">8.1.</span> <span class="nav-text">博客操作类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化博客"><span class="nav-number">8.1.1.</span> <span class="nav-text">初始化博客</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动本地服务器"><span class="nav-number">8.1.2.</span> <span class="nav-text">启动本地服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#部署到-Github-Pages"><span class="nav-number">8.1.3.</span> <span class="nav-text">部署到 Github Pages</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文章操作类"><span class="nav-number">8.2.</span> <span class="nav-text">文章操作类</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是-GitHub-Pages"><span class="nav-number">2.</span> <span class="nav-text">什么是 GitHub Pages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub-Pages使用指南"><span class="nav-number">2.1.</span> <span class="nav-text">GitHub Pages使用指南</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用限制"><span class="nav-number">2.2.</span> <span class="nav-text">使用限制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Git"><span class="nav-number">3.</span> <span class="nav-text">安装 Git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mac-用户"><span class="nav-number">3.1.</span> <span class="nav-text">Mac 用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-用户"><span class="nav-number">3.2.</span> <span class="nav-text">Windows 用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注册-GitHub-账号"><span class="nav-number">4.</span> <span class="nav-text">注册 GitHub 账号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-SSH"><span class="nav-number">5.</span> <span class="nav-text">配置 SSH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加-SSH-Key-到-GitHub"><span class="nav-number">6.</span> <span class="nav-text">添加 SSH Key 到 GitHub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试-SSH-Key-是否配置成功"><span class="nav-number">7.</span> <span class="nav-text">测试 SSH Key 是否配置成功</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将博客网站上传到-GitHub"><span class="nav-number">8.</span> <span class="nav-text">将博客网站上传到 GitHub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在博客上发表文章"><span class="nav-number">9.</span> <span class="nav-text">在博客上发表文章</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -616,7 +668,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -705,13 +757,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">101k</span>
+    <span title="站点总字数">105k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:32</span>
+    <span title="站点阅读时长">1:35</span>
 </div>
 
         
