@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Amita:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"manual"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言最近将博客从 Jekyll 迁移到 Hexo，在迁移的过程中也遇到一些问题，下面就简单记录一下 Hexo+NexT+Github Pages 的搭建步骤。 在上一章，我们已经集成 DaoVoice 在线联系功能，本章，我们将设置网站统计分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo+Next搭建个人博客 （添加网站统计分析功能）">
+<meta property="og:url" content="http://yoursite.com/2020/03/28/2020-03-28-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-%EF%BC%88%E6%B7%BB%E5%8A%A0%E5%90%84%E7%A7%8D%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD%EF%BC%89/index.html">
+<meta property="og:site_name" content="Leezhiy Blog">
+<meta property="og:description" content="前言最近将博客从 Jekyll 迁移到 Hexo，在迁移的过程中也遇到一些问题，下面就简单记录一下 Hexo+NexT+Github Pages 的搭建步骤。 在上一章，我们已经集成 DaoVoice 在线联系功能，本章，我们将设置网站统计分析">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/analytics-google.png">
+<meta property="og:image" content="http://yoursite.com/images/analytics-google-create-app.png">
+<meta property="og:image" content="http://yoursite.com/images/analytics-google-create-app2.png">
+<meta property="og:image" content="http://yoursite.com/images/analytics-google-create-app-success.png">
+<meta property="og:image" content="http://yoursite.com/images/analytics-baidu.png">
+<meta property="og:image" content="http://yoursite.com/images/analytics-baidu-get-code.png">
+<meta property="og:image" content="http://yoursite.com/images/analytics-baidu-get-code-success.png">
+<meta property="og:image" content="http://yoursite.com/images/analytics-cnzz-add-site.png">
+<meta property="og:image" content="http://yoursite.com/images/analytics-cnzz-add-site2.png">
+<meta property="og:image" content="http://yoursite.com/images/analytics-cnzz-get-code.png">
+<meta property="og:image" content="http://yoursite.com/images/analytics-firebase-index.png">
+<meta property="og:image" content="http://yoursite.com/images/analytics-firebase-get-code.png">
+<meta property="og:image" content="http://yoursite.com/images/valine-create-app.png">
+<meta property="og:image" content="http://yoursite.com/images/valine-app.png">
+<meta property="og:image" content="http://yoursite.com/images/valine-app-create-class.png">
+<meta property="og:image" content="http://yoursite.com/images/valine-app-close-service.png">
+<meta property="article:published_time" content="2020-03-28T08:25:13.000Z">
+<meta property="article:modified_time" content="2020-04-18T09:58:53.824Z">
+<meta property="article:author" content="Li Zhiyuan">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Next">
+<meta property="article:tag" content="博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/analytics-google.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/28/2020-03-28-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-%EF%BC%88%E6%B7%BB%E5%8A%A0%E5%90%84%E7%A7%8D%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style><style>
+#needsharebutton-float {
+  bottom: 88px;
+  cursor: pointer;
+  left: -8px;
+  position: fixed;
+  z-index: 9999;
+}
+#needsharebutton-float .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 4px;
+  padding: 0 10px 0 14px;
+}
+</style>
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+    app_id: '4e6b4c7f',   // 必填，您的 APP 标识
+  }, {
+    launcher: {
+      disableLauncherIcon: true, // 悬浮 ICON 是否显示
+      defaultEnterView: 'list', // 'list' 或 'new' 默认是 list(在对话列表是空的时候默认切换到 new)
+    }
+  });
+  daovoice('update');
+
+  var DaoCloudIsShow = false;
+  // 监听显示事件回调
+  daovoice('onShow', function(){
+    DaoCloudIsShow = ture;
+  });
+  // 监听隐藏事件回调
+  daovoice('onHide', function(){
+    DaoCloudIsShow = false;
+  });
+  // 点击按钮时运行的方法
+  var openDaoCloud = function() {
+    if( DaoCloudIsShow ) {
+      daovoice('hide')
+    } else {
+      daovoice('show')
+    }
+  };
+  </script>
+
+
+
+
+  <title>Hexo+Next搭建个人博客 （添加网站统计分析功能） | Leezhiy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163922351-1"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-163922351-1');
+      }
+    </script>
+
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?bbfcf582d963fc544d48d35e736b88ac";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Leezhiy Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Leezhiy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">我秃了，也变强了</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/custom-name/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/leezhiy" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#607d8b;color:#fff;position: absolute;top: 0;border: 0;right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/28/2020-03-28-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-%EF%BC%88%E6%B7%BB%E5%8A%A0%E5%90%84%E7%A7%8D%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Li Zhiyuan">
+      <meta itemprop="description" content="程序，搞起来很轻松的，就是头冷">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leezhiy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo+Next搭建个人博客 （添加网站统计分析功能）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-28 16:25:13" itemprop="dateCreated datePublished" datetime="2020-03-28T16:25:13+08:00">2020-03-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-18 17:58:53" itemprop="dateModified" datetime="2020-04-18T17:58:53+08:00">2020-04-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">博客搭建</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/28/2020-03-28-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-%EF%BC%88%E6%B7%BB%E5%8A%A0%E5%90%84%E7%A7%8D%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo+Next搭建个人博客 （添加网站统计分析功能）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/28/2020-03-28-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-%EF%BC%88%E6%B7%BB%E5%8A%A0%E5%90%84%E7%A7%8D%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/28/2020-03-28-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-%EF%BC%88%E6%B7%BB%E5%8A%A0%E5%90%84%E7%A7%8D%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD%EF%BC%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>2.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近将博客从 Jekyll 迁移到 Hexo，在迁移的过程中也遇到一些问题，下面就简单记录一下 <span class="label info">Hexo+NexT+Github Pages</span> 的搭建步骤。</p>
+<p>在上一章，我们已经集成 DaoVoice 在线联系功能，本章，我们将设置网站统计分析</p>
+<a id="more"></a>
+
+<h2 id="添加网站统计"><a href="#添加网站统计" class="headerlink" title="添加网站统计"></a>添加网站统计</h2><h3 id="Google-分析"><a href="#Google-分析" class="headerlink" title="Google 分析"></a>Google 分析</h3><h4 id="新建-Google-分析-账号"><a href="#新建-Google-分析-账号" class="headerlink" title="新建 Google 分析 账号"></a>新建 Google 分析 账号</h4><p>首先进入 <a href="https://analytics.google.com/analytics" target="_blank" rel="noopener">Google 分析</a> 创建账号,如下</p>
+<p><img data-src="/images/analytics-google.png" alt="谷歌分析"></p>
+<p>创建分析应用</p>
+<p><img data-src="/images/analytics-google-create-app.png" alt="创建应用"></p>
+<p><img data-src="/images/analytics-google-create-app2.png" alt="创建应用2"></p>
+<p>创建完成后，我们依次点击页面左下角 <strong>设置 -&gt; 跟踪信息 -&gt; 跟踪代码</strong> 获取跟踪 ID</p>
+<p><img data-src="/images/analytics-google-create-app-success.png" alt="创建完成"></p>
+<h4 id="配置-NexT-主题"><a href="#配置-NexT-主题" class="headerlink" title="配置 NexT 主题"></a>配置 NexT 主题</h4><p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>google_analytics</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Google Analytics</span></span><br><span class="line">google_analytics:</span><br><span class="line">  tracking_id: # 你的跟踪代码</span><br><span class="line"><span class="meta">  #</span><span class="bash"> By default, NexT will load an external gtag.js script on your site.</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> If you only need the pageview feature, <span class="built_in">set</span> the following option to <span class="literal">true</span> to get a better performance.</span></span><br><span class="line">  only_pageview: false</span><br></pre></td></tr></table></figure>
+
+<h3 id="百度统计"><a href="#百度统计" class="headerlink" title="百度统计"></a>百度统计</h3><h4 id="获取统计代码"><a href="#获取统计代码" class="headerlink" title="获取统计代码"></a>获取统计代码</h4><p>首先我们登录 <a href="https://tongji.baidu.com/web/welcome/login" target="_blank" rel="noopener">百度统计</a></p>
+<p>添加网站</p>
+<p><img data-src="/images/analytics-baidu.png" alt="百度统计添加网站"></p>
+<p>添加完成后，点击获取代码</p>
+<p><img data-src="/images/analytics-baidu-get-code.png" alt="获取代码"></p>
+<p>红框部分就是我们需要的统计代码</p>
+<p><img data-src="/images/analytics-baidu-get-code-success.png" alt="统计代码"></p>
+<h4 id="配置-NexT-主题-1"><a href="#配置-NexT-主题-1" class="headerlink" title="配置 NexT 主题"></a>配置 NexT 主题</h4><p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>baidu_analytics</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Baidu Analytics</span></span><br><span class="line">baidu_analytics: # 你的 app_id</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="不算子统计"><a href="#不算子统计" class="headerlink" title="不算子统计"></a>不算子统计</h3><p><a href="http://ibruce.info/2015/04/04/busuanzi" target="_blank" rel="noopener">不算子官网</a></p>
+<p>NexT 中已经为我们集成了不算子统计的代码，我们只需在NexT配置文件中开启即可</p>
+<p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>busuanzi_count</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Show Views / Visitors of the website / page with busuanzi.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Get more information on http://ibruce.info/2015/04/04/busuanzi</span></span><br><span class="line">busuanzi_count:</span><br><span class="line">  enable: true</span><br><span class="line">  total_visitors: true</span><br><span class="line">  total_visitors_icon: fa fa-user</span><br><span class="line">  total_views: true</span><br><span class="line">  total_views_icon: fa fa-eye</span><br><span class="line">  post_views: true</span><br><span class="line">  post_views_icon: fa fa-eye</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="CNZZ-友盟统计"><a href="#CNZZ-友盟统计" class="headerlink" title="CNZZ 友盟统计"></a>CNZZ 友盟统计</h3><h4 id="获取统计代码-1"><a href="#获取统计代码-1" class="headerlink" title="获取统计代码"></a>获取统计代码</h4><p>首先我们登录 <a href="https://passport.umeng.com/login" target="_blank" rel="noopener">友盟+</a></p>
+<p>点击 <strong>添加 Web</strong> 添加一个网站</p>
+<p><img data-src="/images/analytics-cnzz-add-site.png" alt="添加网站"></p>
+<p><img data-src="/images/analytics-cnzz-add-site2.png" alt="添加网站"></p>
+<p>添加完成后复制红框中的值</p>
+<p><img data-src="/images/analytics-cnzz-get-code.png" alt="获取站点ID"></p>
+<h4 id="配置-NexT-主题-2"><a href="#配置-NexT-主题-2" class="headerlink" title="配置 NexT 主题"></a>配置 NexT 主题</h4><p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>cnzz_siteid</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> CNZZ count</span></span><br><span class="line">cnzz_siteid: # 你的站点id</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加字数统计和预计阅读时长"><a href="#添加字数统计和预计阅读时长" class="headerlink" title="添加字数统计和预计阅读时长"></a>添加字数统计和预计阅读时长</h2><p>在站点根目录下打开 git bash ，输入以下命令安装 <code>hexo-symbols-count-time</code> 插件</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-symbols-count-time --save</span></span><br></pre></td></tr></table></figure>
+
+<p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>symbols_count_time</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Post wordcount display settings</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Dependencies: https://github.com/theme-next/hexo-symbols-count-time</span></span><br><span class="line">symbols_count_time:</span><br><span class="line">  symbols: true</span><br><span class="line">  time: true</span><br><span class="line">  total_symbols: true</span><br><span class="line">  total_time: true</span><br><span class="line">  exclude_codeblock: false</span><br><span class="line">  awl: 4</span><br><span class="line">  wpm: 275</span><br><span class="line">  suffix: "mins."</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加文章阅读量统计"><a href="#添加文章阅读量统计" class="headerlink" title="添加文章阅读量统计"></a>添加文章阅读量统计</h2><p><strong>注：文章阅读量统计可以按照自己喜好选择其中一个便可</strong></p>
+<h3 id="Firebase-文章阅读量统计"><a href="#Firebase-文章阅读量统计" class="headerlink" title="Firebase 文章阅读量统计"></a>Firebase 文章阅读量统计</h3><h4 id="获取参数"><a href="#获取参数" class="headerlink" title="获取参数"></a>获取参数</h4><p>Firebase 是基于 Google 账号的，所以可以直接用 Google 账号，我们先<a href="https://console.firebase.google.com/u/0/" target="_blank" rel="noopener">创建一个项目</a></p>
+<p>创建完成后点击下图所示位置获取apiKey和projectId</p>
+<p><img data-src="/images/analytics-firebase-index.png" alt="首页"></p>
+<p>下图红框圈中的地方就是你的apiKey和projectId<br><img data-src="/images/analytics-firebase-get-code.png" alt="获取参数"></p>
+<h4 id="配置-NexT-主题-3"><a href="#配置-NexT-主题-3" class="headerlink" title="配置 NexT 主题"></a>配置 NexT 主题</h4><p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>firestore</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Another tool to show number of visitors to each article.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Visit https://console.firebase.google.com/u/0/ to get apiKey and projectId.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Visit https://firebase.google.com/docs/firestore/ to get more information about firestore.</span></span><br><span class="line">firestore:</span><br><span class="line">  enable: true</span><br><span class="line">  collection: articles # Required, a string collection name to access firestore database</span><br><span class="line">  apiKey: # 你的 apiKey</span><br><span class="line">  projectId: # 你的 projectId</span><br></pre></td></tr></table></figure>
+<h3 id="Leancloud"><a href="#Leancloud" class="headerlink" title="Leancloud"></a>Leancloud</h3><p><strong>如果是文章评论选择使用 Valine 插件的用户，可以直接把 <code>valine.visitor</code> 这个参数设置为 <code>true</code> 即可</strong></p>
+<p>注册 <a href="https://www.leancloud.cn/" target="_blank" rel="noopener">LeanCloud</a> 账号，注册完成后，我们找到创建应用</p>
+<p><img data-src="/images/valine-create-app.png" alt="创建应用"></p>
+<p>在这里填写你的应用名称,名称可以自己定义，然后下面选择 <strong>开发版</strong> 点击 <strong>创建</strong>。</p>
+<p><img data-src="/images/valine-app.png" alt="应用"></p>
+<p>然后点击应用进入设置</p>
+<p>在设置页，我们首先点击存储，查看是否有 <strong>Counter</strong> 表，没有则创建，权限设为无限制。</p>
+<p><img data-src="/images/valine-app-create-class.png" alt="添加表"></p>
+<p>然后点击设置 &gt; 安全中心 ,将除了数据存储的服务全部关闭。</p>
+<p><img data-src="/images/valine-app-close-service.png" alt="关闭其他服务"></p>
+<p>最后点击 <strong>应用 Keys</strong> 取得我们 <strong>AppKey</strong> 和 <strong>App id</strong></p>
+<h4 id="配置-NexT-主题-4"><a href="#配置-NexT-主题-4" class="headerlink" title="配置 NexT 主题"></a>配置 NexT 主题</h4><p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>leancloud_visitors</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Show number of visitors of each article.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> You can visit https://leancloud.cn to get AppID and AppKey.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> AppID and AppKey are recommended to be the same as valine<span class="string">'s for counter compatibility.</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Do not <span class="built_in">enable</span> both `valine.visitor` and `leancloud_visitors`.</span></span><br><span class="line">leancloud_visitors:</span><br><span class="line">  enable: true</span><br><span class="line">  app_id: # 获取的 App id</span><br><span class="line">  app_key: # 获取的 AppKey</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Required <span class="keyword">for</span> apps from CN region</span></span><br><span class="line">  server_url: # &lt;your server url&gt;</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> If you don<span class="string">'t care about security in leancloud counter and just want to use it directly</span></span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> (without hexo-leancloud-counter-security plugin), <span class="built_in">set</span> `security` to `<span class="literal">false</span>`.</span></span><br><span class="line">  security: true</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\03\14\2020-03-14-Hexo-Next搭建个人博客（安装Hexo及主题）\" rel="bookmark">Hexo+Next搭建个人博客（安装Hexo及主题）</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\03\15\2020-03-15-Hexo-Next搭建个人博客（Github-Pages-托管-Hexo）\" rel="bookmark">Hexo+Next搭建个人博客（Github Pages 托管 Hexo）</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\03\15\2020-03-15-Hexo-Next搭建个人博客（NexT 主题设置）\" rel="bookmark">Hexo+Next搭建个人博客（Next 主题设置）</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\03\21\2020-03-21-Hexo-Next搭建个人博客-（集成DaoVoice在线联系功能）\" rel="bookmark">Hexo+Next搭建个人博客 （集成DaoVoice在线联系功能）</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\03\20\2020-03-20-Hexo-Next搭建个人博客（集成Valine文章评论功能）\" rel="bookmark">Hexo+Next搭建个人博客（集成Valine文章评论功能）</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        <div class="reward-container">
+  <div>Buy me a cup of milkshake 🍨.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Li Zhiyuan 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="Li Zhiyuan 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------------- 💖 🌞 本 文 结 束 😚 感 谢 您 的 阅 读 🌞 💖 -------------</div>
+    
+</div>
+
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Li Zhiyuan
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2020/03/28/2020-03-28-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-%EF%BC%88%E6%B7%BB%E5%8A%A0%E5%90%84%E7%A7%8D%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD%EF%BC%89/" title="Hexo+Next搭建个人博客 （添加网站统计分析功能）">http://yoursite.com/2020/03/28/2020-03-28-Hexo-Next搭建个人博客-（添加各种统计功能）/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.png">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+              <a href="/tags/Next/" rel="tag"><i class="fa fa-tag"></i> Next</a>
+              <a href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag"><i class="fa fa-tag"></i> 博客</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/21/2020-03-21-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-%EF%BC%88%E9%9B%86%E6%88%90DaoVoice%E5%9C%A8%E7%BA%BF%E8%81%94%E7%B3%BB%E5%8A%9F%E8%83%BD%EF%BC%89/" rel="prev" title="Hexo+Next搭建个人博客 （集成DaoVoice在线联系功能）">
+      <i class="fa fa-chevron-left"></i> Hexo+Next搭建个人博客 （集成DaoVoice在线联系功能）
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加网站统计"><span class="nav-number">2.</span> <span class="nav-text">添加网站统计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Google-分析"><span class="nav-number">2.1.</span> <span class="nav-text">Google 分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#新建-Google-分析-账号"><span class="nav-number">2.1.1.</span> <span class="nav-text">新建 Google 分析 账号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置-NexT-主题"><span class="nav-number">2.1.2.</span> <span class="nav-text">配置 NexT 主题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#百度统计"><span class="nav-number">2.2.</span> <span class="nav-text">百度统计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取统计代码"><span class="nav-number">2.2.1.</span> <span class="nav-text">获取统计代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置-NexT-主题-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">配置 NexT 主题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不算子统计"><span class="nav-number">2.3.</span> <span class="nav-text">不算子统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CNZZ-友盟统计"><span class="nav-number">2.4.</span> <span class="nav-text">CNZZ 友盟统计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取统计代码-1"><span class="nav-number">2.4.1.</span> <span class="nav-text">获取统计代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置-NexT-主题-2"><span class="nav-number">2.4.2.</span> <span class="nav-text">配置 NexT 主题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加字数统计和预计阅读时长"><span class="nav-number">3.</span> <span class="nav-text">添加字数统计和预计阅读时长</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加文章阅读量统计"><span class="nav-number">4.</span> <span class="nav-text">添加文章阅读量统计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Firebase-文章阅读量统计"><span class="nav-number">4.1.</span> <span class="nav-text">Firebase 文章阅读量统计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取参数"><span class="nav-number">4.1.1.</span> <span class="nav-text">获取参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置-NexT-主题-3"><span class="nav-number">4.1.2.</span> <span class="nav-text">配置 NexT 主题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Leancloud"><span class="nav-number">4.2.</span> <span class="nav-text">Leancloud</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置-NexT-主题-4"><span class="nav-number">4.2.1.</span> <span class="nav-text">配置 NexT 主题</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Li Zhiyuan"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Li Zhiyuan</p>
+  <div class="site-description" itemprop="description">程序，搞起来很轻松的，就是头冷</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/leezhiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;leezhiy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:18500754397@163.com" title="E-Mail → mailto:18500754397@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/5678634433" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;5678634433" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/li-zhi-yuan-13-7" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;li-zhi-yuan-13-7" rel="noopener" target="_blank"><i class="fa fa-globe fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://gitee.com/leezhiy" title="Gitee → https:&#x2F;&#x2F;gitee.com&#x2F;leezhiy" rel="noopener" target="_blank"><i class="fab fa-git fa-fw"></i>Gitee</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://music.163.com/#/user/home?id=131550901" title="网易云 → https:&#x2F;&#x2F;music.163.com&#x2F;#&#x2F;user&#x2F;home?id&#x3D;131550901" rel="noopener" target="_blank"><i class="fa fa-music fa-fw"></i>网易云</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情连接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://music.163.com/#/user/home?id=131550901" title="https:&#x2F;&#x2F;music.163.com&#x2F;#&#x2F;user&#x2F;home?id&#x3D;131550901" rel="noopener" target="_blank">😆 网易云音乐 😆</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div style="background-image:linear-gradient(90deg,#6dba82 0,#07b39b 15%,#1098ad 30%,#5073b8 44%,#a166ab 58%,#ef4e7b 72%,#f37055 86%,#f79533 100%);background-size:cover;-webkit-background-clip:text;-webkit-text-fill-color:transparent;user-select:none"><i>Tip: 本站电脑访问体验更佳耶&nbsp;<i class="fa fa-angellist" style="display:inline"></i></i></div>
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Li Zhiyuan</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">114k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:44</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+  <div style="display: none;">
+    <script data-pjax src="//s95.cnzz.com/z_stat.php?id=1278825815&web_id=1278825815"></script>
+  </div>
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<div id="needsharebutton-float">
+      <span class="btn">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </span>
+    </div>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "default";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook,Linkedin,Mailto,Reddit,Delicious,StumbleUpon,Pinterest,GooglePlus,Tumblr,GoogleBookmarks,Newsvine,Evernote,Friendfeed,Vkontakte,Odnoklassniki,Mailru";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+      flOptions = {};
+        flOptions.iconStyle = "box";
+        flOptions.boxForm = "horizontal";
+        flOptions.position = "middleRight";
+        flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook,Linkedin";
+      new needShareButton('#needsharebutton-float', flOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//cdn.bootcss.com/valine/1.4.4/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'JVvuWX6nMNxhJHtTykHi9eAw-gzGzoHsz',
+      appKey     : 'rx4Oj2FCD7V0UGv8lLuRJaGa',
+      placeholder: "聊五分钱的天吗？|ω･)و ̑̑༉",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="openDaoCloud()">
+      <i class='fa fa-comments'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button" onclick="moonMenuClick()">
+    <svg class="moon-menu-svg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+      <g class="moon-menu-points">
+        <circle class="moon-menu-point" r=".2rem" cx="0" cy="-.8rem"></circle>
+        <circle class="moon-menu-point" r=".2rem"></circle>
+        <circle class="moon-menu-point" r=".2rem" cx="0" cy=".8rem"></circle>
+      </g>
+    </svg>
+    <div class="moon-menu-icon">
+    </div>
+    <div class="moon-menu-text">
+    </div>
+  </div>
+</div>
+<script src="/js/injector.js"></script>
+    </div>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+  
+     <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+     <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+     <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+
+  
+     <!-- require APlayer -->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+     <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+     <!-- require MetingJS -->
+     <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+     <meting-js
+       server="netease"
+       type="playlist"
+       fixed="true"
+       id="3099335800"
+       auto=""
+       mini="true"
+       autoplay="true"
+       theme=""
+       loop="all"
+       order="random"
+       preload="auto"
+       volume="0.7"
+       mutex="true"
+       list-folded="true"
+       list-max-height="340px"
+       storage-name="metingjs" >
+     </meting-js>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":450,"hOffset":10,"vOffset":150},"mobile":{"show":false},"react":{"opacity":1},"log":false});</script></body>
+</html>
