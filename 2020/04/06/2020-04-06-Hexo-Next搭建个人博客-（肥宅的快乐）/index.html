@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Amita:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Josefin Sans Light:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Amita:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
   <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
   <script src="/lib/pace/pace.min.js"></script>
@@ -22,22 +22,22 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"manual"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="什么是注册树模式注册树模式通过将对象实例注册到全局对象树上，需要的时候将对象从全局对象树上取下来，就像小时候买糖葫芦一样，卖糖葫芦的将糖葫芦插到一个大的杆子上，人们买的时候就取下来，不同的是，注册树模式摘下来还会有，能摘很多次，糖葫芦摘一次就没了。">
+  <meta name="description" content="前言最近将博客从 Jekyll 迁移到 Hexo，在迁移的过程中也遇到一些问题，下面就简单记录一下 Hexo+NexT+Github Pages 的搭建步骤。 在上一章，我们已经设置了多个网站统计分析，在本章，我们将为博客添加一个萌萌的 Live2D 看板娘。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="php 设计模式（三）注册树模式">
-<meta property="og:url" content="http://yoursite.com/2018/07/15/2020-03-19-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89%E6%B3%A8%E5%86%8C%E6%A0%91%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:title" content="Hexo+Next搭建个人博客 （肥宅的快乐）">
+<meta property="og:url" content="http://yoursite.com/2020/04/06/2020-04-06-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-%EF%BC%88%E8%82%A5%E5%AE%85%E7%9A%84%E5%BF%AB%E4%B9%90%EF%BC%89/index.html">
 <meta property="og:site_name" content="Leezhiy Blog">
-<meta property="og:description" content="什么是注册树模式注册树模式通过将对象实例注册到全局对象树上，需要的时候将对象从全局对象树上取下来，就像小时候买糖葫芦一样，卖糖葫芦的将糖葫芦插到一个大的杆子上，人们买的时候就取下来，不同的是，注册树模式摘下来还会有，能摘很多次，糖葫芦摘一次就没了。">
+<meta property="og:description" content="前言最近将博客从 Jekyll 迁移到 Hexo，在迁移的过程中也遇到一些问题，下面就简单记录一下 Hexo+NexT+Github Pages 的搭建步骤。 在上一章，我们已经设置了多个网站统计分析，在本章，我们将为博客添加一个萌萌的 Live2D 看板娘。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2018-07-15T03:49:32.000Z">
-<meta property="article:modified_time" content="2020-04-17T11:16:05.726Z">
+<meta property="article:published_time" content="2020-04-06T08:26:00.000Z">
+<meta property="article:modified_time" content="2020-04-18T14:22:56.674Z">
 <meta property="article:author" content="Li Zhiyuan">
-<meta property="article:tag" content="PHP">
-<meta property="article:tag" content="面试问题">
-<meta property="article:tag" content="设计模式">
+<meta property="article:tag" content="博客">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Next">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2018/07/15/2020-03-19-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89%E6%B3%A8%E5%86%8C%E6%A0%91%E6%A8%A1%E5%BC%8F/">
+<link rel="canonical" href="http://yoursite.com/2020/04/06/2020-04-06-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-%EF%BC%88%E8%82%A5%E5%AE%85%E7%9A%84%E5%BF%AB%E4%B9%90%EF%BC%89/">
 
 
 <script id="page-configurations">
@@ -75,7 +75,25 @@
   border-radius: 4px;
   padding: 0 10px 0 14px;
 }
-</style>
+</style><script src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script><script>
+<!--浏览器搞笑标题-->
+var OriginTitle = document.title;
+var titleTime;
+document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+        // $('[rel="icon"]').attr('href', "/img/trhx2.png");
+        document.title = '警告！警告！';
+        clearTimeout(titleTime);
+    }
+    else {
+        // $('[rel="icon"]').attr('href', "/img/trhx2.png");
+        document.title = 'ヾ(◍°∇°◍)欢迎回来|' + OriginTitle;
+        titleTime = setTimeout(function () {
+            document.title = OriginTitle;
+        }, 2000);
+    }
+});
+</script>
   <script>
   (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
   daovoice('init', {
@@ -110,15 +128,39 @@
 
 
 
-  <title>php 设计模式（三）注册树模式 | Leezhiy Blog</title>
+  <!-- require APlayer -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+  <script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+  <!-- require MetingJS -->
+  <script src="//cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+  <meting-js
+    server="netease"
+    type="playlist"
+    fixed="true"
+    id="3099335800"
+    auto=""
+    mini="true"
+    autoplay="true"
+    theme=""
+    loop="all"
+    order="random"
+    preload="auto"
+    volume="0.7"
+    mutex="true"
+    list-folded="true"
+    list-max-height="340px"
+    storage-name="metingjs" >
+  </meting-js>
+
+  <title>Hexo+Next搭建个人博客 （肥宅的快乐） | Leezhiy Blog</title>
   
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163922351-1"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163807341-1"></script>
     <script data-pjax>
       if (CONFIG.hostname === location.hostname) {
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'UA-163922351-1');
+        gtag('config', 'UA-163807341-1');
       }
     </script>
 
@@ -277,7 +319,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/15/2020-03-19-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89%E6%B3%A8%E5%86%8C%E6%A0%91%E6%A8%A1%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/06/2020-04-06-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-%EF%BC%88%E8%82%A5%E5%AE%85%E7%9A%84%E5%BF%AB%E4%B9%90%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -290,7 +332,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          php 设计模式（三）注册树模式
+          Hexo+Next搭建个人博客 （肥宅的快乐）
         </h1>
 
         <div class="post-meta">
@@ -300,14 +342,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-07-15 11:49:32" itemprop="dateCreated datePublished" datetime="2018-07-15T11:49:32+08:00">2018-07-15</time>
+              <time title="创建时间：2020-04-06 16:26:00" itemprop="dateCreated datePublished" datetime="2020-04-06T16:26:00+08:00">2020-04-06</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-17 19:16:05" itemprop="dateModified" datetime="2020-04-17T19:16:05+08:00">2020-04-17</time>
+                <time title="修改时间：2020-04-18 22:22:56" itemprop="dateModified" datetime="2020-04-18T22:22:56+08:00">2020-04-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -315,16 +357,16 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">博客搭建</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
                 </span>
             </span>
 
           
-            <span id="/2018/07/15/2020-03-19-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89%E6%B3%A8%E5%86%8C%E6%A0%91%E6%A8%A1%E5%BC%8F/" class="post-meta-item leancloud_visitors" data-flag-title="php 设计模式（三）注册树模式" title="阅读次数">
+            <span id="/2020/04/06/2020-04-06-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-%EF%BC%88%E8%82%A5%E5%AE%85%E7%9A%84%E5%BF%AB%E4%B9%90%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo+Next搭建个人博客 （肥宅的快乐）" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -339,8 +381,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2018/07/15/2020-03-19-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89%E6%B3%A8%E5%86%8C%E6%A0%91%E6%A8%A1%E5%BC%8F/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2018/07/15/2020-03-19-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89%E6%B3%A8%E5%86%8C%E6%A0%91%E6%A8%A1%E5%BC%8F/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/04/06/2020-04-06-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-%EF%BC%88%E8%82%A5%E5%AE%85%E7%9A%84%E5%BF%AB%E4%B9%90%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/06/2020-04-06-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-%EF%BC%88%E8%82%A5%E5%AE%85%E7%9A%84%E5%BF%AB%E4%B9%90%EF%BC%89/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -349,13 +391,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>1.5k</span>
+              <span>2.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -367,20 +409,43 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="什么是注册树模式"><a href="#什么是注册树模式" class="headerlink" title="什么是注册树模式"></a>什么是注册树模式</h3><p><strong>注册树模式通过将对象实例注册到全局对象树上，需要的时候将对象从全局对象树上取下来</strong>，就像小时候买糖葫芦一样，卖糖葫芦的将糖葫芦插到一个大的杆子上，人们买的时候就取下来，不同的是，注册树模式摘下来还会有，能摘很多次，糖葫芦摘一次就没了。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近将博客从 Jekyll 迁移到 Hexo，在迁移的过程中也遇到一些问题，下面就简单记录一下 <span class="label info">Hexo+NexT+Github Pages</span> 的搭建步骤。</p>
+<p>在上一章，我们已经设置了多个网站统计分析，在本章，我们将为博客添加一个萌萌的 Live2D 看板娘。</p>
 <a id="more"></a>
 
-<h3 id="为什么要使用注册树模式"><a href="#为什么要使用注册树模式" class="headerlink" title="为什么要使用注册树模式"></a>为什么要使用注册树模式</h3><p>前面说到的单例模式解决了在整个项目中创建唯一对象的问题，</p>
-<p>工厂模式解决了不通过new解决实例对象的问题，考虑的是项目拓展与维护。</p>
-<p>总得来说单例模式和工厂模式可以产生更加合理的对象，</p>
-<p>那怎么方便统筹调用这些对象呢，这时候就用到了注册树模式，<strong>不管你是单例模式，工厂模式还是二者结合生成的对象，都给我统统注册到树上，用到某个对象的时候，直接从树上取下来就好</strong>。</p>
-<h3 id="如何实现注册树"><a href="#如何实现注册树" class="headerlink" title="如何实现注册树"></a>如何实现注册树</h3><p>我们用“四个一”来记</p>
-<p>(1).<strong>一个静态变量</strong>，用于将所有的对象<strong>插入到注册树上</strong>，而且这个注册树应该是一个二位数组。</p>
-<p>(2).<strong>一个插入对象实例的方法</strong>（set()）。</p>
-<p>(3).<strong>一个撤销对象实例的方法</strong>（__unset()）。</p>
-<p>(4).<strong>一个获取对象实例的方法</strong>（get()）。</p>
-<p>拥有这些，我们就可以愉快的完成注册树模式了。</p>
-<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Class MysqlFactory 工厂类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySQLFactory</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">factory</span><span class="params">($className)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> $className;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Interface Mysql MySQL约束接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">MySQL</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">connect</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Class Mysqli mysqli连接 实现方式</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mysqli</span> <span class="keyword">implements</span> <span class="title">MySQL</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">connect</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'mysqli is connected'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Class PDO PDO连接 实现方式</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PDO</span> <span class="keyword">implements</span> <span class="title">MySQL</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">connect</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'PDO is connected'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@purpose</span>: 创建一个注册树模式</span></span><br><span class="line"><span class="comment"> * Class Register</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Register</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> array 将所有的对象“插入”到注册树上</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">protected</span> $objects;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">set</span><span class="params">($alias, $object)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">self</span>::$objects[$alias] = $object;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">__unset</span><span class="params">($alias)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">unset</span>(<span class="keyword">self</span>::$objects[$alias]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">($alias)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span>::$objects[$alias];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Register::set(<span class="string">'SingleMysqlPDO'</span>, MySQLFactory::factory(<span class="string">'PDO'</span>));</span><br><span class="line"></span><br><span class="line">$single = Register::get(<span class="string">'SingleMysqlPDO'</span>);</span><br></pre></td></tr></table></figure>
+<p>Live2d是这几年比较火热的一门技术，是应用于游戏中的一种绘图渲染，近几年广泛应用于手游中（作为看板）。</p>
+<p>很意外的，它也很适用于博客中。</p>
+<p>虽然本身的功能不大，但是作为美化来说还是十分可爱的。</p>
+<h2 id="简单版"><a href="#简单版" class="headerlink" title="简单版"></a>简单版</h2><p>如果对于看板娘的要求不是特别高，只是需要放在那里卖个萌就行，建议用简易版的就ok。比较常见于各个博客的看板娘类型。</p>
+<h3 id="安装插件："><a href="#安装插件：" class="headerlink" title="安装插件："></a>安装插件：</h3><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install --save hexo-helper-live2d</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="安装模型"><a href="#安装模型" class="headerlink" title="安装模型:"></a>安装模型:</h3><p>现有的 Live2D 看板娘模型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">live2d-widget-model-chitose</span><br><span class="line">live2d-widget-model-epsilon2_1</span><br><span class="line">live2d-widget-model-gf</span><br><span class="line">live2d-widget-model-haru&#x2F;01 (use npm install --save live2d-widget-model-haru)</span><br><span class="line">live2d-widget-model-haru&#x2F;02 (use npm install --save live2d-widget-model-haru)</span><br><span class="line">live2d-widget-model-haruto</span><br><span class="line">live2d-widget-model-hibiki</span><br><span class="line">live2d-widget-model-hijiki</span><br><span class="line">live2d-widget-model-izumi</span><br><span class="line">live2d-widget-model-koharu # 本博客的看板娘</span><br><span class="line">live2d-widget-model-miku</span><br><span class="line">live2d-widget-model-ni-j</span><br><span class="line">live2d-widget-model-nico</span><br><span class="line">live2d-widget-model-nietzsche</span><br><span class="line">live2d-widget-model-nipsilon</span><br><span class="line">live2d-widget-model-nito</span><br><span class="line">live2d-widget-model-shizuku</span><br><span class="line">live2d-widget-model-tororo</span><br><span class="line">live2d-widget-model-tsumiki</span><br><span class="line">live2d-widget-model-unitychan</span><br><span class="line">live2d-widget-model-wanko</span><br><span class="line">live2d-widget-model-z16</span><br></pre></td></tr></table></figure>
+
+<p>选择一个你喜欢的，运行下面命令：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install packagename</span></span><br></pre></td></tr></table></figure>
+
+<p>同时在 <span class="label primary">站点配置文件</span> 中添加：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Live2D</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># https://github.com/EYHN/hexo-helper-live2d</span></span></span><br><span class="line">live2d:</span><br><span class="line">  enable: true</span><br><span class="line"><span class="meta">  #</span><span class="bash"> <span class="built_in">enable</span>: <span class="literal">false</span></span></span><br><span class="line">  scriptFrom: local # 默认</span><br><span class="line">  pluginRootPath: live2dw/ # 插件在站点上的根目录(相对路径)</span><br><span class="line">  pluginJsPath: lib/ # 脚本文件相对与插件根目录路径</span><br><span class="line">  pluginModelPath: assets/ # 模型文件相对与插件根目录路径</span><br><span class="line"><span class="meta">  #</span><span class="bash"> scriptFrom: jsdelivr <span class="comment"># jsdelivr CDN</span></span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> scriptFrom: unpkg <span class="comment"># unpkg CDN</span></span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> scriptFrom: https://cdn.jsdelivr.net/npm/live2d-widget@3.x/lib/L2Dwidget.min.js <span class="comment"># 你的自定义 url</span></span></span><br><span class="line">  tagMode: false # 标签模式, 是否仅替换 live2d tag标签而非插入到所有页面中</span><br><span class="line">  debug: false # 调试, 是否在控制台输出日志</span><br><span class="line">  model:</span><br><span class="line">    use: live2d-widget-model-koharu # npm-module package name</span><br><span class="line">    # use: wanko # 博客根目录/live2d_models/ 下的目录名</span><br><span class="line">    # use: ./wives/wanko # 相对于博客根目录的路径</span><br><span class="line">    # use: https://cdn.jsdelivr.net/npm/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json # 你的自定义 url</span><br><span class="line">  display:</span><br><span class="line">    position: right</span><br><span class="line">    width: 200 # 看板娘宽度</span><br><span class="line">    height: 450 # 看板娘高度</span><br><span class="line">    hOffset: 10 # 看板娘向左/右偏移量</span><br><span class="line">    vOffset: 150 # 看板娘向上偏移量</span><br><span class="line">  mobile:</span><br><span class="line">    show: false # 手机中是否展示</span><br></pre></td></tr></table></figure>
+
+<h2 id="高级版"><a href="#高级版" class="headerlink" title="高级版"></a>高级版</h2><p>高级版对比初级版更多了换装、换人、飞机大战小游戏等功能，但由于只能置于页面最下方，会挡住很多按钮，故本博客没有用。</p>
+<h3 id="使用-CDN"><a href="#使用-CDN" class="headerlink" title="使用 CDN"></a>使用 CDN</h3><p>高级版看板娘免安装可以直接使用 CDN，我们依然使用 Hexo 的注入功能来管理插件</p>
+<p>首先，打开 <span class="label success">主题配置文件</span> ，在最底部添加</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> live2d 看板娘</span></span><br><span class="line">live2d:</span><br><span class="line">  enabled: true</span><br></pre></td></tr></table></figure>
+
+<p>第二步，打开 <code>hexo/scripts/plugins.js</code>，在 head 注入点<a href="https://theme-next.org/docs/advanced-settings" target="_blank" rel="noopener">注入</a> js 文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">hexo.extend.filter.register(<span class="string">'theme_inject'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">injects</span>) </span>&#123;</span><br><span class="line">  .</span><br><span class="line">  .</span><br><span class="line">  .</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (hexo.theme.config.live2d.enabled) &#123;</span><br><span class="line">    injects.head.raw(<span class="string">'live2d.js'</span>, <span class="string">'&lt;script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"&gt;&lt;/script&gt;'</span>, &#123;&#125;, &#123;<span class="attr">cache</span>: <span class="literal">true</span>&#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  .</span><br><span class="line">  .</span><br><span class="line">  .</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="下载到本地"><a href="#下载到本地" class="headerlink" title="下载到本地"></a>下载到本地</h3><p>当然你也可以下载到本地来使用，在 Hexo 根目录输入如下命令：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/stevenjoezhang/live2d-widget.git <span class="built_in">source</span>/js/live2d/</span></span><br></pre></td></tr></table></figure>
+<p>接下来就和上面使用 CDN 一样了，只不过要注意注入时 <code>script</code> 标签的 <code>src</code> 属性要换成 <code>/js/live2d/autoload.js</code></p>
+<p>如果想要定制对话框以及样式的话可以改下面这些文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo&#x2F;source&#x2F;js&#x2F;live2d&#x2F;waifu-tips.js 包含了按钮和对话框的逻辑；</span><br><span class="line">hexo&#x2F;source&#x2F;js&#x2F;live2d&#x2F;waifu-tips.json 中定义了触发条件（selector，CSS 选择器）和触发时显示的文字（text）；</span><br><span class="line">hexo&#x2F;source&#x2F;js&#x2F;live2d&#x2F;waifu.css 是看板娘的样式表。</span><br></pre></td></tr></table></figure>
+
+
+
+
+
     </div>
 
     
@@ -390,19 +455,19 @@
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2018\07\14\2020-03-18-PHP设计模式（一）单例模式与多例模式\" rel="bookmark">php 设计模式（一）单例模式与多例模式</a></div>
+      <div class="popular-posts-title"><a href="\2020\03\15\2020-03-15-Hexo-Next搭建个人博客（Github-Pages-托管-Hexo）\" rel="bookmark">Hexo+Next搭建个人博客（Github Pages 托管 Hexo）</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2018\07\15\2020-03-19-PHP设计模式（七）装饰器模式\" rel="bookmark">php 设计模式（七）装饰器模式</a></div>
+      <div class="popular-posts-title"><a href="\2020\03\15\2020-03-15-Hexo-Next搭建个人博客（NexT 主题设置）\" rel="bookmark">Hexo+Next搭建个人博客（Next 主题设置）</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2018\07\15\2020-03-19-PHP设计模式（二）工厂模式\" rel="bookmark">php 设计模式（二）工厂模式</a></div>
+      <div class="popular-posts-title"><a href="\2020\03\14\2020-03-14-Hexo-Next搭建个人博客（安装Hexo及主题）\" rel="bookmark">Hexo+Next搭建个人博客（安装Hexo及主题）</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2018\07\15\2020-03-19-PHP设计模式（五）策略模式\" rel="bookmark">php 设计模式（五）策略模式</a></div>
+      <div class="popular-posts-title"><a href="\2020\03\20\2020-03-20-Hexo-Next搭建个人博客（集成Valine文章评论功能）\" rel="bookmark">Hexo+Next搭建个人博客（集成Valine文章评论功能）</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2018\07\15\2020-03-19-PHP设计模式（六）观察者模式\" rel="bookmark">php 设计模式（六）观察者模式</a></div>
+      <div class="popular-posts-title"><a href="\2020\03\28\2020-03-28-Hexo-Next搭建个人博客-（添加各种统计功能）\" rel="bookmark">Hexo+Next搭建个人博客 （添加网站统计分析功能）</a></div>
     </li>
   </ul>
 <div class="post-widgets">
@@ -450,7 +515,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://yoursite.com/2018/07/15/2020-03-19-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89%E6%B3%A8%E5%86%8C%E6%A0%91%E6%A8%A1%E5%BC%8F/" title="php 设计模式（三）注册树模式">http://yoursite.com/2018/07/15/2020-03-19-PHP设计模式（三）注册树模式/</a>
+    <a href="http://yoursite.com/2020/04/06/2020-04-06-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-%EF%BC%88%E8%82%A5%E5%AE%85%E7%9A%84%E5%BF%AB%E4%B9%90%EF%BC%89/" title="Hexo+Next搭建个人博客 （肥宅的快乐）">http://yoursite.com/2020/04/06/2020-04-06-Hexo-Next搭建个人博客-（肥宅的快乐）/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -491,9 +556,9 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/PHP/" rel="tag"><i class="fa fa-tag"></i> PHP</a>
-              <a href="/tags/%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98/" rel="tag"><i class="fa fa-tag"></i> 面试问题</a>
-              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"><i class="fa fa-tag"></i> 设计模式</a>
+              <a href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag"><i class="fa fa-tag"></i> 博客</a>
+              <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+              <a href="/tags/Next/" rel="tag"><i class="fa fa-tag"></i> Next</a>
           </div>
 
         
@@ -502,12 +567,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2018/07/15/2020-03-19-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" rel="prev" title="php 设计模式（二）工厂模式">
-      <i class="fa fa-chevron-left"></i> php 设计模式（二）工厂模式
+    <a href="/2020/03/28/2020-03-28-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-%EF%BC%88%E6%B7%BB%E5%8A%A0%E5%90%84%E7%A7%8D%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD%EF%BC%89/" rel="prev" title="Hexo+Next搭建个人博客 （添加网站统计分析功能）">
+      <i class="fa fa-chevron-left"></i> Hexo+Next搭建个人博客 （添加网站统计分析功能）
     </a></div>
       <div class="post-nav-item">
-    <a href="/2018/07/15/2020-03-19-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" rel="next" title="php 设计模式（四）适配器模式">
-      php 设计模式（四）适配器模式 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/04/11/2020-04-11-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-%EF%BC%88%E6%B7%BB%E5%8A%A0%E7%BD%91%E9%A1%B5%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8%EF%BC%89/" rel="next" title="Hexo+Next搭建个人博客 （添加网页音乐播放器）">
+      Hexo+Next搭建个人博客 （添加网页音乐播放器） <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -568,7 +633,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是注册树模式"><span class="nav-number">1.</span> <span class="nav-text">什么是注册树模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要使用注册树模式"><span class="nav-number">2.</span> <span class="nav-text">为什么要使用注册树模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何实现注册树"><span class="nav-number">3.</span> <span class="nav-text">如何实现注册树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码示例"><span class="nav-number">4.</span> <span class="nav-text">代码示例</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单版"><span class="nav-number">2.</span> <span class="nav-text">简单版</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装插件："><span class="nav-number">2.1.</span> <span class="nav-text">安装插件：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装模型"><span class="nav-number">2.2.</span> <span class="nav-text">安装模型:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级版"><span class="nav-number">3.</span> <span class="nav-text">高级版</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-CDN"><span class="nav-number">3.1.</span> <span class="nav-text">使用 CDN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载到本地"><span class="nav-number">3.2.</span> <span class="nav-text">下载到本地</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -584,7 +649,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -672,12 +737,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">114k</span>
+    <span title="站点总字数">137k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:44</span>
+    <span title="站点阅读时长">2:05</span>
 </div>
 
         
@@ -905,32 +970,6 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
      <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
      <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
      <script type="text/javascript" src="/js/fireworks.js"></script>
-  
-
-  
-     <!-- require APlayer -->
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-     <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-     <!-- require MetingJS -->
-     <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
-     <meting-js
-       server="netease"
-       type="playlist"
-       fixed="true"
-       id="3099335800"
-       auto=""
-       mini="true"
-       autoplay="true"
-       theme=""
-       loop="all"
-       order="random"
-       preload="auto"
-       volume="0.7"
-       mutex="true"
-       list-folded="true"
-       list-max-height="340px"
-       storage-name="metingjs" >
-     </meting-js>
   
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":450,"hOffset":10,"vOffset":150},"mobile":{"show":false},"react":{"opacity":1},"log":false});</script></body>
 </html>

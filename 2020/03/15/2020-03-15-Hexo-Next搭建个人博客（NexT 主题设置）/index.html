@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Amita:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Josefin Sans Light:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Amita:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
   <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
   <script src="/lib/pace/pace.min.js"></script>
@@ -30,11 +30,11 @@
 <meta property="og:description" content="前言最近将博客从 Jekyll 迁移到 Hexo，在迁移的过程中也遇到一些问题，下面就简单记录一下 Hexo+NexT+Github Pages 的搭建步骤。 在上一章，我们已经将 Hexo + Next 安装到了本地， 在本章我们将对 NexT 主题进行一些个性化的设置。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-15T10:30:17.000Z">
-<meta property="article:modified_time" content="2020-04-18T07:33:18.596Z">
+<meta property="article:modified_time" content="2020-04-18T15:55:12.332Z">
 <meta property="article:author" content="Li Zhiyuan">
+<meta property="article:tag" content="博客">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Next">
-<meta property="article:tag" content="博客">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/03/15/2020-03-15-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88NexT%20%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE%EF%BC%89/">
@@ -75,7 +75,25 @@
   border-radius: 4px;
   padding: 0 10px 0 14px;
 }
-</style>
+</style><script src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script><script>
+<!--浏览器搞笑标题-->
+var OriginTitle = document.title;
+var titleTime;
+document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+        // $('[rel="icon"]').attr('href', "/img/trhx2.png");
+        document.title = '警告！警告！';
+        clearTimeout(titleTime);
+    }
+    else {
+        // $('[rel="icon"]').attr('href', "/img/trhx2.png");
+        document.title = 'ヾ(◍°∇°◍)欢迎回来|' + OriginTitle;
+        titleTime = setTimeout(function () {
+            document.title = OriginTitle;
+        }, 2000);
+    }
+});
+</script>
   <script>
   (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
   daovoice('init', {
@@ -110,15 +128,39 @@
 
 
 
+  <!-- require APlayer -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+  <script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+  <!-- require MetingJS -->
+  <script src="//cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+  <meting-js
+    server="netease"
+    type="playlist"
+    fixed="true"
+    id="3099335800"
+    auto=""
+    mini="true"
+    autoplay="true"
+    theme=""
+    loop="all"
+    order="random"
+    preload="auto"
+    volume="0.7"
+    mutex="true"
+    list-folded="true"
+    list-max-height="340px"
+    storage-name="metingjs" >
+  </meting-js>
+
   <title>Hexo+Next搭建个人博客（Next 主题设置） | Leezhiy Blog</title>
   
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163922351-1"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163807341-1"></script>
     <script data-pjax>
       if (CONFIG.hostname === location.hostname) {
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'UA-163922351-1');
+        gtag('config', 'UA-163807341-1');
       }
     </script>
 
@@ -307,7 +349,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-18 15:33:18" itemprop="dateModified" datetime="2020-04-18T15:33:18+08:00">2020-04-18</time>
+                <time title="修改时间：2020-04-18 23:55:12" itemprop="dateModified" datetime="2020-04-18T23:55:12+08:00">2020-04-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -349,7 +391,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>13k</span>
+              <span>14k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -472,7 +514,12 @@
 <figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install --save lozad</span></span><br></pre></td></tr></table></figure>
 <p>打开 <span class="label success">主题配置文件</span> ，搜索 <code>lazyloag</code> 关键字，设置如下</p>
 <figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 修改一</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Vanilla JavaScript plugin <span class="keyword">for</span> lazyloading images.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> For more information: https://github.com/ApoorvSaxena/lozad.js</span></span><br><span class="line">lazyload: true</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改二</span></span><br><span class="line">comments:</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Available values: tabs | buttons</span></span><br><span class="line">  style: tabs</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Choose a comment system to be displayed by default.</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> Available values: changyan | disqus | disqusjs | gitalk | livere | valine</span></span><br><span class="line">  active:</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Setting `<span class="literal">true</span>` means remembering the comment system selected by the visitor.</span></span><br><span class="line">  storage: true</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Lazyload all comment systems.</span></span><br><span class="line">  lazyload: true</span><br></pre></td></tr></table></figure>
+<h3 id="安装-hexo-filter-optimize-插件优化页面加载速度"><a href="#安装-hexo-filter-optimize-插件优化页面加载速度" class="headerlink" title="安装 hexo-filter-optimize 插件优化页面加载速度"></a>安装 hexo-filter-optimize 插件优化页面加载速度</h3><p><strong>注：此插件可能会导致Font Awesome和PJAX无法加载，请谨慎安装</strong></p>
+<p>打开博客目录，运行 git bash ，安装插件</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-filter-optimize</span></span><br></pre></td></tr></table></figure>
 
+<p>打开 <span class="label primary">站点配置文件</span> ，搜索 <code>lazyloag</code> 关键字，设置如下</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">filter_optimize:</span><br><span class="line">  enable: true</span><br><span class="line"><span class="meta">  #</span><span class="bash"> remove the surrounding comments <span class="keyword">in</span> each of the bundled files</span></span><br><span class="line">  remove_comments: false</span><br><span class="line">  css:</span><br><span class="line">    # minify all css files</span><br><span class="line">    minify: true</span><br><span class="line">    # bundle loaded css files into one</span><br><span class="line">    bundle: true</span><br><span class="line">    # use a script block to load css elements dynamically</span><br><span class="line">    delivery: true</span><br><span class="line">    # make specific css content inline into the html page</span><br><span class="line">    #   - only support the full path</span><br><span class="line">    #   - default is ['css/main.css']</span><br><span class="line">    inlines:</span><br><span class="line">    excludes:</span><br><span class="line">  js:</span><br><span class="line">    # minify all js files</span><br><span class="line">    minify: true</span><br><span class="line">    # bundle loaded js files into one</span><br><span class="line">    bundle: true</span><br><span class="line">    excludes:</span><br><span class="line"><span class="meta">  #</span><span class="bash"> <span class="built_in">set</span> the priority of this plugin,</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> lower means it will be executed first, default of Hexo is 10</span></span><br><span class="line">  priority: 12</span><br></pre></td></tr></table></figure>
 
 <h3 id="网站动态元素延时加载"><a href="#网站动态元素延时加载" class="headerlink" title="网站动态元素延时加载"></a>网站动态元素延时加载</h3><p>我们的网站添加了许多动态元素之后，加载速度会变慢，所以可以先不加载动态元素，等静态元素加载完之后再加载动态元素，这样就加速了网站的登入。可打开<span class="label success">主题配置文件</span> ，搜索 <code>motion</code> 关键字，设置如下</p>
 <figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ---------------------------------------------------------------</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Animation Settings</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ---------------------------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Use velocity to animate everything.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> For more information: http://velocityjs.org</span></span><br><span class="line">motion:</span><br><span class="line">  enable: false</span><br><span class="line">  async: false</span><br><span class="line">  transition:</span><br><span class="line">    # Transition variants:</span><br><span class="line">    # fadeIn | flipXIn | flipYIn | flipBounceXIn | flipBounceYIn</span><br><span class="line">    # swoopIn | whirlIn | shrinkIn | expandIn</span><br><span class="line">    # bounceIn | bounceUpIn | bounceDownIn | bounceLeftIn | bounceRightIn</span><br><span class="line">    # slideUpIn | slideDownIn | slideLeftIn | slideRightIn</span><br><span class="line">    # slideUpBigIn | slideDownBigIn | slideLeftBigIn | slideRightBigIn</span><br><span class="line">    # perspectiveUpIn | perspectiveDownIn | perspectiveLeftIn | perspectiveRightIn</span><br><span class="line">    post_block: fadeIn</span><br><span class="line">    post_header: slideDownIn</span><br><span class="line">    post_body: slideDownIn</span><br><span class="line">    coll_header: slideLeftIn</span><br><span class="line">    # Only for Pisces | Gemini.</span><br><span class="line">    sidebar: slideUpIn</span><br></pre></td></tr></table></figure>
@@ -488,19 +535,19 @@
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\03\14\2020-03-14-Hexo-Next搭建个人博客（安装Hexo及主题）\" rel="bookmark">Hexo+Next搭建个人博客（安装Hexo及主题）</a></div>
+      <div class="popular-posts-title"><a href="\2020\03\15\2020-03-15-Hexo-Next搭建个人博客（Github-Pages-托管-Hexo）\" rel="bookmark">Hexo+Next搭建个人博客（Github Pages 托管 Hexo）</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\03\15\2020-03-15-Hexo-Next搭建个人博客（Github-Pages-托管-Hexo）\" rel="bookmark">Hexo+Next搭建个人博客（Github Pages 托管 Hexo）</a></div>
+      <div class="popular-posts-title"><a href="\2020\03\14\2020-03-14-Hexo-Next搭建个人博客（安装Hexo及主题）\" rel="bookmark">Hexo+Next搭建个人博客（安装Hexo及主题）</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\2020\03\20\2020-03-20-Hexo-Next搭建个人博客（集成Valine文章评论功能）\" rel="bookmark">Hexo+Next搭建个人博客（集成Valine文章评论功能）</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\03\21\2020-03-21-Hexo-Next搭建个人博客-（集成DaoVoice在线联系功能）\" rel="bookmark">Hexo+Next搭建个人博客 （集成DaoVoice在线联系功能）</a></div>
+      <div class="popular-posts-title"><a href="\2020\03\28\2020-03-28-Hexo-Next搭建个人博客-（添加各种统计功能）\" rel="bookmark">Hexo+Next搭建个人博客 （添加网站统计分析功能）</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\03\28\2020-03-28-Hexo-Next搭建个人博客-（添加各种统计功能）\" rel="bookmark">Hexo+Next搭建个人博客 （添加网站统计分析功能）</a></div>
+      <div class="popular-posts-title"><a href="\2020\03\21\2020-03-21-Hexo-Next搭建个人博客-（集成DaoVoice在线联系功能）\" rel="bookmark">Hexo+Next搭建个人博客 （集成DaoVoice在线联系功能）</a></div>
     </li>
   </ul>
 <div class="post-widgets">
@@ -589,9 +636,9 @@
       <footer class="post-footer">
           
           <div class="post-tags">
+              <a href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag"><i class="fa fa-tag"></i> 博客</a>
               <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
               <a href="/tags/Next/" rel="tag"><i class="fa fa-tag"></i> Next</a>
-              <a href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag"><i class="fa fa-tag"></i> 博客</a>
           </div>
 
         
@@ -666,7 +713,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本设置"><span class="nav-number">2.</span> <span class="nav-text">基本设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#站点初始设置"><span class="nav-number">2.1.</span> <span class="nav-text">站点初始设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置主题风格"><span class="nav-number">2.2.</span> <span class="nav-text">设置主题风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#菜单设置"><span class="nav-number">2.3.</span> <span class="nav-text">菜单设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#头像设置"><span class="nav-number">2.4.</span> <span class="nav-text">头像设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码块样式设置"><span class="nav-number">2.5.</span> <span class="nav-text">代码块样式设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回到顶部按钮设置"><span class="nav-number">2.6.</span> <span class="nav-text">回到顶部按钮设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#社交媒体联系方式修改"><span class="nav-number">2.7.</span> <span class="nav-text">社交媒体联系方式修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加友情链接"><span class="nav-number">2.8.</span> <span class="nav-text">增加友情链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将文章底部-换成标签图标"><span class="nav-number">2.9.</span> <span class="nav-text">将文章底部 # 换成标签图标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置打赏"><span class="nav-number">2.10.</span> <span class="nav-text">设置打赏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置订阅"><span class="nav-number">2.11.</span> <span class="nav-text">设置订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启阅读进度条"><span class="nav-number">2.12.</span> <span class="nav-text">开启阅读进度条</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#右上角-Github-按钮开启"><span class="nav-number">2.13.</span> <span class="nav-text">右上角 Github 按钮开启</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字体设置"><span class="nav-number">2.14.</span> <span class="nav-text">字体设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#底部设置"><span class="nav-number">2.15.</span> <span class="nav-text">底部设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版权信息设置"><span class="nav-number">2.16.</span> <span class="nav-text">版权信息设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三方插件"><span class="nav-number">3.</span> <span class="nav-text">第三方插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本地搜索"><span class="nav-number">3.1.</span> <span class="nav-text">本地搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加相关文章"><span class="nav-number">3.2.</span> <span class="nav-text">添加相关文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#博客图片插件"><span class="nav-number">3.3.</span> <span class="nav-text">博客图片插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中英文之间自动加空格"><span class="nav-number">3.4.</span> <span class="nav-text">中英文之间自动加空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网页加载进度条"><span class="nav-number">3.5.</span> <span class="nav-text">网页加载进度条</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分享插件"><span class="nav-number">3.6.</span> <span class="nav-text">分享插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博客速度优化"><span class="nav-number">4.</span> <span class="nav-text">博客速度优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pjax"><span class="nav-number">4.1.</span> <span class="nav-text">Pjax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#懒加载"><span class="nav-number">4.2.</span> <span class="nav-text">懒加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网站动态元素延时加载"><span class="nav-number">4.3.</span> <span class="nav-text">网站动态元素延时加载</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本设置"><span class="nav-number">2.</span> <span class="nav-text">基本设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#站点初始设置"><span class="nav-number">2.1.</span> <span class="nav-text">站点初始设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置主题风格"><span class="nav-number">2.2.</span> <span class="nav-text">设置主题风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#菜单设置"><span class="nav-number">2.3.</span> <span class="nav-text">菜单设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#头像设置"><span class="nav-number">2.4.</span> <span class="nav-text">头像设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码块样式设置"><span class="nav-number">2.5.</span> <span class="nav-text">代码块样式设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回到顶部按钮设置"><span class="nav-number">2.6.</span> <span class="nav-text">回到顶部按钮设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#社交媒体联系方式修改"><span class="nav-number">2.7.</span> <span class="nav-text">社交媒体联系方式修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加友情链接"><span class="nav-number">2.8.</span> <span class="nav-text">增加友情链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将文章底部-换成标签图标"><span class="nav-number">2.9.</span> <span class="nav-text">将文章底部 # 换成标签图标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置打赏"><span class="nav-number">2.10.</span> <span class="nav-text">设置打赏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置订阅"><span class="nav-number">2.11.</span> <span class="nav-text">设置订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启阅读进度条"><span class="nav-number">2.12.</span> <span class="nav-text">开启阅读进度条</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#右上角-Github-按钮开启"><span class="nav-number">2.13.</span> <span class="nav-text">右上角 Github 按钮开启</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字体设置"><span class="nav-number">2.14.</span> <span class="nav-text">字体设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#底部设置"><span class="nav-number">2.15.</span> <span class="nav-text">底部设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版权信息设置"><span class="nav-number">2.16.</span> <span class="nav-text">版权信息设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三方插件"><span class="nav-number">3.</span> <span class="nav-text">第三方插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本地搜索"><span class="nav-number">3.1.</span> <span class="nav-text">本地搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加相关文章"><span class="nav-number">3.2.</span> <span class="nav-text">添加相关文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#博客图片插件"><span class="nav-number">3.3.</span> <span class="nav-text">博客图片插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中英文之间自动加空格"><span class="nav-number">3.4.</span> <span class="nav-text">中英文之间自动加空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网页加载进度条"><span class="nav-number">3.5.</span> <span class="nav-text">网页加载进度条</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分享插件"><span class="nav-number">3.6.</span> <span class="nav-text">分享插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博客速度优化"><span class="nav-number">4.</span> <span class="nav-text">博客速度优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pjax"><span class="nav-number">4.1.</span> <span class="nav-text">Pjax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#懒加载"><span class="nav-number">4.2.</span> <span class="nav-text">懒加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-hexo-filter-optimize-插件优化页面加载速度"><span class="nav-number">4.3.</span> <span class="nav-text">安装 hexo-filter-optimize 插件优化页面加载速度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网站动态元素延时加载"><span class="nav-number">4.4.</span> <span class="nav-text">网站动态元素延时加载</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -682,7 +729,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -770,12 +817,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">114k</span>
+    <span title="站点总字数">137k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:44</span>
+    <span title="站点阅读时长">2:05</span>
 </div>
 
         
@@ -1003,32 +1050,6 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
      <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
      <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
      <script type="text/javascript" src="/js/fireworks.js"></script>
-  
-
-  
-     <!-- require APlayer -->
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-     <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-     <!-- require MetingJS -->
-     <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
-     <meting-js
-       server="netease"
-       type="playlist"
-       fixed="true"
-       id="3099335800"
-       auto=""
-       mini="true"
-       autoplay="true"
-       theme=""
-       loop="all"
-       order="random"
-       preload="auto"
-       volume="0.7"
-       mutex="true"
-       list-folded="true"
-       list-max-height="340px"
-       storage-name="metingjs" >
-     </meting-js>
   
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":450,"hOffset":10,"vOffset":150},"mobile":{"show":false},"react":{"opacity":1},"log":false});</script></body>
 </html>

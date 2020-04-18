@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Amita:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Josefin Sans Light:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Amita:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
   <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
   <script src="/lib/pace/pace.min.js"></script>
@@ -53,8 +53,8 @@
 <meta property="article:modified_time" content="2020-04-16T08:38:53.862Z">
 <meta property="article:author" content="Li Zhiyuan">
 <meta property="article:tag" content="PHP">
-<meta property="article:tag" content="编程思想">
 <meta property="article:tag" content="面向对象编程">
+<meta property="article:tag" content="编程思想">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/images/OOP/1.png">
 
@@ -96,7 +96,25 @@
   border-radius: 4px;
   padding: 0 10px 0 14px;
 }
-</style>
+</style><script src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script><script>
+<!--浏览器搞笑标题-->
+var OriginTitle = document.title;
+var titleTime;
+document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+        // $('[rel="icon"]').attr('href', "/img/trhx2.png");
+        document.title = '警告！警告！';
+        clearTimeout(titleTime);
+    }
+    else {
+        // $('[rel="icon"]').attr('href', "/img/trhx2.png");
+        document.title = 'ヾ(◍°∇°◍)欢迎回来|' + OriginTitle;
+        titleTime = setTimeout(function () {
+            document.title = OriginTitle;
+        }, 2000);
+    }
+});
+</script>
   <script>
   (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
   daovoice('init', {
@@ -131,15 +149,39 @@
 
 
 
+  <!-- require APlayer -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+  <script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+  <!-- require MetingJS -->
+  <script src="//cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+  <meting-js
+    server="netease"
+    type="playlist"
+    fixed="true"
+    id="3099335800"
+    auto=""
+    mini="true"
+    autoplay="true"
+    theme=""
+    loop="all"
+    order="random"
+    preload="auto"
+    volume="0.7"
+    mutex="true"
+    list-folded="true"
+    list-max-height="340px"
+    storage-name="metingjs" >
+  </meting-js>
+
   <title>php面向对象编程（上） | Leezhiy Blog</title>
   
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163922351-1"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163807341-1"></script>
     <script data-pjax>
       if (CONFIG.hostname === location.hostname) {
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'UA-163922351-1');
+        gtag('config', 'UA-163807341-1');
       }
     </script>
 
@@ -513,10 +555,10 @@
       <div class="popular-posts-title"><a href="\2015\07\15\2015-7-15-浅析session和cookie的区别和联系\" rel="bookmark">浅析session和cookie的区别和联系</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2018\07\14\2020-03-18-PHP设计模式（一）单例模式与多例模式\" rel="bookmark">php 设计模式（一）单例模式与多例模式</a></div>
+      <div class="popular-posts-title"><a href="\2018\07\14\2018-07-14-PHP设计模式（一）单例模式与多例模式\" rel="bookmark">php 设计模式（一）单例模式与多例模式</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2018\07\15\2020-03-19-PHP设计模式（七）装饰器模式\" rel="bookmark">php 设计模式（七）装饰器模式</a></div>
+      <div class="popular-posts-title"><a href="\2018\07\15\2018-07-15-PHP设计模式（二）工厂模式\" rel="bookmark">php 设计模式（二）工厂模式</a></div>
     </li>
   </ul>
 <div class="post-widgets">
@@ -606,8 +648,8 @@
           
           <div class="post-tags">
               <a href="/tags/PHP/" rel="tag"><i class="fa fa-tag"></i> PHP</a>
-              <a href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" rel="tag"><i class="fa fa-tag"></i> 编程思想</a>
               <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 面向对象编程</a>
+              <a href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" rel="tag"><i class="fa fa-tag"></i> 编程思想</a>
           </div>
 
         
@@ -620,7 +662,7 @@
       <i class="fa fa-chevron-left"></i> 利用php数组函数进行函数式编程
     </a></div>
       <div class="post-nav-item">
-    <a href="/2018/07/14/2020-03-18-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%A4%9A%E4%BE%8B%E6%A8%A1%E5%BC%8F/" rel="next" title="php 设计模式（一）单例模式与多例模式">
+    <a href="/2018/07/14/2018-07-14-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%A4%9A%E4%BE%8B%E6%A8%A1%E5%BC%8F/" rel="next" title="php 设计模式（一）单例模式与多例模式">
       php 设计模式（一）单例模式与多例模式 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -698,7 +740,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -786,12 +828,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">114k</span>
+    <span title="站点总字数">137k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:44</span>
+    <span title="站点阅读时长">2:05</span>
 </div>
 
         
@@ -1019,32 +1061,6 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
      <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
      <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
      <script type="text/javascript" src="/js/fireworks.js"></script>
-  
-
-  
-     <!-- require APlayer -->
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-     <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-     <!-- require MetingJS -->
-     <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
-     <meting-js
-       server="netease"
-       type="playlist"
-       fixed="true"
-       id="3099335800"
-       auto=""
-       mini="true"
-       autoplay="true"
-       theme=""
-       loop="all"
-       order="random"
-       preload="auto"
-       volume="0.7"
-       mutex="true"
-       list-folded="true"
-       list-max-height="340px"
-       storage-name="metingjs" >
-     </meting-js>
   
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":450,"hOffset":10,"vOffset":150},"mobile":{"show":false},"react":{"opacity":1},"log":false});</script></body>
 </html>

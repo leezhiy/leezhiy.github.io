@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Amita:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Josefin Sans Light:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Amita:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
   <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
   <script src="/lib/pace/pace.min.js"></script>
@@ -70,7 +70,25 @@
   border-radius: 4px;
   padding: 0 10px 0 14px;
 }
-</style>
+</style><script src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script><script>
+<!--浏览器搞笑标题-->
+var OriginTitle = document.title;
+var titleTime;
+document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+        // $('[rel="icon"]').attr('href', "/img/trhx2.png");
+        document.title = '警告！警告！';
+        clearTimeout(titleTime);
+    }
+    else {
+        // $('[rel="icon"]').attr('href', "/img/trhx2.png");
+        document.title = 'ヾ(◍°∇°◍)欢迎回来|' + OriginTitle;
+        titleTime = setTimeout(function () {
+            document.title = OriginTitle;
+        }, 2000);
+    }
+});
+</script>
   <script>
   (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
   daovoice('init', {
@@ -105,15 +123,39 @@
 
 
 
+  <!-- require APlayer -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+  <script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+  <!-- require MetingJS -->
+  <script src="//cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+  <meting-js
+    server="netease"
+    type="playlist"
+    fixed="true"
+    id="3099335800"
+    auto=""
+    mini="true"
+    autoplay="true"
+    theme=""
+    loop="all"
+    order="random"
+    preload="auto"
+    volume="0.7"
+    mutex="true"
+    list-folded="true"
+    list-max-height="340px"
+    storage-name="metingjs" >
+  </meting-js>
+
   <title>归档 | Leezhiy Blog</title>
   
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163922351-1"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163807341-1"></script>
     <script data-pjax>
       if (CONFIG.hostname === location.hostname) {
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'UA-163922351-1');
+        gtag('config', 'UA-163807341-1');
       }
     </script>
 
@@ -274,13 +316,73 @@
   <div class="post-block">
     <div class="posts-collapse">
       <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 24 篇日志。 继续努力。</span>
+        <span class="collection-header">嗯..! 目前共计 27 篇日志。 继续努力。</span>
       </div>
 
       
     <div class="collection-year">
       <span class="collection-header">2018</span>
     </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2018-07-15T20:38:22+08:00"
+              content="2018-07-15">
+          07-15
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2018/07/15/2018-07-15-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%85%AD%EF%BC%89%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" itemprop="url">
+            <span itemprop="name">php 设计模式（六）观察者模式</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2018-07-15T16:27:10+08:00"
+              content="2018-07-15">
+          07-15
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2018/07/15/2018-07-15-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%94%EF%BC%89%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" itemprop="url">
+            <span itemprop="name">php 设计模式（五）策略模式</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2018-07-15T14:42:11+08:00"
+              content="2018-07-15">
+          07-15
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2018/07/15/2018-07-15-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" itemprop="url">
+            <span itemprop="name">php 设计模式（四）适配器模式</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
 
   <article itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
@@ -294,7 +396,7 @@
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2018/07/15/2020-03-19-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89%E6%B3%A8%E5%86%8C%E6%A0%91%E6%A8%A1%E5%BC%8F/" itemprop="url">
+          <a class="post-title-link" href="/2018/07/15/2018-07-15-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89%E6%B3%A8%E5%86%8C%E6%A0%91%E6%A8%A1%E5%BC%8F/" itemprop="url">
             <span itemprop="name">php 设计模式（三）注册树模式</span>
           </a>
       </div>
@@ -314,7 +416,7 @@
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2018/07/15/2020-03-19-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" itemprop="url">
+          <a class="post-title-link" href="/2018/07/15/2018-07-15-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" itemprop="url">
             <span itemprop="name">php 设计模式（二）工厂模式</span>
           </a>
       </div>
@@ -334,7 +436,7 @@
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2018/07/14/2020-03-18-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%A4%9A%E4%BE%8B%E6%A8%A1%E5%BC%8F/" itemprop="url">
+          <a class="post-title-link" href="/2018/07/14/2018-07-14-PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%A4%9A%E4%BE%8B%E6%A8%A1%E5%BC%8F/" itemprop="url">
             <span itemprop="name">php 设计模式（一）单例模式与多例模式</span>
           </a>
       </div>
@@ -425,66 +527,6 @@
     </header>
   </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2015-07-18T00:00:00+08:00"
-              content="2015-07-18">
-          07-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2015/07/18/2015-7-18-javascript%E4%B9%8BBOM%EF%BC%88windows%E5%AF%B9%E8%B1%A1%EF%BC%89/" itemprop="url">
-            <span itemprop="name">javascript之BOM（windows对象）</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2015-07-18T00:00:00+08:00"
-              content="2015-07-18">
-          07-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2015/07/18/2015-7-18-javascript%E4%B9%8BDOM%E6%93%8D%E4%BD%9C/" itemprop="url">
-            <span itemprop="name">javascript之DOM操作</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2015-07-16T00:00:00+08:00"
-              content="2015-07-16">
-          07-16
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2015/07/16/2015-7-16-mysql%E5%B8%B8%E7%94%A8%E7%9A%84sql%E8%AF%AD%E5%8F%A5/" itemprop="url">
-            <span itemprop="name">mysql常用sql语句</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
 
     </div>
   </div>
@@ -562,7 +604,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -650,12 +692,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">114k</span>
+    <span title="站点总字数">137k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:44</span>
+    <span title="站点阅读时长">2:05</span>
 </div>
 
         
@@ -883,32 +925,6 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
      <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
      <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
      <script type="text/javascript" src="/js/fireworks.js"></script>
-  
-
-  
-     <!-- require APlayer -->
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-     <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-     <!-- require MetingJS -->
-     <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
-     <meting-js
-       server="netease"
-       type="playlist"
-       fixed="true"
-       id="3099335800"
-       auto=""
-       mini="true"
-       autoplay="true"
-       theme=""
-       loop="all"
-       order="random"
-       preload="auto"
-       volume="0.7"
-       mutex="true"
-       list-folded="true"
-       list-max-height="340px"
-       storage-name="metingjs" >
-     </meting-js>
   
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":450,"hOffset":10,"vOffset":150},"mobile":{"show":false},"react":{"opacity":1},"log":false});</script></body>
 </html>
