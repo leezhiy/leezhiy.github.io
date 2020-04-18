@@ -102,7 +102,7 @@ deploy:
   repo: https://github.com/leezhiy/leezhiy.github.io
   branch: master
 
-# 看门2D小人
+# Live2D 看板娘
 live2d:
   enable: true
   scriptFrom: local
@@ -123,6 +123,13 @@ live2d:
     show: false
   react:
     opacity: 1.0
+
+# 支持 GitHub 图标
+emoji:
+  enable: true
+  className: github-emoji
+  styles:
+  customEmojis:
 
 moon_menu:
   chat:

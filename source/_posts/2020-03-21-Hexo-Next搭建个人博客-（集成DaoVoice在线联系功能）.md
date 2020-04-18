@@ -40,7 +40,7 @@ date: 2020-03-21 23:24:24
 
 ### 修改配置文件
 
-打开 {% label success@主题配置文件 %} ，在最底部添加
+首先，打开 {% label success@主题配置文件 %} ，在最底部添加
 
 ```shell script
 # DaoVoice
@@ -51,16 +51,16 @@ daovoice:
 
 ### 注入布局
 
-首先，我们在 Hexo 或者 Theme 的 `scripts` 创建一个js文件（名字随意），添加以下内容。只要是这里面的脚本，Hexo运行时会执行它。
+第二步，我们在 Hexo 的 `scripts` 创建一个js文件 plugins.js（用来管理需要修改代码的第三方插件），添加以下内容。只要是这里面的脚本，Hexo运行时会执行它。
 
 ```javascript
 hexo.extend.filter.register('theme_inject', function (injects) {
     // hexo.theme.config.daovoice 就是上面配置的值，我们将配置参数传递给 daovoice.swig
-    injects.head.file('daovoice', 'source/_data/daovoice.swig', {daovoice: hexo.theme.config.daovoice});
+    injects.head.file('daovoice', 'source/_data/DaoVoice.swig', {daovoice: hexo.theme.config.daovoice});
 });
 ```
 
-第二步，我们创建 `Hexo/source/_data/daovoice.swig` 文件，添加以下内容。
+最后，我们创建 `Hexo/source/_data/DaoVoice.swig` 文件，添加以下内容。
 
 ```textmate
 {% if daovoice.enabled %}
@@ -82,7 +82,7 @@ hexo.extend.filter.register('theme_inject', function (injects) {
 ### 安装 hexo-cake-moon-menu 插件
 在 Hexo 目录打开 git bash 并输入命令：
 ```shell script
-$ yarn add hexo-cake-moon-menu
+$ npm install hexo-cake-moon-menu --save
 ```
 打开 {% label primary@站点配置文件 %} ，在最底部添加
 

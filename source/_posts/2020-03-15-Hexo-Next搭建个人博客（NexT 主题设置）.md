@@ -453,7 +453,7 @@ $ npm install hexo-related-popular-posts --save
 related_posts:
   enable: true
   title: # Custom header, leave empty to use the default one
-  display_in_home: false
+  display_in_home: true
   params:
     maxCount: 5
     #PPMixingRate: 0.0
@@ -592,7 +592,43 @@ comments:
   # Lazyload all comment systems.
   lazyload: true
 ```
+### 安装 hexo-filter-optimize 插件优化页面加载速度
 
+**注：此插件可能会导致Font Awesome和PJAX无法加载，请谨慎安装**
+
+打开博客目录，运行 git bash ，安装插件
+```shell script
+$ npm install hexo-filter-optimize
+```
+
+打开 {% label primary@站点配置文件 %} ，搜索 `lazyloag` 关键字，设置如下
+```shell script
+filter_optimize:
+  enable: true
+  # remove the surrounding comments in each of the bundled files
+  remove_comments: false
+  css:
+    # minify all css files
+    minify: true
+    # bundle loaded css files into one
+    bundle: true
+    # use a script block to load css elements dynamically
+    delivery: true
+    # make specific css content inline into the html page
+    #   - only support the full path
+    #   - default is ['css/main.css']
+    inlines:
+    excludes:
+  js:
+    # minify all js files
+    minify: true
+    # bundle loaded js files into one
+    bundle: true
+    excludes:
+  # set the priority of this plugin,
+  # lower means it will be executed first, default of Hexo is 10
+  priority: 12
+```
 
 ### 网站动态元素延时加载
 我们的网站添加了许多动态元素之后，加载速度会变慢，所以可以先不加载动态元素，等静态元素加载完之后再加载动态元素，这样就加速了网站的登入。可打开{% label success@主题配置文件 %} ，搜索 `motion` 关键字，设置如下
