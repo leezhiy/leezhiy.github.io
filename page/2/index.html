@@ -995,7 +995,7 @@ document.addEventListener('visibilitychange', function () {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://leezhiy.github.io/2015/08/17/2015-8-17-php%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://leezhiy.github.io/2015/10/18/2015-10-18-linux-%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -1009,7 +1009,7 @@ document.addEventListener('visibilitychange', function () {
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/08/17/2015-8-17-php%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89/" class="post-title-link" itemprop="url">php面向对象编程（上）</a>
+            <a href="/2015/10/18/2015-10-18-linux-%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA/" class="post-title-link" itemprop="url">linux 磁盘分区</a>
         </h2>
 
         <div class="post-meta">
@@ -1019,7 +1019,280 @@ document.addEventListener('visibilitychange', function () {
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2015-08-17 00:00:00" itemprop="dateCreated datePublished" datetime="2015-08-17T00:00:00+08:00">2015-08-17</time>
+              <time title="创建时间：2015-10-18 16:33:48" itemprop="dateCreated datePublished" datetime="2015-10-18T16:33:48+08:00">2015-10-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2015/10/18/2015-10-18-linux-%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA/" class="post-meta-item leancloud_visitors" data-flag-title="linux 磁盘分区" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2015/10/18/2015-10-18-linux-%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2015/10/18/2015-10-18-linux-%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>磁盘分区是指使用分区编辑器在磁盘上划分几个逻辑部分，也就是说，把一块大的硬盘划分为几块小的硬盘。</p>
+<h2 id="分区的类型"><a href="#分区的类型" class="headerlink" title="分区的类型"></a>分区的类型</h2><p>分区的类型主要有主分区、扩展分区和逻辑分区。</p>
+<p>主分区：每块硬盘最多只能有4个主分区，可以格式化和存储数据。</p>
+<p>扩展分区：最多只能有1个，扩展分区加上主分区最多只能有4个，扩展分区本身不能格式化和存储数据，但它可以被划分为多个逻辑分区或主分区，然后再来格式化和存储数据。不管主分区个数是否达到最大值4，由扩展分区划分的逻辑分区的设备文件名只能从 <code>/dev/sda5</code> 开始。</p>
+<p>逻辑分区：可以格式化和存储数据。</p>
+<h2 id="格式化"><a href="#格式化" class="headerlink" title="格式化"></a>格式化</h2><p>格式化（高级格式化），又称逻辑格式化，是指根据用户选定的文件系统（如FAT16、FAT32、NTFS、EXT2、EXT3、EXT4等），在磁盘的特定区域写入特定的数据，在分区中划出一片用于存放文件分配表、目录表等用于文件管理的磁盘空间。简单地说，对分区进行格式化，就是为了写入文件系统。</p>
+<p>硬盘经过分区后，必须对分区进行逻辑格式化之后，才能在分区中写入数据。</p>
+<h2 id="硬件设备文件名"><a href="#硬件设备文件名" class="headerlink" title="硬件设备文件名"></a>硬件设备文件名</h2><p>在 linux 中，所有的硬件设备都是文件。硬盘有设备文件名，硬盘经过分区后，每一个分区也必须有一个唯一的设备文件名，用于标示该分区。</p>
+<table>
+<thead>
+<tr>
+<th align="left">硬件</th>
+<th align="left">设备文件名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">IDE硬盘</td>
+<td align="left">/dev/hd[a-d]</td>
+</tr>
+<tr>
+<td align="left">SCSI/SATA/USB硬盘</td>
+<td align="left">/dev/sd[a-p]</td>
+</tr>
+<tr>
+<td align="left">光驱</td>
+<td align="left">/dev/cdrom 或 dev/sr0</td>
+</tr>
+<tr>
+<td align="left">软盘</td>
+<td align="left">/dev/fd[0-1]</td>
+</tr>
+<tr>
+<td align="left">打印机（25针）</td>
+<td align="left">/dev/lp[0-2]</td>
+</tr>
+<tr>
+<td align="left">打印机（USB）</td>
+<td align="left">/dev/usb/lp[0-15]</td>
+</tr>
+<tr>
+<td align="left">鼠标</td>
+<td align="left">/dev/mouse</td>
+</tr>
+</tbody></table>
+<p>第一块 SCSI 硬盘的设备文件名就是 <code>/dev/sda</code>，第二块SCSI硬盘的设备文件名就是 <code>/dev/sdb</code> ，以此类推。</p>
+<p><code>/dev/sda</code> 的第一个主分区的设备文件名是 <code>/dev/sda1</code>，第二个主分区的设备文件名是 <code>/dev/sda2</code>，以此类推。</p>
+<p>在windows系统中，硬盘经过分区、格式化和分配盘符后就可以使用。</p>
+<p>在linux系统中，多了一个“建立设备文件名”的步骤，即硬盘经过分区、建立分区设备文件名、格式化和分配挂载点后才可以使用。</p>
+<p>设备文件名是 linux 系统自动识别和创建的。</p>
+<p>IDE硬盘接口、 SCSI 硬盘接口、 SATA 硬盘接口、 USB 硬盘接口，是根据硬盘的接口类型来区分的，不同类型的硬盘支持的最高数据传输速度也不同。IDE 硬盘属于最古老的硬盘类型，传输速度最慢；目前最普遍的硬盘都是 SATA 串口硬盘，传输速度较快。</p>
+<h2 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h2><p>挂载指的是将设备文件名和挂载点关联起来的过程。相当于 windows 系统中的分配盘符的操作，挂载点相当于 windows 系统的盘符。</p>
+<p>windows 系统是用 C、D、E、F 等作为盘符，而 linux 系统是用空目录作为挂载点。理论上说，任何一个空目录都可以作为挂载点，个别特殊的空目录除外。</p>
+<p>分区时，必须进行挂载的分区有：</p>
+<ul>
+<li><code>/</code> （根分区）</li>
+<li><code>swap</code> 分区，即交换分区。 一般指定为内存的2倍，但不超过2GB。交换分区相当于系统的虚拟内存，它比较特殊，没有挂载点。因为它是给系统来自动使用的，而不是给用户操作的。</li>
+</ul>
+<p>一般来说，有了上面两个分区后，linux 就可以正常安装和使用。但推荐单独分一个 boot 分区（启动分区），将一个主分区挂载到 /boot 挂载点上，分配200MB的大小就足够了。启动分区里面存放的是和 linux 系统启动相关的文件。单独分一个启动分区的目的，是为了防止根分区被写满后，导致系统无法启动的问题发生。</p>
+<p>一般按照启动分区（挂载点为 <code>/boot</code> ）、交换分区（没有挂载点）和根分区（挂载点为 <code>/</code> ）的顺序来进行分区操作</p>
+<h2 id="文件系统结构"><a href="#文件系统结构" class="headerlink" title="文件系统结构"></a>文件系统结构</h2><p>linux系统的文件系统结构非常特殊，它和Windows系统很不相同。</p>
+<p><code>/</code> 是所有其他目录的根目录，根目录下一般会有 <code>/boot</code>、<code>/etc</code>、<code>/home</code>等子目录。</p>
+<p>假如，我们将 <code>/dev/sda1</code> 挂载到 <code>/boot</code> 上，将 <code>/dev/sda2</code> 挂载到 <code>/home</code> 上，将 <code>/dev/sda3</code> 挂载到 <code>/</code> 上。当我们向 <code>/</code> 中写入数据时，数据是保存在 <code>/dev/sda3</code> 分区上的；当我们向 <code>/home</code> 中写入数据时，数据却是保存在 <code>/dev/sda2</code> 分区上的。从文件系统结构上来看，<code>/home</code> 是 / 的子目录；但从硬盘上来看， <code>/home</code> 和 <code>/</code>的硬盘空间却是独立的。</p>
+<p><code>/</code>  根目录是必须要进行分区的，根目录下面的子目录也可以单独分区（即单独分配磁盘空间）。</p>
+
+      
+    </div>
+
+    
+    
+    
+      
+
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://leezhiy.github.io/2015/10/17/2015-10-17-linux-%E6%96%B0%E6%89%8B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Li Zhiyuan">
+      <meta itemprop="description" content="程序，搞起来很轻松的，就是头冷">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leezhiy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/10/17/2015-10-17-linux-%E6%96%B0%E6%89%8B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">linux 新手常用命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-10-17 21:18:48" itemprop="dateCreated datePublished" datetime="2015-10-17T21:18:48+08:00">2015-10-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2015/10/17/2015-10-17-linux-%E6%96%B0%E6%89%8B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-meta-item leancloud_visitors" data-flag-title="linux 新手常用命令" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2015/10/17/2015-10-17-linux-%E6%96%B0%E6%89%8B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2015/10/17/2015-10-17-linux-%E6%96%B0%E6%89%8B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>9.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>9 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>记录一些常用的 linux 命令</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/10/17/2015-10-17-linux-%E6%96%B0%E6%89%8B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://leezhiy.github.io/2015/09/20/2015-09-20-php-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Li Zhiyuan">
+      <meta itemprop="description" content="程序，搞起来很轻松的，就是头冷">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leezhiy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/09/20/2015-09-20-php-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/" class="post-title-link" itemprop="url">php 抽象类和接口</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-09-20 14:42:21" itemprop="dateCreated datePublished" datetime="2015-09-20T14:42:21+08:00">2015-09-20</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1032,7 +1305,7 @@ document.addEventListener('visibilitychange', function () {
             </span>
 
           
-            <span id="/2015/08/17/2015-8-17-php%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="php面向对象编程（上）" title="阅读次数">
+            <span id="/2015/09/20/2015-09-20-php-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/" class="post-meta-item leancloud_visitors" data-flag-title="php 抽象类和接口" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1047,8 +1320,8 @@ document.addEventListener('visibilitychange', function () {
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2015/08/17/2015-8-17-php%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2015/08/17/2015-8-17-php%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89/" itemprop="commentCount"></span>
+    <a title="valine" href="/2015/09/20/2015-09-20-php-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2015/09/20/2015-09-20-php-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1057,13 +1330,13 @@ document.addEventListener('visibilitychange', function () {
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>3.3k</span>
+              <span>1.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>3 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -1075,12 +1348,10 @@ document.addEventListener('visibilitychange', function () {
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>面向过程 ：每个小系统有着明确的开始和和结束 。开始和结束之间有着严谨的因果关系。</p>
-<p>比如 ：上帝创造一个人，如果有70亿人那就很麻烦</p>
-<p>随机函数先获取随机的数字 作为数组的下标，然后再从数组中获取对应下标的数字。</p>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在学习PHP面向对象时，都会在抽象类与接口上迷惑，作用差不多为什么还那么容易混淆，何不留一去一？但是事实上两者的区别还是很大的，如果能够很好地运用PHP的两个方法，面向对象的程序设计将会更加合理、清晰高效。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2015/08/17/2015-8-17-php%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89/#more" rel="contents">
+              <a class="btn" href="/2015/09/20/2015-09-20-php-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1106,7 +1377,7 @@ document.addEventListener('visibilitychange', function () {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://leezhiy.github.io/2015/08/11/2015-8-11-%E5%88%A9%E7%94%A8php%E6%95%B0%E7%BB%84%E5%87%BD%E6%95%B0%E8%BF%9B%E8%A1%8C%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">
+    <link itemprop="mainEntityOfPage" href="http://leezhiy.github.io/2015/09/13/2015-09-13-static-this-self-%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -1120,7 +1391,7 @@ document.addEventListener('visibilitychange', function () {
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/08/11/2015-8-11-%E5%88%A9%E7%94%A8php%E6%95%B0%E7%BB%84%E5%87%BD%E6%95%B0%E8%BF%9B%E8%A1%8C%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" class="post-title-link" itemprop="url">利用php数组函数进行函数式编程</a>
+            <a href="/2015/09/13/2015-09-13-static-this-self-%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">static $this self 之间的区别</a>
         </h2>
 
         <div class="post-meta">
@@ -1130,7 +1401,7 @@ document.addEventListener('visibilitychange', function () {
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2015-08-11 00:00:00" itemprop="dateCreated datePublished" datetime="2015-08-11T00:00:00+08:00">2015-08-11</time>
+              <time title="创建时间：2015-09-13 19:52:01" itemprop="dateCreated datePublished" datetime="2015-09-13T19:52:01+08:00">2015-09-13</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1143,7 +1414,7 @@ document.addEventListener('visibilitychange', function () {
             </span>
 
           
-            <span id="/2015/08/11/2015-8-11-%E5%88%A9%E7%94%A8php%E6%95%B0%E7%BB%84%E5%87%BD%E6%95%B0%E8%BF%9B%E8%A1%8C%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" class="post-meta-item leancloud_visitors" data-flag-title="利用php数组函数进行函数式编程" title="阅读次数">
+            <span id="/2015/09/13/2015-09-13-static-this-self-%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-meta-item leancloud_visitors" data-flag-title="static $this self 之间的区别" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1158,8 +1429,8 @@ document.addEventListener('visibilitychange', function () {
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2015/08/11/2015-8-11-%E5%88%A9%E7%94%A8php%E6%95%B0%E7%BB%84%E5%87%BD%E6%95%B0%E8%BF%9B%E8%A1%8C%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2015/08/11/2015-8-11-%E5%88%A9%E7%94%A8php%E6%95%B0%E7%BB%84%E5%87%BD%E6%95%B0%E8%BF%9B%E8%A1%8C%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" itemprop="commentCount"></span>
+    <a title="valine" href="/2015/09/13/2015-09-13-static-this-self-%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2015/09/13/2015-09-13-static-this-self-%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1168,13 +1439,13 @@ document.addEventListener('visibilitychange', function () {
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>3.8k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>3 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -1186,232 +1457,10 @@ document.addEventListener('visibilitychange', function () {
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h3><p>因为一个BUG， 我在一个摇摇欲坠，几乎碰一下就会散架的项目中某一个角落中发现下面这样一段代码</p>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在做项目时候，碰到一个问题，发现是对 self static 的理解不深，才出现了问题，所以记录下来，避免再次犯同样的错误。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2015/08/11/2015-8-11-%E5%88%A9%E7%94%A8php%E6%95%B0%E7%BB%84%E5%87%BD%E6%95%B0%E8%BF%9B%E8%A1%8C%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://leezhiy.github.io/2015/07/20/2015-7-20-ajax%E5%9F%BA%E7%A1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Li Zhiyuan">
-      <meta itemprop="description" content="程序，搞起来很轻松的，就是头冷">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leezhiy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/07/20/2015-7-20-ajax%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">ajax基础</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-07-20 00:00:00" itemprop="dateCreated datePublished" datetime="2015-07-20T00:00:00+08:00">2015-07-20</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Javascript/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2015/07/20/2015-7-20-ajax%E5%9F%BA%E7%A1%80/" class="post-meta-item leancloud_visitors" data-flag-title="ajax基础" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2015/07/20/2015-7-20-ajax%E5%9F%BA%E7%A1%80/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2015/07/20/2015-7-20-ajax%E5%9F%BA%E7%A1%80/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>5.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="AJAX-简介"><a href="#AJAX-简介" class="headerlink" title="AJAX 简介"></a>AJAX 简介</h3><p>AJAX全称为“Asynchronous JavaScript and XML”（异步JavaScript和XML），是一种创建交互式网页应用的网页开发技术。类似于DHTML或LAMP，AJAX不是指一种单一的技术，而是有机地利用了一系列相关的技术。</p>
-<p>AJAX 不是一种新的编程语言，而是一种用于创建更好更快以及交互性更强的 Web 应用程序的技术。通过 AJAX，您的 JavaScript 可使用 JavaScript 的 XMLHttpRequest 对象来直接与服务器进行通信。通过这个对象，您的 JavaScript 可在不重载页面的情况与 Web 服务器交换数据。AJAX 在浏览器与 Web 服务器之间使用异步数据传输（HTTP 请求），这样就可使网页从服务器请求少量的信息，而不是整个页面。AJAX 可使因特网应用程序更小、更快，更友好。</p>
-<p>AJAX 是一种独立于 Web 服务器软件的浏览器技术。AJAX 基于下列 Web 标准：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/07/20/2015-7-20-ajax%E5%9F%BA%E7%A1%80/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://leezhiy.github.io/2015/07/18/2015-7-18-JavaScript%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Li Zhiyuan">
-      <meta itemprop="description" content="程序，搞起来很轻松的，就是头冷">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leezhiy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/07/18/2015-7-18-JavaScript%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">javascript基础入门</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-07-18 00:00:00" itemprop="dateCreated datePublished" datetime="2015-07-18T00:00:00+08:00">2015-07-18</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Javascript/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2015/07/18/2015-7-18-JavaScript%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/" class="post-meta-item leancloud_visitors" data-flag-title="javascript基础入门" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2015/07/18/2015-7-18-JavaScript%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2015/07/18/2015-7-18-JavaScript%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>9.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>8 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>JavaScript 语言正越来越受欢迎，可以说是是互联网上最突出的语言之一。你可以跨平台和浏览器使用它，其并不排斥后端语言。现在有许多不同的开发库——有些非常棒—— 这些库对开发很有帮助，比如说加快了开发的时间等等。问题是，有时候这些库与原始语言之间很是有一些距离，这使得像我们这种刚入门的开发者缺乏一种对语言的基础了解。</p>
-<h3 id="了解JavaScript语言"><a href="#了解JavaScript语言" class="headerlink" title="了解JavaScript语言"></a>了解JavaScript语言</h3><p>JavaScript语言是一种免费的客户端脚本语言，其能够让你往超文本标记语言(Hypertext Markup Language，HTML)页面中加入交互行为。客户端(client-side)意味着JavaScript运行在浏览器中，而不是用在服务器端。在网页被服务器送达并被浏览器加载后，客户端脚本就允许用户与网页进行交互。例如，Google Maps就是使用JavaScript语言来支持用户与地图之间的交互的，交互的方式有移动地图、放大和缩小等。没有JavaScript语言的话，网页需要为每次和每个用户的交互行为进行刷新，当然，除非页面用到了诸如Adobe Flash或是Microsoft® Silverlight一类的插件。JavaScript语言不需要插件。</p>
-<p>因为JavaScript语言为加载后的网页提供用户交互行为，因此开发者通常会用它来实现下面的一些功能：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/07/18/2015-7-18-JavaScript%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/#more" rel="contents">
+              <a class="btn" href="/2015/09/13/2015-09-13-static-this-self-%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1436,7 +1485,7 @@ document.addEventListener('visibilitychange', function () {
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1504,7 +1553,7 @@ document.addEventListener('visibilitychange', function () {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1517,7 +1566,7 @@ document.addEventListener('visibilitychange', function () {
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1592,12 +1641,12 @@ document.addEventListener('visibilitychange', function () {
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">137k</span>
+    <span title="站点总字数">169k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:05</span>
+    <span title="站点阅读时长">2:33</span>
 </div>
 
         
