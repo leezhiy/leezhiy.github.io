@@ -22,15 +22,15 @@
     var CONFIG = {"hostname":"leezhiy.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"manual"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="磁盘分区是指使用分区编辑器在磁盘上划分几个逻辑部分，也就是说，把一块大的硬盘划分为几块小的硬盘。 分区的类型分区的类型主要有主分区、扩展分区和逻辑分区。 主分区：每块硬盘最多只能有4个主分区，可以格式化和存储数据。 扩展分区：最多只能有1个，扩展分区加上主分区最多只能有4个，扩展分区本身不能格式化和存储数据，但它可以被划分为多个逻辑分区或主分区，然后再来格式化和存储数据。不管主分区个数是否达到最大">
+  <meta name="description" content="磁盘分区是指使用分区编辑器在磁盘上划分几个逻辑部分，也就是说，把一块大的硬盘划分为几块小的硬盘。 分区的类型分区的类型主要有主分区、扩展分区和逻辑分区。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux 磁盘分区">
 <meta property="og:url" content="http://leezhiy.github.io/2015/10/18/2015-10-18-linux-%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA/index.html">
 <meta property="og:site_name" content="Leezhiy Blog">
-<meta property="og:description" content="磁盘分区是指使用分区编辑器在磁盘上划分几个逻辑部分，也就是说，把一块大的硬盘划分为几块小的硬盘。 分区的类型分区的类型主要有主分区、扩展分区和逻辑分区。 主分区：每块硬盘最多只能有4个主分区，可以格式化和存储数据。 扩展分区：最多只能有1个，扩展分区加上主分区最多只能有4个，扩展分区本身不能格式化和存储数据，但它可以被划分为多个逻辑分区或主分区，然后再来格式化和存储数据。不管主分区个数是否达到最大">
+<meta property="og:description" content="磁盘分区是指使用分区编辑器在磁盘上划分几个逻辑部分，也就是说，把一块大的硬盘划分为几块小的硬盘。 分区的类型分区的类型主要有主分区、扩展分区和逻辑分区。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2015-10-18T08:33:48.000Z">
-<meta property="article:modified_time" content="2020-04-19T14:59:43.729Z">
+<meta property="article:modified_time" content="2020-04-19T15:08:21.421Z">
 <meta property="article:author" content="Li Zhiyuan">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -398,6 +398,8 @@ document.addEventListener('visibilitychange', function () {
       
         <p>磁盘分区是指使用分区编辑器在磁盘上划分几个逻辑部分，也就是说，把一块大的硬盘划分为几块小的硬盘。</p>
 <h2 id="分区的类型"><a href="#分区的类型" class="headerlink" title="分区的类型"></a>分区的类型</h2><p>分区的类型主要有主分区、扩展分区和逻辑分区。</p>
+<a id="more"></a>
+
 <p>主分区：每块硬盘最多只能有4个主分区，可以格式化和存储数据。</p>
 <p>扩展分区：最多只能有1个，扩展分区加上主分区最多只能有4个，扩展分区本身不能格式化和存储数据，但它可以被划分为多个逻辑分区或主分区，然后再来格式化和存储数据。不管主分区个数是否达到最大值4，由扩展分区划分的逻辑分区的设备文件名只能从 <code>/dev/sda5</code> 开始。</p>
 <p>逻辑分区：可以格式化和存储数据。</p>
