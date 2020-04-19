@@ -2,8 +2,8 @@
 layout: post
 title: mysql常用sql语句
 date: 2015-7-16 
-tags: [Mysql] 
-categories: [MYSQL]  
+tags: [MySQL] 
+categories: [MySQL]  
 ---
 
 刚刚学习sql，对常用的sql进行总结，留着备用
