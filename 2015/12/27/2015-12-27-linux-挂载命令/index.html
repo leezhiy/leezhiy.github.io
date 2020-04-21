@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Josefin Sans Light:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Amita:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"leezhiy.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"manual"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="挂载概念Linux中的根目录以外的文件要想被访问，需要将其“关联”到根目录下的某个目录来实现，这种关联操作就是“挂载”，这个目录就是“挂载点”，解除次关联关系的过程称之为“卸载”。 注意：“挂载点”的目录需要以下几个要求：  目录事先存在，可以用mkdir命令新建目录；  挂载点目录不可被其他进程使用到；  挂载点下原有文件将被隐藏。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux 挂载命令">
+<meta property="og:url" content="http://leezhiy.github.io/2015/12/27/2015-12-27-linux-%E6%8C%82%E8%BD%BD%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Leezhiy Blog">
+<meta property="og:description" content="挂载概念Linux中的根目录以外的文件要想被访问，需要将其“关联”到根目录下的某个目录来实现，这种关联操作就是“挂载”，这个目录就是“挂载点”，解除次关联关系的过程称之为“卸载”。 注意：“挂载点”的目录需要以下几个要求：  目录事先存在，可以用mkdir命令新建目录；  挂载点目录不可被其他进程使用到；  挂载点下原有文件将被隐藏。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2015-12-27T08:24:57.000Z">
+<meta property="article:modified_time" content="2020-04-21T09:39:27.921Z">
+<meta property="article:author" content="Li Zhiyuan">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://leezhiy.github.io/2015/12/27/2015-12-27-linux-%E6%8C%82%E8%BD%BD%E5%91%BD%E4%BB%A4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style><style>
+#needsharebutton-float {
+  bottom: 88px;
+  cursor: pointer;
+  left: -8px;
+  position: fixed;
+  z-index: 9999;
+}
+#needsharebutton-float .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 4px;
+  padding: 0 10px 0 14px;
+}
+</style><script src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script><script>
+<!--浏览器搞笑标题-->
+var OriginTitle = document.title;
+var titleTime;
+document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+        // $('[rel="icon"]').attr('href', "/img/trhx2.png");
+        document.title = '警告！警告！';
+        clearTimeout(titleTime);
+    }
+    else {
+        // $('[rel="icon"]').attr('href', "/img/trhx2.png");
+        document.title = 'ヾ(◍°∇°◍)欢迎回来|' + OriginTitle;
+        titleTime = setTimeout(function () {
+            document.title = OriginTitle;
+        }, 2000);
+    }
+});
+</script>
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+    app_id: '4e6b4c7f',   // 必填，您的 APP 标识
+  }, {
+    launcher: {
+      disableLauncherIcon: true, // 悬浮 ICON 是否显示
+      defaultEnterView: 'list', // 'list' 或 'new' 默认是 list(在对话列表是空的时候默认切换到 new)
+    }
+  });
+  daovoice('update');
+
+  var DaoCloudIsShow = false;
+  // 监听显示事件回调
+  daovoice('onShow', function(){
+    DaoCloudIsShow = ture;
+  });
+  // 监听隐藏事件回调
+  daovoice('onHide', function(){
+    DaoCloudIsShow = false;
+  });
+  // 点击按钮时运行的方法
+  var openDaoCloud = function() {
+    if( DaoCloudIsShow ) {
+      daovoice('hide')
+    } else {
+      daovoice('show')
+    }
+  };
+  </script>
+
+
+
+
+  <!-- require APlayer -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+  <script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+  <!-- require MetingJS -->
+  <script src="//cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+  <meting-js
+    server="netease"
+    type="playlist"
+    fixed="true"
+    id="3099335800"
+    auto=""
+    mini="true"
+    autoplay="true"
+    theme=""
+    loop="all"
+    order="random"
+    preload="auto"
+    volume="0.7"
+    mutex="true"
+    list-folded="true"
+    list-max-height="340px"
+    storage-name="metingjs" >
+  </meting-js>
+
+  <title>linux 挂载命令 | Leezhiy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163807341-1"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-163807341-1');
+      }
+    </script>
+
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?bbfcf582d963fc544d48d35e736b88ac";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Leezhiy Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Leezhiy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">我秃了，也变强了</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/custom-name/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/leezhiy" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#607d8b;color:#fff;position: absolute;top: 0;border: 0;right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://leezhiy.github.io/2015/12/27/2015-12-27-linux-%E6%8C%82%E8%BD%BD%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Li Zhiyuan">
+      <meta itemprop="description" content="程序，搞起来很轻松的，就是头冷">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leezhiy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          linux 挂载命令
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-12-27 16:24:57" itemprop="dateCreated datePublished" datetime="2015-12-27T16:24:57+08:00">2015-12-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2015/12/27/2015-12-27-linux-%E6%8C%82%E8%BD%BD%E5%91%BD%E4%BB%A4/" class="post-meta-item leancloud_visitors" data-flag-title="linux 挂载命令" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2015/12/27/2015-12-27-linux-%E6%8C%82%E8%BD%BD%E5%91%BD%E4%BB%A4/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2015/12/27/2015-12-27-linux-%E6%8C%82%E8%BD%BD%E5%91%BD%E4%BB%A4/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>6.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="挂载概念"><a href="#挂载概念" class="headerlink" title="挂载概念"></a>挂载概念</h2><p>Linux中的根目录以外的文件要想被访问，需要将其“关联”到根目录下的某个目录来实现，这种关联操作就是“挂载”，这个目录就是“挂载点”，解除次关联关系的过程称之为“卸载”。</p>
+<p>注意：“挂载点”的目录需要以下几个要求：</p>
+<ol>
+<li><p>目录事先存在，可以用mkdir命令新建目录；</p>
+</li>
+<li><p>挂载点目录不可被其他进程使用到；</p>
+</li>
+<li><p>挂载点下原有文件将被隐藏。</p>
+</li>
+</ol>
+<a id="more"></a>
+
+<h2 id="挂载与卸载"><a href="#挂载与卸载" class="headerlink" title="挂载与卸载"></a>挂载与卸载</h2><p>挂载方法：<code>mount DECE MOUNT_POINT</code></p>
+<ul>
+<li>mount：通过查看/etc/mtab（文章最后会对/etc/mtab有个解释）文件显示当前系统已挂载的所有设备</li>
+</ul>
+<p>命令使用格式：<code>mount [-fnrsvw] [-t vfstype] [-o options] device dir</code></p>
+<p>device：指明要挂载的设备；</p>
+<ol>
+<li><p>设备文件：例如 <code>/dev/sda5</code></p>
+</li>
+<li><p>卷标：-L ‘LABEL’, 例如 -L ‘MYDATA’</p>
+</li>
+<li><p>UUID, -U ‘UUID’：例如 -U ‘0c50523c-43f1-45e7-85c0-a126711d406e’</p>
+</li>
+<li><p>伪文件系统名称：proc, sysfs, devtmpfs, configfs</p>
+</li>
+</ol>
+<p>dir：挂载点</p>
+<ul>
+<li><p>事先存在；建议使用空目录；</p>
+</li>
+<li><p>进程正在使用中的设备无法被卸载；</p>
+</li>
+</ul>
+<p>常用命令选项：</p>
+<pre><code>-t vsftype：指定要挂载的设备上的文件系统类型；
+
+-r: readonly，只读挂载；
+
+-w: read and write, 读写挂载；
+
+-n: 不更新/etc/mtab； 
+
+-a：自动挂载所有支持自动挂载的设备；(定义在了/etc/fstab文件中，且挂载选项中有“自动挂载”功能)
+
+-L &apos;LABEL&apos;: 以卷标指定挂载设备；
+
+-U &apos;UUID&apos;: 以UUID指定要挂载的设备；
+
+-B, --bind: 绑定目录到另一个目录上；
+
+注意：查看内核追踪到的已挂载的所有设备：`cat /proc/mounts`
+
+-o options：(挂载文件系统的选项)
+
+  async：异步模式；
+
+  sync：同步模式；
+
+  atime/noatime：包含目录和文件；
+
+  diratime/nodiratime：目录的访问时间戳
+
+  auto/noauto：是否支持自动挂载
+
+  exec/noexec：是否支持将文件系统上应用程序运行为进程
+
+  dev/nodev：是否支持在此文件系统上使用设备文件；
+
+  suid/nosuid：是否支持在此文件系统上使用特殊权限
+
+  remount：重新挂载
+
+  ro：只读
+
+  rw:读写
+
+  user/nouser：是否允许普通用户挂载此设备
+
+  acl：启用此文件系统上的acl功能</code></pre><p>注意：<strong>上述选项可多个同时使用，彼此使用逗号分隔</strong>；</p>
+<p> 默认挂载选项：defaults：rw, suid, dev, exec, auto, nouser, and async</p>
+<h2 id="命令演示："><a href="#命令演示：" class="headerlink" title="命令演示："></a>命令演示：</h2><ol>
+<li><p>指定文件系统将块设备挂载至指定空文件夹内：演示内容：</p>
+<ol>
+<li>没有指定文件系统，命令是否能正确执行；</li>
+<li>指定错误文件系统，命令是否能正确执行；</li>
+<li>挂载点有内容的文件夹，查看被挂载后其内容是否消失。</li>
+</ol>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost /]# fdisk -l</span><br><span class="line">...</span><br><span class="line">设备 Boot      Start         End      Blocks   Id  System</span><br><span class="line">/dev/sdb1            2048     2099199     1048576   83  Linux</span><br><span class="line">/dev/sdb2         2099200     4196351     1048576    5  Extended</span><br><span class="line">/dev/sdb5         2101248     2306047      102400   83  Linux</span><br><span class="line">/dev/sdb6         2308096     2512895      102400   83  Linux</span><br><span class="line">/dev/sdb7         2514944     2719743      102400   83  Linux</span><br><span class="line">/dev/sdb8         2721792     2926591      102400   83  Linux</span><br><span class="line">...</span><br><span class="line">[root@localhost /]# mount /dev/sdb8 /device</span><br><span class="line">[root@localhost /]# df</span><br><span class="line">文件系统                   1K-块    已用     可用 已用% 挂载点</span><br><span class="line">/dev/mapper/CentOS-root 18307072 4724136 13582936   26% /</span><br><span class="line">devtmpfs                  485368       0   485368    0% /dev</span><br><span class="line">tmpfs                     500664      84   500580    1% /dev/shm</span><br><span class="line">tmpfs                     500664    7160   493504    2% /run</span><br><span class="line">tmpfs                     500664       0   500664    0% /sys/fs/cgroup</span><br><span class="line">/dev/sda1                 508588  142620   365968   29% /boot</span><br><span class="line">tmpfs                     100136      20   100116    1% /run/user/42</span><br><span class="line">tmpfs                     100136       0   100136    0% /run/user/0</span><br><span class="line">/dev/sdb8                  98988    5280    93708    6% /device</span><br><span class="line">[root@localhost /]# blkid /dev/sdb8</span><br><span class="line">/dev/sdb8: UUID="a3c4bf06-3695-45e8-8a07-a063498f0578" TYPE="xfs" </span><br><span class="line">[root@localhost /]# umount /device</span><br><span class="line">[root@localhost /]# mount -t ext2 /dev/sdb8 /device</span><br><span class="line">mount: 文件系统类型错误、选项错误、/dev/sdb8 上有坏超级块、</span><br><span class="line">       缺少代码页或助手程序，或其他错误</span><br><span class="line">[root@localhost /]# cd /device/</span><br><span class="line">[root@localhost device]# ll</span><br><span class="line">总用量 0</span><br><span class="line">[root@localhost device]# touch 11 22</span><br><span class="line">[root@localhost device]# ll</span><br><span class="line">总用量 0</span><br><span class="line">-rw-r--r--. 1 root root 0 8月  23 10:14 11</span><br><span class="line">-rw-r--r--. 1 root root 0 8月  23 10:14 22</span><br><span class="line">[root@localhost device]# ll</span><br><span class="line">总用量 0</span><br><span class="line">[root@localhost device]# ll -a</span><br><span class="line">总用量 4</span><br><span class="line">drwxr-xr-x.  2 root root    6 8月  23 09:27 .</span><br><span class="line">dr-xr-xr-x. 21 root root 4096 8月  23 09:29 ..</span><br><span class="line">[root@localhost device]# cd ..</span><br><span class="line">[root@localhost /]# umount /device/</span><br><span class="line">[root@localhost /]# cd /device/</span><br><span class="line">[root@localhost device]# ll</span><br><span class="line">总用量 0</span><br><span class="line">-rw-r--r--. 1 root root 0 8月  23 10:14 11</span><br><span class="line">-rw-r--r--. 1 root root 0 8月  23 10:14 22</span><br></pre></td></tr></table></figure>
+<p>通过上述演示，说明了如下事实： </p>
+<ol>
+<li>没有指定文件系统，块设备也可以正常挂载；</li>
+<li>指定与块设备不一致的文件系统类型则命令报错；</li>
+<li>挂载点有内容的文件夹，在挂载后内容消失，卸载后内容重现，也就是说挂载后会将原文件内容掩盖，但并不对其进行其他操作。</li>
+</ol>
+</li>
+<li><p>演示内容：</p>
+<ol>
+<li>指定卷标并以只读方式挂载；</li>
+<li>对目录进行挂载操作，查看其与硬链接与软链接有何不同。</li>
+</ol>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost device]# blkid /dev/sdb6</span><br><span class="line"></span><br><span class="line">/dev/sdb6: LABEL="sdb6" UUID="8284450c-8cb9-45d7-a8b8-ed9ed9ef9e52" TYPE="xfs" </span><br><span class="line">[root@localhost device]# mount -L 'sdb6' -r /device/ </span><br><span class="line">[root@localhost device]# touch /device/33 </span><br><span class="line">touch: 无法创建"/device/33": 只读文件系统 </span><br><span class="line">[root@localhost device]# umount /device/ </span><br><span class="line">[root@localhost /]# mount -B /etc/ /device/ </span><br><span class="line">[root@localhost /]# ll -i / </span><br><span class="line">总用量 64 </span><br><span class="line">    11341 lrwxrwxrwx.  1 root root    7 7月  19 23:54 bin -&gt; usr/bin</span><br><span class="line">      128 dr-xr-xr-x.  4 root root 4096 8月  2 10:09 boot </span><br><span class="line">        3 drwxr-xr-x.  19 root root 3300 8月  23 09:10 dev </span><br><span class="line"> 33554561 drwxr-xr-x. 129 root root 8192 8月  23 09:38 device </span><br><span class="line"> 33554561 drwxr-xr-x. 129 root root 8192 8月  23 09:38 etc </span><br><span class="line">      158 drwxr-xr-x.  42 root root 4096 8月  22 09:00 home</span><br></pre></td></tr></table></figure>
+
+<p>通过上述演示，说明了如下事实：</p>
+<ol>
+<li>指定卷标挂载可行，以只读方式挂载后，无法对挂载点中的内容进行修改、创建等操作；</li>
+<li>目录的挂载实质上是硬链接，挂载后可以对里面的文件内容进行修改与删除。</li>
+</ol>
+<p>注：<strong>文件夹的挂载在df中并不显示</strong></p>
+</li>
+</ol>
+<h2 id="卸载命令：umount"><a href="#卸载命令：umount" class="headerlink" title="卸载命令：umount"></a>卸载命令：umount</h2><p>命令使用格式：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">umount DEVICE</span><br><span class="line"></span><br><span class="line">umount MOUNT_POINT</span><br></pre></td></tr></table></figure>
+
+<p>上面已经演示过umount的使用</p>
+<p>fuser：查看正在访问指定文件系统的进程：</p>
+<p>命令使用格式：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fuser -v MOUNT_POINT</span><br></pre></td></tr></table></figure>
+<p>终止所有在正访问指定的文件系统的进程：慎用</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fuser -km MOUNT_POINT</span><br></pre></td></tr></table></figure>
+
+<h2 id="交换分区swap"><a href="#交换分区swap" class="headerlink" title="交换分区swap"></a>交换分区swap</h2><p>这里介绍下交换分区，通过实验演示交换分区的创建及挂载</p>
+<p>挂载交换分区：</p>
+<p>启用：swapon</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">swapon [OPTION]... [DEVICE]</span><br><span class="line"><span class="meta"> #</span><span class="bash"> -a：激活所有的交换分区；</span></span><br><span class="line"><span class="meta"> #</span><span class="bash"> -p PRIORITY：指定优先级；</span></span><br></pre></td></tr></table></figure>
+<p>禁用：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapoff [OPTION]... [DEVICE]</span><br></pre></td></tr></table></figure>
+
+<p>实验演示：</p>
+<ol>
+<li><p>交换分区的创建：</p>
+<ol>
+<li><p>新创建一分区，</p>
+</li>
+<li><p>修改新分区的类型，改为swap号码为82，</p>
+</li>
+<li><p>格式化为swap</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# fdisk /dev/sdb </span><br><span class="line">欢迎使用 fdisk (util-linux 2.23.2)。 </span><br><span class="line">更改将停留在内存中，直到您决定将更改写入磁盘。 </span><br><span class="line">使用写入命令前请三思。 </span><br><span class="line">命令(输入 m 获取帮助)：n </span><br><span class="line">Partition type: </span><br><span class="line">  p  primary (1 primary, 1 extended, 2 free) </span><br><span class="line">  l  logical (numbered from 5) </span><br><span class="line">Select (default p): l </span><br><span class="line">添加逻辑分区 9 </span><br><span class="line">起始 扇区 (2928640-4196351，默认为 2928640)： </span><br><span class="line">将使用默认值 2928640 </span><br><span class="line">Last 扇区, +扇区 or +size&#123;K,M,G&#125; (2928640-4196351，默认为 4196351)：+100M </span><br><span class="line">分区 9 已设置为 Linux 类型，大小设为 100 MiB </span><br><span class="line">命令(输入 m 获取帮助)：p </span><br><span class="line">磁盘 /dev/sdb：5368 MB, 5368709120 字节，10485760 个扇区 </span><br><span class="line">Units = 扇区 of 1 * 512 = 512 bytes </span><br><span class="line">扇区大小(逻辑/物理)：512 字节 / 512 字节 </span><br><span class="line">I/O 大小(最小/最佳)：512 字节 / 512 字节 </span><br><span class="line">磁盘标签类型：dos </span><br><span class="line">磁盘标识符：0xd391e822 </span><br><span class="line">  设备 Boot      Start        End      Blocks  Id  System </span><br><span class="line">/dev/sdb1            2048    2099199    1048576  83  Linux </span><br><span class="line">/dev/sdb2        2099200    4196351    1048576    5  Extended </span><br><span class="line">/dev/sdb5        2101248    2306047      102400  83  Linux </span><br><span class="line">/dev/sdb6        2308096    2512895      102400  83  Linux </span><br><span class="line">/dev/sdb7        2514944    2719743      102400  83  Linux </span><br><span class="line">/dev/sdb8        2721792    2926591      102400  83  Linux </span><br><span class="line">/dev/sdb9        2928640    3133439      102400  83  Linux </span><br><span class="line">命令(输入 m 获取帮助)：t </span><br><span class="line">分区号 (1,2,5-9，默认 9)：9 </span><br><span class="line">Hex 代码(输入 L 列出所有代码)：82 </span><br><span class="line">已将分区“Linux”的类型更改为“Linux swap / Solaris” </span><br><span class="line">命令(输入 m 获取帮助)：p </span><br><span class="line">磁盘 /dev/sdb：5368 MB, 5368709120 字节，10485760 个扇区 </span><br><span class="line">Units = 扇区 of 1 * 512 = 512 bytes </span><br><span class="line">扇区大小(逻辑/物理)：512 字节 / 512 字节 </span><br><span class="line">I/O 大小(最小/最佳)：512 字节 / 512 字节 </span><br><span class="line">磁盘标签类型：dos </span><br><span class="line">磁盘标识符：0xd391e822 </span><br><span class="line">  设备 Boot      Start        End      Blocks  Id  System </span><br><span class="line">/dev/sdb1            2048    2099199    1048576  83  Linux </span><br><span class="line">/dev/sdb2        2099200    4196351    1048576    5  Extended </span><br><span class="line">/dev/sdb5        2101248    2306047      102400  83  Linux </span><br><span class="line">/dev/sdb6        2308096    2512895      102400  83  Linux </span><br><span class="line">/dev/sdb7        2514944    2719743      102400  83  Linux </span><br><span class="line">/dev/sdb8        2721792    2926591      102400  83  Linux </span><br><span class="line">/dev/sdb9        2928640    3133439      102400  82  Linux swap / Solaris </span><br><span class="line">命令(输入 m 获取帮助)：w </span><br><span class="line">The partition table has been altered! </span><br><span class="line">Calling ioctl() to re-read partition table. </span><br><span class="line">正在同步磁盘。 </span><br><span class="line">[root@localhost ~]# mkswap /dev/sdb9 </span><br><span class="line">正在设置交换空间版本 1，大小 = 102396 KiB </span><br><span class="line">无标签，UUID=74bf2766-a01b-48ea-9082-2fad6b8e06a9</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>挂载交换分区：启用与禁用</p>
+ <figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# free </span><br><span class="line">              total        used        free      shared  buff/cache  available </span><br><span class="line">Mem:        1001332      101756      535892      13424      363684      720328 </span><br><span class="line">Swap:      2097148          0    2097148 </span><br><span class="line">[root@localhost ~]# swapon /dev/sdb9  </span><br><span class="line">[root@localhost ~]# free </span><br><span class="line">              total        used        free      shared  buff/cache  available </span><br><span class="line">Mem:        1001332      101716      535924      13424      363692      720368 </span><br><span class="line">Swap:      2199544          0    2199544 </span><br><span class="line">[root@localhost ~]# swapoff /dev/sdb9  </span><br><span class="line">[root@localhost ~]# free </span><br><span class="line">              total        used        free      shared  buff/cache  available </span><br><span class="line">Mem:        1001332      102492      535152      13424      363688      719592 </span><br><span class="line">Swap:      2097148          0    2097148</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>实验涉及到的命令小结：    </p>
+<ul>
+<li>内存空间使用状态：  <figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">free [OPTION]</span><br><span class="line">    -m: 以MB为单位</span><br><span class="line">    -g: 以GB为单位</span><br></pre></td></tr></table></figure></li>
+<li>文件系统空间占用等信息的查看工具：  <figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df</span><br><span class="line">  -h: human-readable</span><br><span class="line">  -i: inodes instead of blocks</span><br><span class="line">  -P: 以Posix兼容的格式输出;</span><br></pre></td></tr></table></figure></li>
+<li>查看某目录总体空间占用状态：  <figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">du [OPTION]... DIR</span><br><span class="line">  -h: human-readable</span><br><span class="line">  -s: summary</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<p>命令总结：<code>mount, umount, free， df, du, swapon, swapoff, fuser</code></p>
+<h2 id="开机自动挂载"><a href="#开机自动挂载" class="headerlink" title="开机自动挂载"></a>开机自动挂载</h2><p>如果我们想实现开机自动挂载某设备，只要修改 <code>/etc/fstab</code> 文件即可。</p>
+<p>文件挂载的配置文件：<code>/etc/fstab</code></p>
+<p>查看此文件可知</p>
+<p>每行定义一个要挂载的文件系统；</p>
+<p>其每行的格式如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">要挂载的设备或伪文件系统  挂载点  文件系统类型  挂载选项  转储频率  自检次序 </span><br><span class="line">UUID&#x3D;6efb8a23-bae1-427c-ab10-3caca95250b1 &#x2F;boot  xfs    defaults    0 0</span><br><span class="line"></span><br><span class="line">要挂载的设备或伪文件系统：设备文件、LABEL(LABEL&#x3D;&quot;&quot;)、UUID(UUID&#x3D;&quot;&quot;)、伪文件系统名称(proc, sysfs)</span><br><span class="line"></span><br><span class="line">   挂载点：指定的文件夹</span><br><span class="line"></span><br><span class="line">   挂载选项：defaults</span><br><span class="line"></span><br><span class="line">   转储频率：</span><br><span class="line">      0：不做备份</span><br><span class="line">      1：每天转储</span><br><span class="line">      2：每隔一天转储</span><br><span class="line"></span><br><span class="line">   自检次序：</span><br><span class="line">      0：不自检</span><br><span class="line">      1：首先自检；一般只有rootfs才用1；</span><br></pre></td></tr></table></figure>
+
+<h2 id="etc-fstab和-etc-mtab的区别"><a href="#etc-fstab和-etc-mtab的区别" class="headerlink" title="/etc/fstab和/etc/mtab的区别"></a>/etc/fstab和/etc/mtab的区别</h2><ul>
+<li><p>/etc/fstab文件的作用: </p>
+<p>记录了计算机上硬盘分区的相关信息，启动 Linux 的时候，检查分区的 fsck 命令，和挂载分区的 mount 命令，都需要 fstab 中的信息，来正确的检查和挂载硬盘。 </p>
+</li>
+<li><p>/etc/mtab文件的作用： </p>
+<p>记载的是现在系统已经装载的文件系统，包括操作系统建立的虚拟文件等；而/etc/fstab是系统准备装载的。 每当 mount 挂载分区、umount 卸载分区，都会动态更新 mtab，mtab 总是保持着当前系统中已挂载的分区信息，fdisk、df 这类程序，必须要读取 mtab 文件，才能获得当前系统中的分区挂载情况。当然我们自己还可以通过读取/proc/mount也可以来获取当前挂载信息 </p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2015\10\18\2015-10-18-linux-磁盘分区\" rel="bookmark">linux 磁盘分区</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2015\10\17\2015-10-17-linux-新手常用命令\" rel="bookmark">linux 新手常用命令</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2015\10\31\2015-10-31-linux-目录结构说明\" rel="bookmark">linux 目录结构说明</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2015\11\08\2015-11-08-linux-常用压缩解压命令\" rel="bookmark">linux 常用压缩解压命令</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2015\12\19\2015-12-19-linxu-用户权限管理\" rel="bookmark">linux 用户权限管理</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        <div class="reward-container">
+  <div>Buy me a cup of milkshake 🍨.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Li Zhiyuan 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="Li Zhiyuan 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------------- 💖 🌞 本 文 结 束 😚 感 谢 您 的 阅 读 🌞 💖 -------------</div>
+    
+</div>
+
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Li Zhiyuan
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://leezhiy.github.io/2015/12/27/2015-12-27-linux-%E6%8C%82%E8%BD%BD%E5%91%BD%E4%BB%A4/" title="linux 挂载命令">http://leezhiy.github.io/2015/12/27/2015-12-27-linux-挂载命令/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.png">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2015/12/19/2015-12-19-linxu-%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" rel="prev" title="linux 用户权限管理">
+      <i class="fa fa-chevron-left"></i> linux 用户权限管理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/01/17/2016-01-17-linux-rpm%E5%8C%85%E7%AE%A1%E7%90%86%E5%92%8C%E5%AE%89%E8%A3%85/" rel="next" title="linux rpm包管理和安装">
+      linux rpm包管理和安装 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#挂载概念"><span class="nav-number">1.</span> <span class="nav-text">挂载概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#挂载与卸载"><span class="nav-number">2.</span> <span class="nav-text">挂载与卸载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令演示："><span class="nav-number">3.</span> <span class="nav-text">命令演示：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卸载命令：umount"><span class="nav-number">4.</span> <span class="nav-text">卸载命令：umount</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交换分区swap"><span class="nav-number">5.</span> <span class="nav-text">交换分区swap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开机自动挂载"><span class="nav-number">6.</span> <span class="nav-text">开机自动挂载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#etc-fstab和-etc-mtab的区别"><span class="nav-number">7.</span> <span class="nav-text">&#x2F;etc&#x2F;fstab和&#x2F;etc&#x2F;mtab的区别</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Li Zhiyuan"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Li Zhiyuan</p>
+  <div class="site-description" itemprop="description">程序，搞起来很轻松的，就是头冷</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/leezhiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;leezhiy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:18500754397@163.com" title="E-Mail → mailto:18500754397@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/5678634433" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;5678634433" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/li-zhi-yuan-13-7" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;li-zhi-yuan-13-7" rel="noopener" target="_blank"><i class="fa fa-globe fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://gitee.com/leezhiy" title="Gitee → https:&#x2F;&#x2F;gitee.com&#x2F;leezhiy" rel="noopener" target="_blank"><i class="fab fa-git fa-fw"></i>Gitee</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://music.163.com/#/user/home?id=131550901" title="网易云 → https:&#x2F;&#x2F;music.163.com&#x2F;#&#x2F;user&#x2F;home?id&#x3D;131550901" rel="noopener" target="_blank"><i class="fa fa-music fa-fw"></i>网易云</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情连接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://music.163.com/#/user/home?id=131550901" title="https:&#x2F;&#x2F;music.163.com&#x2F;#&#x2F;user&#x2F;home?id&#x3D;131550901" rel="noopener" target="_blank">😆 网易云音乐 😆</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div style="background-image:linear-gradient(90deg,#6dba82 0,#07b39b 15%,#1098ad 30%,#5073b8 44%,#a166ab 58%,#ef4e7b 72%,#f37055 86%,#f79533 100%);background-size:cover;-webkit-background-clip:text;-webkit-text-fill-color:transparent;user-select:none"><i>Tip: 本站电脑访问体验更佳耶&nbsp;<i class="fa fa-angellist" style="display:inline"></i></i></div>
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Li Zhiyuan</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">209k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:10</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+  <div style="display: none;">
+    <script data-pjax src="//s95.cnzz.com/z_stat.php?id=1278825815&web_id=1278825815"></script>
+  </div>
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<div id="needsharebutton-float">
+      <span class="btn">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </span>
+    </div>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "default";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook,Linkedin,Mailto,Reddit,Delicious,StumbleUpon,Pinterest,GooglePlus,Tumblr,GoogleBookmarks,Newsvine,Evernote,Friendfeed,Vkontakte,Odnoklassniki,Mailru";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+      flOptions = {};
+        flOptions.iconStyle = "box";
+        flOptions.boxForm = "horizontal";
+        flOptions.position = "middleRight";
+        flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook,Linkedin";
+      new needShareButton('#needsharebutton-float', flOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//cdn.bootcss.com/valine/1.4.4/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'JVvuWX6nMNxhJHtTykHi9eAw-gzGzoHsz',
+      appKey     : 'rx4Oj2FCD7V0UGv8lLuRJaGa',
+      placeholder: "聊五分钱的天吗？|ω･)و ̑̑༉",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="openDaoCloud()">
+      <i class='fa fa-comments'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button" onclick="moonMenuClick()">
+    <svg class="moon-menu-svg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+      <g class="moon-menu-points">
+        <circle class="moon-menu-point" r=".2rem" cx="0" cy="-.8rem"></circle>
+        <circle class="moon-menu-point" r=".2rem"></circle>
+        <circle class="moon-menu-point" r=".2rem" cx="0" cy=".8rem"></circle>
+      </g>
+    </svg>
+    <div class="moon-menu-icon">
+    </div>
+    <div class="moon-menu-text">
+    </div>
+  </div>
+</div>
+<script src="/js/injector.js"></script>
+    </div>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+  
+     <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+     <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+     <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":450,"hOffset":10,"vOffset":150},"mobile":{"show":false},"react":{"opacity":1},"log":false});</script></body>
+</html>

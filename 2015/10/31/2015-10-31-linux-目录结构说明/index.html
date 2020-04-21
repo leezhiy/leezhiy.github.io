@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Josefin Sans Light:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Amita:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"leezhiy.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"manual"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="概述疑问1为什么某些程序位于 &#x2F;bin 下，或者 &#x2F;sbin ，或者 &#x2F;usr&#x2F;bin ，或 &#x2F;usr&#x2F;sbin 目录下吗？例如， less 命令位于 &#x2F;usr&#x2F;bin 目录下。为什么没在 &#x2F;bin 中，或 &#x2F;sbin ，或 &#x2F;usr&#x2F;sbin 目录中？所有这些目录之间有什么不同？ 疑问2为什么很多发行版本，比如 Centos 、 Red hat 、 SuSE 。它们的 &#x2F; （根）目录下都有相同的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux 目录结构说明">
+<meta property="og:url" content="http://leezhiy.github.io/2015/10/31/2015-10-31-linux-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%AF%B4%E6%98%8E/index.html">
+<meta property="og:site_name" content="Leezhiy Blog">
+<meta property="og:description" content="概述疑问1为什么某些程序位于 &#x2F;bin 下，或者 &#x2F;sbin ，或者 &#x2F;usr&#x2F;bin ，或 &#x2F;usr&#x2F;sbin 目录下吗？例如， less 命令位于 &#x2F;usr&#x2F;bin 目录下。为什么没在 &#x2F;bin 中，或 &#x2F;sbin ，或 &#x2F;usr&#x2F;sbin 目录中？所有这些目录之间有什么不同？ 疑问2为什么很多发行版本，比如 Centos 、 Red hat 、 SuSE 。它们的 &#x2F; （根）目录下都有相同的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://leezhiy.github.io/images/linux-filesystem.png">
+<meta property="article:published_time" content="2015-10-31T09:18:36.000Z">
+<meta property="article:modified_time" content="2020-04-20T10:45:34.031Z">
+<meta property="article:author" content="Li Zhiyuan">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://leezhiy.github.io/images/linux-filesystem.png">
+
+<link rel="canonical" href="http://leezhiy.github.io/2015/10/31/2015-10-31-linux-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%AF%B4%E6%98%8E/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style><style>
+#needsharebutton-float {
+  bottom: 88px;
+  cursor: pointer;
+  left: -8px;
+  position: fixed;
+  z-index: 9999;
+}
+#needsharebutton-float .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 4px;
+  padding: 0 10px 0 14px;
+}
+</style><script src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script><script>
+<!--浏览器搞笑标题-->
+var OriginTitle = document.title;
+var titleTime;
+document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+        // $('[rel="icon"]').attr('href', "/img/trhx2.png");
+        document.title = '警告！警告！';
+        clearTimeout(titleTime);
+    }
+    else {
+        // $('[rel="icon"]').attr('href', "/img/trhx2.png");
+        document.title = 'ヾ(◍°∇°◍)欢迎回来|' + OriginTitle;
+        titleTime = setTimeout(function () {
+            document.title = OriginTitle;
+        }, 2000);
+    }
+});
+</script>
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+    app_id: '4e6b4c7f',   // 必填，您的 APP 标识
+  }, {
+    launcher: {
+      disableLauncherIcon: true, // 悬浮 ICON 是否显示
+      defaultEnterView: 'list', // 'list' 或 'new' 默认是 list(在对话列表是空的时候默认切换到 new)
+    }
+  });
+  daovoice('update');
+
+  var DaoCloudIsShow = false;
+  // 监听显示事件回调
+  daovoice('onShow', function(){
+    DaoCloudIsShow = ture;
+  });
+  // 监听隐藏事件回调
+  daovoice('onHide', function(){
+    DaoCloudIsShow = false;
+  });
+  // 点击按钮时运行的方法
+  var openDaoCloud = function() {
+    if( DaoCloudIsShow ) {
+      daovoice('hide')
+    } else {
+      daovoice('show')
+    }
+  };
+  </script>
+
+
+
+
+  <!-- require APlayer -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+  <script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+  <!-- require MetingJS -->
+  <script src="//cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+  <meting-js
+    server="netease"
+    type="playlist"
+    fixed="true"
+    id="3099335800"
+    auto=""
+    mini="true"
+    autoplay="true"
+    theme=""
+    loop="all"
+    order="random"
+    preload="auto"
+    volume="0.7"
+    mutex="true"
+    list-folded="true"
+    list-max-height="340px"
+    storage-name="metingjs" >
+  </meting-js>
+
+  <title>linux 目录结构说明 | Leezhiy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163807341-1"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-163807341-1');
+      }
+    </script>
+
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?bbfcf582d963fc544d48d35e736b88ac";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Leezhiy Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Leezhiy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">我秃了，也变强了</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/custom-name/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/leezhiy" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#607d8b;color:#fff;position: absolute;top: 0;border: 0;right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://leezhiy.github.io/2015/10/31/2015-10-31-linux-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%AF%B4%E6%98%8E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Li Zhiyuan">
+      <meta itemprop="description" content="程序，搞起来很轻松的，就是头冷">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leezhiy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          linux 目录结构说明
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-10-31 17:18:36" itemprop="dateCreated datePublished" datetime="2015-10-31T17:18:36+08:00">2015-10-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2015/10/31/2015-10-31-linux-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%AF%B4%E6%98%8E/" class="post-meta-item leancloud_visitors" data-flag-title="linux 目录结构说明" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2015/10/31/2015-10-31-linux-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%AF%B4%E6%98%8E/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2015/10/31/2015-10-31-linux-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%AF%B4%E6%98%8E/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>13k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>12 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="疑问1"><a href="#疑问1" class="headerlink" title="疑问1"></a>疑问1</h3><p>为什么某些程序位于 /bin 下，或者 /sbin ，或者 /usr/bin ，或 /usr/sbin 目录下吗？例如， <code>less</code> 命令位于 /usr/bin 目录下。为什么没在 /bin 中，或 /sbin ，或 /usr/sbin 目录中？所有这些目录之间有什么不同？</p>
+<h3 id="疑问2"><a href="#疑问2" class="headerlink" title="疑问2"></a>疑问2</h3><p>为什么很多发行版本，比如 Centos 、 Red hat 、 SuSE 。它们的 / （根）目录下都有相同的目录结构？比如 /etc 、 /home 、 /dev 、 /var 、 /tmp 。为什么叫这些名字，这些目录下放的都是什么东西？</p>
+<a id="more"></a>
+<h3 id="文件系统目录标准"><a href="#文件系统目录标准" class="headerlink" title="文件系统目录标准"></a>文件系统目录标准</h3><p>由于 Linux 家喻户晓，开发人员众多，目录也越来越多，如果没有一个统一的标准，那么不同的发行版文件放置位置也不同，相同文件的名称也不同，这样看起来会非常的杂乱无章，在这种情况下 FHS 的出现就是必然的了。</p>
+<p>Filesystem Hierarchy Standard（文件系统目录标准）的缩写，多数 Linux 版本采用这种文件组织形式，类似于 Windows 操作系统中 c 盘的文件目录， FHS 采用树形结构组织文件。 FHS 定义了系统中每个区域的用途、所需要的最小构成的文件和目录，同时还给出了例外处理与矛盾处理。</p>
+<p>FHS 定义了两层规范，第一层是 / 目录下要放置哪些文件数据。第二层则是针对 /usr 和 /var 这两个目录的子目录定义。</p>
+<h2 id="目录说明"><a href="#目录说明" class="headerlink" title="目录说明"></a>目录说明</h2><h3 id="目录特点"><a href="#目录特点" class="headerlink" title="目录特点"></a>目录特点</h3><ol>
+<li><code>/</code>（根）是所有目录的顶点。</li>
+<li>目录结构像一颗倒挂的树。</li>
+<li>目录和磁盘分区，默认是没有关联的。</li>
+<li><code>/</code>（根）下不同的目录可能会对应不同的分区或磁盘。</li>
+<li>所有的目录都是按照一定的类别和规律组成的。</li>
+</ol>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><p>FHS规定的 <code>/</code> (根)目录下各目录结构，如下图</p>
+<p><img data-src="/images/linux-filesystem.png" alt="文件系统"></p>
+<h2 id="目录说明-1"><a href="#目录说明-1" class="headerlink" title="目录说明"></a>目录说明</h2><h3 id="根-目录"><a href="#根-目录" class="headerlink" title="/ (根)目录"></a>/ (根)目录</h3><p>每一个文件和目录从根开始，<code>/</code> 下的目录有</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@centos /]# ls</span><br><span class="line">bin data etc lib   lost+found  mnt   opt   root  selinux  sys  usr</span><br><span class="line">boot dev home lib64 media  daxin  proc  sbin  srv   tmp  var</span><br></pre></td></tr></table></figure>
+<h3 id="bin-目录"><a href="#bin-目录" class="headerlink" title="/bin 目录"></a>/bin 目录</h3><p>用来存放二进制可执行命令的目录，用户常用的命令都存在该目录下。例如：mkdir（创建目录）、cat（查看文件）、find（查找文件）等。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@centos bin]# ls</span><br><span class="line">alsaunmute            egrep               mkdir          sh</span><br><span class="line">arch                  env                 mknod          sleep</span><br><span class="line">awk                   ex                  mktemp         sort</span><br><span class="line">basename              false               more           stty</span><br><span class="line">bash                  fgrep               mount          su</span><br><span class="line">cat                   find                mountpoint     sync</span><br><span class="line">chgrp                 findmnt             mv             tar</span><br><span class="line">……</span><br><span class="line">[root@centos bin]#</span><br></pre></td></tr></table></figure>
+
+<h3 id="sbin-目录"><a href="#sbin-目录" class="headerlink" title="/sbin 目录"></a>/sbin 目录</h3><p>同样用来存放二进制可执行文件，只是这里面的命令只供系统管理员，管理系统使用(root用户)。例如：iptables（防护墙）、ifconfig（查看网卡信息）、init（设置启动级别）等。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@centos sbin]# ls</span><br><span class="line">accton           ip                       partx</span><br><span class="line">addpart          ip6tables                pccardctl</span><br><span class="line">agetty           ip6tables-1.4.7          pidof</span><br><span class="line">……</span><br><span class="line">init             nologin                  vgscan</span><br><span class="line">initctl          pam_console_apply        vgsplit</span><br><span class="line">insmod           pam_tally2               vmcore-dmesg</span><br><span class="line">insmod.static    pam_timestamp_check      weak-modules</span><br><span class="line">install-info     parted                   wipefs</span><br><span class="line">installkernel    partprobe</span><br><span class="line">[root@centos sbin]#</span><br></pre></td></tr></table></figure>
+
+<h3 id="dev-目录"><a href="#dev-目录" class="headerlink" title="/dev 目录"></a>/dev 目录</h3><p>设备文件存放的目录，因为linux中一切皆文件，所以就像鼠标、键盘、光驱，对linux来说也都是一个个的文件。例如/dev/cdrom(光驱)、/dev/sda1（硬盘）等。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@centos dev]# ls</span><br><span class="line">agpgart          lp0                 rfkill    tty24  tty57</span><br><span class="line">block            lp1                 root      tty25  tty58</span><br><span class="line">bsg              lp2                 rtc       tty26  tty59</span><br><span class="line">btrfs-control    lp3                 rtc0      tty27  tty6</span><br><span class="line">bus              MAKEDEV             scd0      tty28  tty60</span><br><span class="line">……</span><br><span class="line">loop5            ram9                tty21     tty54  vga_arbiter</span><br><span class="line">loop6            random              tty22     tty55  zero</span><br><span class="line">loop7            raw                 tty23     tty56</span><br><span class="line">[root@centos dev]#</span><br></pre></td></tr></table></figure>
+
+<h3 id="tmp"><a href="#tmp" class="headerlink" title="/tmp"></a>/tmp</h3><p>临时文件存放的地方，由于这个目录的权限为 777，所有用户对这个目录都有可读可写可执行的权限，所以其他人也可以删除你的文件。(可以当作windows的回收站来用，不用的东西先放这里)。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@centos tmp]# ls</span><br><span class="line">1.txt  2.txt  3.txt  4  5  6</span><br><span class="line">[root@centos tmp]#</span><br></pre></td></tr></table></figure>
+
+<h3 id="home"><a href="#home" class="headerlink" title="/home"></a>/home</h3><p>普通用户的家目录，用来存放普通用户的文件。比如我们新建一个用户（useradd）会在/home下创建和这个用户同名的家目录。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@centos home]# ls -l</span><br><span class="line">total 4</span><br><span class="line">drwx------. 3 lzy lzy 4096 Oct 31 13:05 lzy</span><br><span class="line">[root@centos home]#</span><br><span class="line"><span class="meta">#</span><span class="bash"> 说明我们系统中有一个用户名字是lzy，他的家目录在/home/lzy。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="boot目录"><a href="#boot目录" class="headerlink" title="/boot目录"></a>/boot目录</h3><p>存放内核文件和系统引导程序</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@centos boot]# ls</span><br><span class="line">config-2.6.32-573.el6.x86_64</span><br><span class="line">efi</span><br><span class="line">grub</span><br><span class="line">initramfs-2.6.32-573.el6.x86_64.img</span><br><span class="line">lost+found</span><br><span class="line">symvers-2.6.32-573.el6.x86_64.gz</span><br><span class="line">System.map-2.6.32-573.el6.x86_64</span><br><span class="line">vmlinuz-2.6.32-573.el6.x86_64</span><br><span class="line">[root@centos boot]#</span><br></pre></td></tr></table></figure>
+
+<h3 id="lib目录"><a href="#lib目录" class="headerlink" title="/lib目录"></a>/lib目录</h3><p>存放二进制库文件,库文件一般以.so|lib<em>|ld</em>。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@centos lib]# ls</span><br><span class="line">alsa                          libnsl.so.1</span><br><span class="line">cpp                           libnss_compat-2.12.so</span><br><span class="line">crda                          libnss_compat.so.2</span><br><span class="line">firmware                      libnss_dns-2.12.so</span><br><span class="line">i686                          libnss_dns.so.2</span><br><span class="line">…</span><br><span class="line">[root@centos lib]#</span><br></pre></td></tr></table></figure>
+
+<h3 id="mnt目录"><a href="#mnt目录" class="headerlink" title="/mnt目录"></a>/mnt目录</h3><p>一般用来临时挂载临时存储设备的目录</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@centos /]# ls -ld /mnt</span><br><span class="line">drwxr-xr-x. 2 root root 4096 Sep 23  2011 /mnt</span><br></pre></td></tr></table></figure>
+
+<h3 id="opt目录"><a href="#opt目录" class="headerlink" title="/opt目录"></a>/opt目录</h3><p>该目录是可选的，一般是给第三方厂家开发的程序的安装目录。现在一般不用了。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@centos /]# cd /opt</span><br><span class="line">[root@centos opt]# ls</span><br><span class="line">rh</span><br><span class="line">[root@centos opt]#</span><br></pre></td></tr></table></figure>
+
+<h3 id="media目录"><a href="#media目录" class="headerlink" title="/media目录"></a>/media目录</h3><p>用于挂载可移动设备的临时目录。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@centos /]# ls -ld /mnt</span><br><span class="line">drwxr-xr-x. 2 root root 4096 Sep 23  2011 /mnt</span><br><span class="line">[root@centos /]#</span><br></pre></td></tr></table></figure>
+
+<h3 id="root目录"><a href="#root目录" class="headerlink" title="/root目录"></a>/root目录</h3><p>系统管理员的家目录。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@centos ~]# ls -a</span><br><span class="line">.                .bash_logout   install.log         .tcshrc</span><br><span class="line">..               .bash_profile  install.log.syslog  .viminfo</span><br><span class="line">anaconda-ks.cfg  .bashrc        ipaddress</span><br><span class="line">.bash_history    .cshrc         .lesshst</span><br><span class="line">[root@centos ~]#</span><br></pre></td></tr></table></figure>
+
+<h3 id="sys目录"><a href="#sys目录" class="headerlink" title="/sys目录"></a>/sys目录</h3><p>与/proc一样，存放系统运行过程中的信息文件。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@centos sys]# ls</span><br><span class="line">block  class  devices   fs          kernel  power</span><br><span class="line">bus    dev    firmware  hypervisor  module</span><br><span class="line">[root@centos sys]#</span><br></pre></td></tr></table></figure>
+
+<h3 id="etc目录"><a href="#etc目录" class="headerlink" title="/etc目录"></a>/etc目录</h3><p>yum/rpm安装的软件配置文件所在的目录。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@centos etc]# ls </span><br><span class="line">abrt                       mtab</span><br><span class="line">acpi                       my.cnf</span><br><span class="line">adjtime                    nanorc</span><br><span class="line">……</span><br><span class="line">mime.types                 xinetd.d</span><br><span class="line">mke2fs.conf                xml</span><br><span class="line">modprobe.d                 yum</span><br><span class="line">modulefiles                yum.conf</span><br><span class="line">motd                       yum.repos.d</span><br><span class="line">[root@centos etc]#</span><br></pre></td></tr></table></figure>
+
+<h3 id="usr目录"><a href="#usr目录" class="headerlink" title="/usr目录"></a>/usr目录</h3><p>安装除操作系统本身外的一些应用程序或组件的目录，一般可以认为是linux系统上安装的应用程序默认都安装在此目录中；</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@centos etc]# cd /usr</span><br><span class="line">[root@centos usr]# ls</span><br><span class="line">bin  games    lib    libexec  sbin   src</span><br><span class="line">etc  include  lib64  local    share  tmp</span><br><span class="line">[root@centos usr]#</span><br></pre></td></tr></table></figure>
+
+<h2 id="特殊文件说明"><a href="#特殊文件说明" class="headerlink" title="特殊文件说明"></a>特殊文件说明</h2><h3 id="网卡配置文件"><a href="#网卡配置文件" class="headerlink" title="网卡配置文件"></a>网卡配置文件</h3><p>文件位置为：<code>/etc/sysconfig/network-scripts/ifcfg-eth0</code> ，该文件控制网卡的配置信息，网卡的配置文件统一放在 <code>network-scripts</code> 中，<code>eth1</code> 表示第二块网卡，依次累加。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@centos usr]# cat /etc/sysconfig/network-scripts/ifcfg-eth0 </span><br><span class="line">DEVICE=eth0                  #设备名称</span><br><span class="line">TYPE=Ethernet                        #设备类型为Ethernet</span><br><span class="line">ONBOOT=yes                                  #开机启动</span><br><span class="line">NM_CONTROLLED=yes            </span><br><span class="line">BOOTPROTO=none               #IP获取方式</span><br><span class="line">IPADDR=10.0.0.8                             #IP地址</span><br><span class="line">NETMASK=255.255.255.0        #网络掩码</span><br><span class="line">DNS2=4.4.4.4                                #备用DNS地址</span><br><span class="line">GATEWAY=10.0.0.2                            #网关地址</span><br><span class="line">DNS1=10.0.0.2                        #主用DNS地址</span><br><span class="line">[root@centos usr]#</span><br></pre></td></tr></table></figure>
+
+<p>特殊字段说明：</p>
+<ol>
+<li>NM_CONTROLLED表示是否启用NetworkManager管理，NetworkManager是一个图形管理工具，没有装图形界面该选项可以改为no。</li>
+<li>BOOTPROTO 表示获取IP的方式，动态获取（dhcp），静态配置（static），无（none）。</li>
+</ol>
+<h3 id="DNS解析配置文件"><a href="#DNS解析配置文件" class="headerlink" title="DNS解析配置文件"></a>DNS解析配置文件</h3><p>文件位置为：<code>/etc/resolv.conf</code>，该文件用来指定DNS服务器地址（DNS:网络地址解析）</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@centos tmp]# more /etc/resolv.conf</span><br><span class="line"></span><br><span class="line">nameserver 10.0.0.2       #DNS服务器地址</span><br><span class="line">nameserver 4.4.4.4</span><br></pre></td></tr></table></figure>
+
+<p>设置DNS方式：</p>
+<p>直接编辑 <code>/etc/sysconfig/network-scripts/ifcfg-eth0</code></p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@centos7 ~]#cat /etc/sysconfig/network-scripts/ifcfg-eth0 </span><br><span class="line">TYPE=Ethernet</span><br><span class="line">PROXY_METHOD=none</span><br><span class="line">BROWSER_ONLY=no</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPV6INIT=yes</span><br><span class="line">IPV6_AUTOCONF=yes</span><br><span class="line">IPV6_DEFROUTE=yes</span><br><span class="line">IPV6_FAILURE_FATAL=no</span><br><span class="line">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="line">NAME=eth0</span><br><span class="line">UUID=8a8ffc84-3b73-4da3-9562-6101037ad60d</span><br><span class="line">DEVICE=eth0</span><br><span class="line">ONBOOT=yes                # 开机启动</span><br><span class="line">IPADDR=10.0.0.13          # IP地址</span><br><span class="line">PREFIX=24                 # 掩码前缀</span><br><span class="line">GATEWAY=10.0.0.2          # 网关</span><br><span class="line">DNS1=223.5.5.5            # 添加DNS1配置</span><br><span class="line">IPV6_PRIVACY=no</span><br></pre></td></tr></table></figure>
+
+<p>或：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo 'DNS=4.4.4.4' &gt;&gt; /etc/sysconfig/network-scripts/ifcfg-eth0</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ol>
+<li>修改完DNS、IP之后需要重启网络生效。</li>
+</ol>
+<ol>
+<li><p><code>/etc/init.d/network restart</code></p>
+</li>
+<li><p><code>Service network restart</code></p>
+</li>
+<li><p><code>Ifdown eth0 &amp;&amp; ifup eth0</code> (重启网卡)</p>
+</li>
+</ol>
+<ol start="2">
+<li><p>ifcfg-eth0的配置文件优先级高于/etc/resolv.conf文件。</p>
+</li>
+<li><p>系统默认会从/etc/resolv.conf中读取DNS地址，可以直接更改该文件达到临时修改的目的。</p>
+</li>
+</ol>
+<h3 id="局域网DNS解析文件"><a href="#局域网DNS解析文件" class="headerlink" title="局域网DNS解析文件"></a>局域网DNS解析文件</h3><p>文件位置为：<code>/etc/hosts</code>，一般用来进行局域网DNS重定向。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@centos tmp]# cat /etc/hosts</span><br><span class="line">cat /etc/hosts</span><br><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line">192.168.1.1 www.baidu.com    #IP地址  域名</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li><p>我们可以手动的设置局内的DNS解析，一般用来做测试，比如我们配置了 Apache 或者 nginx 提供网络服务，我们可以把域名在本地直接解析到我们的本地地址，方便测试。</p>
+</li>
+<li><p>windows下的路径为：<code>C:\WINDOWS\system32\drivers\etc\hosts</code> ，可以直接在运行中输入drivers。</p>
+</li>
+</ul>
+<h3 id="主机名配置文件"><a href="#主机名配置文件" class="headerlink" title="主机名配置文件"></a>主机名配置文件</h3><p>文件位置为：<code>/etc/sysconfig/network</code></p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@centos tmp]# more /etc/sysconfig/network</span><br><span class="line">NETWORKING=yes                     #是否启用网络</span><br><span class="line">HOSTNAME=centos           #主机名</span><br><span class="line">[root@centos tmp]#</span><br></pre></td></tr></table></figure>
+
+<p>设置方法：</p>
+<ol>
+<li><p><code>hostname hostname</code>(临时设置主机名)</p>
+</li>
+<li><p><code>sed -i ‘s@HOSTNAME=centos@HOSTNAME=XXX@g’ /etc/sysconfig/network</code> (永久更改，需要重启，一般搭配hostname使用)</p>
+</li>
+</ol>
+<h3 id="开机自动挂载文件系统配置文件"><a href="#开机自动挂载文件系统配置文件" class="headerlink" title="开机自动挂载文件系统配置文件"></a>开机自动挂载文件系统配置文件</h3><p>文件位置为：<code>/etc/fstab</code>，主要存放开机自动挂载信息.</p>
+<p>各段说明：</p>
+<ul>
+<li>第一段，表示文件系统的名称（或者UUID，系统唯一识别码）,Blkid 可以查看。</li>
+<li>第二段，表示文件系统的挂载点。</li>
+<li>第三段，表示文件系统的类型。</li>
+<li>第四段，表示挂载文件系统时的属性。</li>
+<li>第五段，第一列表示是否进行dump备份,第二列表示开机是否对磁盘进行fsck检查。</li>
+</ul>
+<p>小技巧：</p>
+<p>当有一些外置磁盘需要开机挂载的时候，我们可以把该磁盘信息添加到该文件中，但要注意的是，如果这块外置磁盘在开机的时候报错，那我们整个系统就起不来了，所以要慎用，如果确实需要开机挂载，可以在/etc/rc.local中写入挂载命令即可。</p>
+<h3 id="启动命令存放文件"><a href="#启动命令存放文件" class="headerlink" title="启动命令存放文件"></a>启动命令存放文件</h3><p>文件位置：<code>/etc/rc.local</code></p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@centos etc]# more rc.local </span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> This script will be executed *after* all the other init scripts.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> You can put your own initialization stuff <span class="keyword">in</span> here <span class="keyword">if</span> you don<span class="string">'t</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> want to <span class="keyword">do</span> the full Sys V style init stuff.</span></span><br><span class="line"></span><br><span class="line">touch /var/lock/subsys/local</span><br><span class="line">[root@centos etc]#</span><br></pre></td></tr></table></figure>
+
+<p>注释：</p>
+<p>该文件是一个软连接文件，链接到 <code>/etc/rc.d/rc.local</code> 文件中。该文件是登陆shell 之前最后调用的一个文件，一般用来存放需要开机启动的软件的命令。</p>
+<h3 id="启动级别配置文件"><a href="#启动级别配置文件" class="headerlink" title="启动级别配置文件"></a>启动级别配置文件</h3><p>文件位置：<code>/etc/inittab</code></p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@centos rc.d]# cat /etc/inittab</span><br><span class="line">……</span><br><span class="line"><span class="meta">#</span><span class="bash"> Default runlevel. The runlevels used are:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   0 - halt (Do NOT <span class="built_in">set</span> initdefault to this)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   1 - Single user mode</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   2 - Multiuser, without NFS (The same as 3, <span class="keyword">if</span> you <span class="keyword">do</span> not have networking)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   3 - Full multiuser mode</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   4 - unused</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   5 - X11</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   6 - reboot (Do NOT <span class="built_in">set</span> initdefault to this)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> </span></span><br><span class="line">id:3:initdefault:</span><br><span class="line">[root@centos rc.d]#</span><br></pre></td></tr></table></figure>
+
+<p>启动级别说明：</p>
+<ul>
+<li>0:表示关机</li>
+<li>1:表示单用户模式</li>
+<li>2:表示多用户模式，但没有NFS服务（NFS:网络文件系统）</li>
+<li>3:表示完整的多用户模式（命令行模式）</li>
+<li>4:保留不用</li>
+<li>5:图形界面</li>
+<li>6:表示重启</li>
+</ul>
+<p><strong>我们日常使用的界面为3，可以使用init 来设置启动级别。</strong></p>
+<h3 id="启动脚本目录"><a href="#启动脚本目录" class="headerlink" title="启动脚本目录"></a>启动脚本目录</h3><p>文件位置：<code>/etc/init.d/</code>，所有服务的默认启动脚本都存放在这里，是一个链接文件，链接到 <code>/etc/rc.d/init.d</code> 目录。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@centos etc]# ls -l init.d</span><br><span class="line">lrwxrwxrwx. 1 root root 11 Mar  3 23:25 init.d -&gt; rc.d/init.d</span><br><span class="line">[root@centos etc]# ls  init.d</span><br><span class="line">abrt-ccpp      functions     lvm2-monitor  postfix      saslauthd</span><br><span class="line">abrtd          haldaemon     mdmonitor     psacct       single</span><br><span class="line">abrt-oops     halt          messagebus    quota_nld    smartd</span><br><span class="line">acpid         ip6tables     netconsole    rdisc        sshd</span><br><span class="line">atd            iptables      netfs         rdma         svnserve</span><br><span class="line">auditd          irqbalance    network       restorecond  sysstat</span><br><span class="line">blk-availability  kdump      nfs-rdma      rngd         udev-post</span><br><span class="line">cpuspeed        killall       ntpd          rsyslog</span><br><span class="line">crond            lvm2-lvmetad  ntpdate       sandbox</span><br><span class="line">[root@centos etc]#</span><br></pre></td></tr></table></figure>
+
+<p>设置开机启动：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看系统启动服务（chkconfig）</span></span><br><span class="line">[root@centos ~]# chkconfig --list</span><br><span class="line">crond       0:off   1:off   2:on    3:on    4:on    5:on    6:off</span><br><span class="line">iptables    0:off   1:off   2:off   3:off   4:off   5:off   6:off</span><br><span class="line">network     0:off   1:off   2:on    3:on    4:on    5:on    6:off</span><br><span class="line">ntpd        0:off   1:off   2:off   3:off   4:off   5:off   6:off</span><br><span class="line">rsyslog     0:off   1:off   2:on    3:on    4:on    5:on    6:off</span><br><span class="line">sshd        0:off   1:off   2:on    3:on    4:on    5:on    6:off</span><br><span class="line">sysstat     0:off   1:on    2:on    3:on    4:on    5:on    6:off</span><br><span class="line">……</span><br><span class="line">[root@centos ~]#</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改某个启动服务为开机启动</span></span><br><span class="line">[root@centos init.d]# chkconfig --level 2345 iptables on</span><br><span class="line">[root@centos init.d]# chkconfig --list | grep iptables</span><br><span class="line">iptables      0:off   1:off   2:on    3:on    4:on    5:on    6:off</span><br><span class="line">[root@centos init.d]#</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加/删除某个服务到开机启动</span></span><br><span class="line">[root@centos init.d]# chkconfig --add xiaoming</span><br><span class="line">[root@centos init.d]# chkconfig --del xiaoming</span><br><span class="line">注意：由于chkconfig启动服务有严格的格式，所以我们需要调整启动脚本在脚本头部添加如下字段：</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh      <span class="comment">#表示shell脚本</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">chkconfig 2345 99 99   <span class="comment"># 这是固定格式，2345表示运行级别，之后为开机执行顺序和关机执行顺序</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">description：this is apache start script   <span class="comment"># 必须的描述文件</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="环境变量配置文件"><a href="#环境变量配置文件" class="headerlink" title="环境变量配置文件"></a>环境变量配置文件</h3><p>文件目录：<code>/etc/profile</code> ，用来存放用户的环境变量配置（例如umask等）在登陆shell设置环境变量的时候，该文件会调用 <code>/etc/profile.d</code> 目录下的文件，我们定义别名，或者其他变量的时候，可以在 <code>/etc/profile.d</code> 下创建文件即可。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@centos ~]# ls !$</span><br><span class="line">ls /etc/profile.d/</span><br><span class="line">colorls.csh  cvs.sh     lang.csh  less.sh      vim.csh</span><br><span class="line">colorls.sh   glib2.csh  lang.sh   modules.csh  vim.sh</span><br><span class="line">cvs.csh      glib2.sh   less.csh  modules.sh   which2.sh</span><br><span class="line">[root@centos ~]#</span><br></pre></td></tr></table></figure>
+<h3 id="登录之前提示信息"><a href="#登录之前提示信息" class="headerlink" title="登录之前提示信息"></a>登录之前提示信息</h3><p>文件位置：<code>/etc/issue</code> ，主要存放的是我们还没有登陆系统的时候的提示信息。（CRT或者Xshell可能会看不到）</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@centos ~]# cat /etc/issue</span><br><span class="line">CentOS release 6.7 (Final)</span><br><span class="line">Kernel \r on an \m</span><br><span class="line">[root@centos ~]#</span><br></pre></td></tr></table></figure>
+
+<p>字段说明:</p>
+<ul>
+<li>第一行显示的是系统版本信息</li>
+<li>第二行显示的是内核版本。</li>
+<li>为了安全起见可以清空该文件，这样其他用户登陆系统之前，就不会预先获得系统的版本和内核版本信息了。</li>
+</ul>
+<h3 id="登陆之后显示的欢迎信息"><a href="#登陆之后显示的欢迎信息" class="headerlink" title="登陆之后显示的欢迎信息"></a>登陆之后显示的欢迎信息</h3><p>文件位置：<code>/etc/motd</code> ，主要存放的是我们登陆系统之后的欢迎信息。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@centos ~]# cat !$  （!$表示上一个命令的最后一个参数）</span><br><span class="line">cat /etc/motd</span><br><span class="line">welcome to my home</span><br><span class="line">[root@centos ~]#</span><br></pre></td></tr></table></figure>
+<h3 id="源码包目录"><a href="#源码包目录" class="headerlink" title="源码包目录"></a>源码包目录</h3><p>文件位置：<code>/usr/local</code> ，一般存放用户上传的文件的目录。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@centos ~]# cd /usr/local/</span><br><span class="line">[root@centos local]# ls</span><br><span class="line">bin  etc  games  include  lib  lib64  libexec  sbin  share  src</span><br><span class="line">[root@centos local]#</span><br></pre></td></tr></table></figure>
+
+<h3 id="用户上传软件的目录"><a href="#用户上传软件的目录" class="headerlink" title="用户上传软件的目录"></a>用户上传软件的目录</h3><p>文件位置：<code>/usr/src</code> ，一般存放自己编译的源码包的目录。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@centos usr]# cd src</span><br><span class="line">[root@centos src]# ls</span><br><span class="line">debug  kernels</span><br><span class="line">[root@centos src]#</span><br></pre></td></tr></table></figure>
+
+<h3 id="系统日志文件"><a href="#系统日志文件" class="headerlink" title="系统日志文件"></a>系统日志文件</h3><p>文件目录：<code>/var/log/messages</code> ，记录系统日志文件。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@centos src]# head -5 /var/log/messages</span><br><span class="line">Mar  7 18:50:02 Beyond rsyslogd: [origin software="rsyslogd" swVersion="5.8.10" x-pid="1327" x-info="http://www.rsyslog.com"] rsyslogd was HUPed</span><br><span class="line">Mar  7 20:46:36 Beyond kernel: e1000: eth0 NIC Link is Down</span><br><span class="line">Mar  7 20:46:43 Beyond kernel: e1000: eth0 NIC Link is Up 1000 Mbps Full Duplex, Flow Control: None</span><br><span class="line">Mar  7 20:46:45 Beyond kernel: e1000: eth0 NIC Link is Down</span><br><span class="line">Mar  7 20:46:51 Beyond kernel: e1000: eth0 NIC Link is Up 1000 Mbps Full Duplex, Flow Control: None</span><br><span class="line">[root@centos src]#</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<p><code>/var/log/message</code> ，是由 rsyslog 来进行写入的，所以如果查看该文件没有内容，请确认 rsyslog 进程状态是否正常。</p>
+<p><strong>使用dmesg命令查看系统的故障信息</strong></p>
+<h3 id="系统安全日志文件"><a href="#系统安全日志文件" class="headerlink" title="系统安全日志文件"></a>系统安全日志文件</h3><p>文件位置：/var/log/secure，主要存放用户验证，鉴权等信息的文件，像ssh远程登陆的信息包括验证成功，验证失败都会记录在这里。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@centos src]# head -5 /var/log/secure</span><br><span class="line">Mar  7 20:39:18 Beyond sshd[1792]: pam_unix(sshd:session): session closed for user root</span><br><span class="line">Mar  7 20:39:27 Beyond sshd[2358]: Address 10.0.0.1 maps to bogon, but this does not map back to the address - POSSIBLE BREAK-IN ATTEMPT!</span><br><span class="line">Mar  7 20:39:27 Beyond sshd[2358]: Accepted password for root from 10.0.0.1 port 53376 ssh2</span><br><span class="line">Mar  7 20:39:28 Beyond sshd[2358]: pam_unix(sshd:session): session opened for user root by (uid=0)</span><br><span class="line">Mar  7 20:47:52 Beyond sshd[2391]: Address 10.0.0.1 maps to bogon, but this does not map back to the address - POSSIBLE BREAK-IN ATTEMPT!</span><br><span class="line">[root@centos src]#</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<p>没事查看一下该文件，因为ssh链接失败的日志会记录在这里，可以防止别人暴力破解我们的密码。</p>
+<h3 id="定时任务配置目录"><a href="#定时任务配置目录" class="headerlink" title="定时任务配置目录"></a>定时任务配置目录</h3><p>文件位置： <code>/var/spool/cron/</code> ，所有用户的 crontab 配置文件都会写入 <code>/var/spool/cron</code> 下，以用户名为文件中。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@centos spool]# cd cron/</span><br><span class="line">[root@centos cron]# ls</span><br><span class="line">root</span><br><span class="line">[root@centos cron]#</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Crontab，计划任务，用来周期的执行某些命令，常用来定期删除日志，或者定期执行某些脚本，由crond进程守护。使用crontab –l来查看当前用户的计划任务。</span></span><br><span class="line"></span><br><span class="line">[root@centos cron]# crontab -l</span><br><span class="line">* * * * * echo '123' &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">[root@centos cron]#</span><br></pre></td></tr></table></figure>
+
+
+<p>crontab中的分段解释</p>
+<ul>
+<li>前面的5个星分别表示，分、时、日、月、周，*表示任意，所以上面的命令意思是任何时间都要执行 <code>echo “123” &gt;/dev/null</code> 这条命令。</li>
+<li><code>/dev/null</code> 文件可以理解为黑洞，所有数据到这个文件中，都会消失的无影无踪。</li>
+<li>使用 <code>crontab –e</code> 设置计划任务，编辑完毕后输入：wq退出</li>
+</ul>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@centos cron]# crontab -e</span><br><span class="line">* * * * * echo '123' &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">~                                                                          </span><br><span class="line">[root@centos cron]#</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="CPU配置信息"><a href="#CPU配置信息" class="headerlink" title="CPU配置信息"></a>CPU配置信息</h3><p>文件位置： <code>/proc/cpuinfo</code>，伪文件系统，不占用磁盘空间，主要显示cpu的配置信息</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@centos cron]# cat /proc/cpuinfo </span><br><span class="line">processor       : 0</span><br><span class="line">vendor_id       : GenuineIntel</span><br><span class="line">cpu family      : 6</span><br><span class="line">model           : 58</span><br><span class="line">model name      : Intel(R) Core(TM) i7-3630QM CPU @ 2.40GHz</span><br><span class="line">stepping        : 9</span><br><span class="line">microcode       : 27</span><br><span class="line">cpu MHz         : 2394.566</span><br><span class="line">cache size      : 6144 KB</span><br><span class="line">physical id     : 0</span><br><span class="line">siblings        : 1</span><br><span class="line">core id         : 0</span><br><span class="line">cpu cores       : 1</span><br><span class="line">apicid          : 0</span><br><span class="line">initial apicid  : 0</span><br><span class="line">fpu             : yes</span><br><span class="line">fpu_exception   : yes</span><br><span class="line">cpuid level     : 13</span><br><span class="line">wp              : yes</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+<h3 id="内存配置信息"><a href="#内存配置信息" class="headerlink" title="内存配置信息"></a>内存配置信息</h3><p>文件位置：<code>/proc/meminfo</code> ，伪文件系统，不占用磁盘空间，主要显示内存的配置信息。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@centos cron]# cat /proc/meminfo </span><br><span class="line">MemTotal:         486644 kB</span><br><span class="line">MemFree:          390444 kB</span><br><span class="line">Buffers:           12532 kB</span><br><span class="line">Cached:            29184 kB</span><br><span class="line">SwapCached:            0 kB</span><br><span class="line">Active:            17792 kB</span><br><span class="line">Inactive:          29068 kB</span><br><span class="line">Active(anon):       5160 kB</span><br><span class="line">Inactive(anon):      168 kB</span><br><span class="line">Active(file):      12632 kB</span><br><span class="line">/proc/loadavg</span><br><span class="line">/proc/mounts</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+
+<p>注意：使用 <code>free –m</code>（设置单位为Mb）也可以查看内存的使用情况</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@centos cron]# free -m</span><br><span class="line">total       used       free     shared    buffers     cached</span><br><span class="line">Mem:     475         94        381          0         12         28</span><br><span class="line">-/+ buffers/cache:   53        421 </span><br><span class="line">Swap:    767          0        767 </span><br><span class="line">[root@centos cron]#</span><br></pre></td></tr></table></figure>
+
+<h3 id="系统平均负载信息"><a href="#系统平均负载信息" class="headerlink" title="系统平均负载信息"></a>系统平均负载信息</h3><p>文件位置：<code>/proc/loadavg</code> ，存放系统平衡负载等相关信息，比如我们使用的 uptime、top、w 命令都会显示系统的平均负载。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@centos cron]# cat /proc/loadavg </span><br><span class="line">0.00 0.00 0.00 1/73 1633</span><br><span class="line">[root@centos cron]#</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<ol>
+<li>各字段表示，1分钟内平均负载、5分钟内平均负载、15分钟内平均负载，1/73分子是正在运行的进程数，分母是总进程数。1633表示最近运行的进程进程号。</li>
+<li>1分钟内平均负载，建议每个CPU不要超过3，具体计算公式为(1分钟内平均负载)/（cpu核数）❤️，超过5的话，要进行优化了。</li>
+</ol>
+<h3 id="系统挂载信息"><a href="#系统挂载信息" class="headerlink" title="系统挂载信息"></a>系统挂载信息</h3><p>文件目录：<code>/proc/mounts</code> ，显示当前系统的所有磁盘挂载信息，包括文件系统名称，挂载点，文件系统类型，挂载属性 等信息。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@centos cron]# cat /proc/mounts </span><br><span class="line">rootfs / rootfs rw 0 0</span><br><span class="line">proc /proc proc rw,relatime 0 0</span><br><span class="line">sysfs /sys sysfs rw,relatime 0 0</span><br><span class="line">devtmpfs /dev devtmpfs rw,relatime,size=228024k,nr_inodes=57006,mode=755 0 0</span><br><span class="line">devpts /dev/pts devpts rw,relatime,gid=5,mode=620,ptmxmode=000 0 0</span><br><span class="line">tmpfs /dev/shm tmpfs rw,relatime 0 0</span><br><span class="line">/dev/sda3 / ext4 rw,relatime,barrier=1,data=ordered 0 0</span><br><span class="line">/proc/bus/usb /proc/bus/usb usbfs rw,relatime 0 0</span><br><span class="line">/dev/sda1 /boot ext4 rw,relatime,barrier=1,data=ordered 0 0</span><br><span class="line">none /proc/sys/fs/binfmt_misc binfmt_misc rw,relatime 0 0</span><br><span class="line">[root@centos cron]#</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2015\10\18\2015-10-18-linux-磁盘分区\" rel="bookmark">linux 磁盘分区</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2015\10\17\2015-10-17-linux-新手常用命令\" rel="bookmark">linux 新手常用命令</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2015\11\08\2015-11-08-linux-常用压缩解压命令\" rel="bookmark">linux 常用压缩解压命令</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2015\12\27\2015-12-27-linux-挂载命令\" rel="bookmark">linux 挂载命令</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2015\12\19\2015-12-19-linxu-用户权限管理\" rel="bookmark">linux 用户权限管理</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        <div class="reward-container">
+  <div>Buy me a cup of milkshake 🍨.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Li Zhiyuan 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="Li Zhiyuan 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------------- 💖 🌞 本 文 结 束 😚 感 谢 您 的 阅 读 🌞 💖 -------------</div>
+    
+</div>
+
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Li Zhiyuan
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://leezhiy.github.io/2015/10/31/2015-10-31-linux-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%AF%B4%E6%98%8E/" title="linux 目录结构说明">http://leezhiy.github.io/2015/10/31/2015-10-31-linux-目录结构说明/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.png">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2015/10/18/2015-10-18-linux-%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA/" rel="prev" title="linux 磁盘分区">
+      <i class="fa fa-chevron-left"></i> linux 磁盘分区
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2015/11/08/2015-11-08-linux-%E5%B8%B8%E7%94%A8%E5%8E%8B%E7%BC%A9%E8%A7%A3%E5%8E%8B%E5%91%BD%E4%BB%A4/" rel="next" title="linux 常用压缩解压命令">
+      linux 常用压缩解压命令 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#疑问1"><span class="nav-number">1.1.</span> <span class="nav-text">疑问1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#疑问2"><span class="nav-number">1.2.</span> <span class="nav-text">疑问2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件系统目录标准"><span class="nav-number">1.3.</span> <span class="nav-text">文件系统目录标准</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录说明"><span class="nav-number">2.</span> <span class="nav-text">目录说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录特点"><span class="nav-number">2.1.</span> <span class="nav-text">目录特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录结构"><span class="nav-number">2.2.</span> <span class="nav-text">目录结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录说明-1"><span class="nav-number">3.</span> <span class="nav-text">目录说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#根-目录"><span class="nav-number">3.1.</span> <span class="nav-text">&#x2F; (根)目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bin-目录"><span class="nav-number">3.2.</span> <span class="nav-text">&#x2F;bin 目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sbin-目录"><span class="nav-number">3.3.</span> <span class="nav-text">&#x2F;sbin 目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dev-目录"><span class="nav-number">3.4.</span> <span class="nav-text">&#x2F;dev 目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tmp"><span class="nav-number">3.5.</span> <span class="nav-text">&#x2F;tmp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#home"><span class="nav-number">3.6.</span> <span class="nav-text">&#x2F;home</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#boot目录"><span class="nav-number">3.7.</span> <span class="nav-text">&#x2F;boot目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lib目录"><span class="nav-number">3.8.</span> <span class="nav-text">&#x2F;lib目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mnt目录"><span class="nav-number">3.9.</span> <span class="nav-text">&#x2F;mnt目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#opt目录"><span class="nav-number">3.10.</span> <span class="nav-text">&#x2F;opt目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#media目录"><span class="nav-number">3.11.</span> <span class="nav-text">&#x2F;media目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#root目录"><span class="nav-number">3.12.</span> <span class="nav-text">&#x2F;root目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sys目录"><span class="nav-number">3.13.</span> <span class="nav-text">&#x2F;sys目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#etc目录"><span class="nav-number">3.14.</span> <span class="nav-text">&#x2F;etc目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#usr目录"><span class="nav-number">3.15.</span> <span class="nav-text">&#x2F;usr目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特殊文件说明"><span class="nav-number">4.</span> <span class="nav-text">特殊文件说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网卡配置文件"><span class="nav-number">4.1.</span> <span class="nav-text">网卡配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS解析配置文件"><span class="nav-number">4.2.</span> <span class="nav-text">DNS解析配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#局域网DNS解析文件"><span class="nav-number">4.3.</span> <span class="nav-text">局域网DNS解析文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主机名配置文件"><span class="nav-number">4.4.</span> <span class="nav-text">主机名配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开机自动挂载文件系统配置文件"><span class="nav-number">4.5.</span> <span class="nav-text">开机自动挂载文件系统配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动命令存放文件"><span class="nav-number">4.6.</span> <span class="nav-text">启动命令存放文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动级别配置文件"><span class="nav-number">4.7.</span> <span class="nav-text">启动级别配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动脚本目录"><span class="nav-number">4.8.</span> <span class="nav-text">启动脚本目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境变量配置文件"><span class="nav-number">4.9.</span> <span class="nav-text">环境变量配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录之前提示信息"><span class="nav-number">4.10.</span> <span class="nav-text">登录之前提示信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登陆之后显示的欢迎信息"><span class="nav-number">4.11.</span> <span class="nav-text">登陆之后显示的欢迎信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码包目录"><span class="nav-number">4.12.</span> <span class="nav-text">源码包目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户上传软件的目录"><span class="nav-number">4.13.</span> <span class="nav-text">用户上传软件的目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统日志文件"><span class="nav-number">4.14.</span> <span class="nav-text">系统日志文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统安全日志文件"><span class="nav-number">4.15.</span> <span class="nav-text">系统安全日志文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定时任务配置目录"><span class="nav-number">4.16.</span> <span class="nav-text">定时任务配置目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU配置信息"><span class="nav-number">4.17.</span> <span class="nav-text">CPU配置信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存配置信息"><span class="nav-number">4.18.</span> <span class="nav-text">内存配置信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统平均负载信息"><span class="nav-number">4.19.</span> <span class="nav-text">系统平均负载信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统挂载信息"><span class="nav-number">4.20.</span> <span class="nav-text">系统挂载信息</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Li Zhiyuan"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Li Zhiyuan</p>
+  <div class="site-description" itemprop="description">程序，搞起来很轻松的，就是头冷</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/leezhiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;leezhiy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:18500754397@163.com" title="E-Mail → mailto:18500754397@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/5678634433" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;5678634433" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/li-zhi-yuan-13-7" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;li-zhi-yuan-13-7" rel="noopener" target="_blank"><i class="fa fa-globe fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://gitee.com/leezhiy" title="Gitee → https:&#x2F;&#x2F;gitee.com&#x2F;leezhiy" rel="noopener" target="_blank"><i class="fab fa-git fa-fw"></i>Gitee</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://music.163.com/#/user/home?id=131550901" title="网易云 → https:&#x2F;&#x2F;music.163.com&#x2F;#&#x2F;user&#x2F;home?id&#x3D;131550901" rel="noopener" target="_blank"><i class="fa fa-music fa-fw"></i>网易云</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情连接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://music.163.com/#/user/home?id=131550901" title="https:&#x2F;&#x2F;music.163.com&#x2F;#&#x2F;user&#x2F;home?id&#x3D;131550901" rel="noopener" target="_blank">😆 网易云音乐 😆</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div style="background-image:linear-gradient(90deg,#6dba82 0,#07b39b 15%,#1098ad 30%,#5073b8 44%,#a166ab 58%,#ef4e7b 72%,#f37055 86%,#f79533 100%);background-size:cover;-webkit-background-clip:text;-webkit-text-fill-color:transparent;user-select:none"><i>Tip: 本站电脑访问体验更佳耶&nbsp;<i class="fa fa-angellist" style="display:inline"></i></i></div>
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Li Zhiyuan</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">209k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:10</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+  <div style="display: none;">
+    <script data-pjax src="//s95.cnzz.com/z_stat.php?id=1278825815&web_id=1278825815"></script>
+  </div>
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<div id="needsharebutton-float">
+      <span class="btn">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </span>
+    </div>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "default";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook,Linkedin,Mailto,Reddit,Delicious,StumbleUpon,Pinterest,GooglePlus,Tumblr,GoogleBookmarks,Newsvine,Evernote,Friendfeed,Vkontakte,Odnoklassniki,Mailru";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+      flOptions = {};
+        flOptions.iconStyle = "box";
+        flOptions.boxForm = "horizontal";
+        flOptions.position = "middleRight";
+        flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook,Linkedin";
+      new needShareButton('#needsharebutton-float', flOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//cdn.bootcss.com/valine/1.4.4/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'JVvuWX6nMNxhJHtTykHi9eAw-gzGzoHsz',
+      appKey     : 'rx4Oj2FCD7V0UGv8lLuRJaGa',
+      placeholder: "聊五分钱的天吗？|ω･)و ̑̑༉",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="openDaoCloud()">
+      <i class='fa fa-comments'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button" onclick="moonMenuClick()">
+    <svg class="moon-menu-svg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+      <g class="moon-menu-points">
+        <circle class="moon-menu-point" r=".2rem" cx="0" cy="-.8rem"></circle>
+        <circle class="moon-menu-point" r=".2rem"></circle>
+        <circle class="moon-menu-point" r=".2rem" cx="0" cy=".8rem"></circle>
+      </g>
+    </svg>
+    <div class="moon-menu-icon">
+    </div>
+    <div class="moon-menu-text">
+    </div>
+  </div>
+</div>
+<script src="/js/injector.js"></script>
+    </div>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+  
+     <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+     <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+     <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":450,"hOffset":10,"vOffset":150},"mobile":{"show":false},"react":{"opacity":1},"log":false});</script></body>
+</html>
